@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arquitectura y wireframes — Yaocalli Consultoría y Estrategia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --obsidiana:#14110F; --obsidiana-80:#2A2521;
+  --barro:#8C4A2F; --barro-deep:#6B3722; --barro-pale:#C98F72; --barro-wash:#F7EDE7;
+  --jade:#3F6B5A; --jade-deep:#2C4C3F; --jade-pale:#7FA593; --jade-wash:#E8EFEB;
+  --cal:#EFE9DE;
+  --g100:#F5F2EC; --g200:#E6E1D7; --g300:#D2CCBF; --g400:#B0A99B;
+  --g500:#8A8377; --g600:#6A645A; --g700:#4D4841; --g800:#33302B; --g900:#1D1A17;
+  --ok:#3E7A55; --ok-text:#2F5E41; --warn:#B8862B; --warn-text:#8A6218;
+  --err:#A33131; --info:#35617A;
+  --serif:'Alegreya', Georgia, serif;
+  --sans:'Alegreya Sans', system-ui, sans-serif;
+  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --measure:68ch; --rule:1px solid var(--g300);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--cal); color:var(--obsidiana); font-family:var(--serif); font-size:17.5px; line-height:1.62; -webkit-font-smoothing:antialiased}
+p{max-width:var(--measure); margin:0 0 1em}
+a{color:var(--barro-deep)}
+h1,h2,h3,h4{font-family:var(--serif); font-weight:700; line-height:1.18; margin:0}
+h2{font-size:40px; letter-spacing:-.01em}
+h3{font-size:28px; margin-top:2.6rem}
+h4{font-size:21px; margin-top:1.9rem}
+@media(max-width:640px){body{font-size:17px} h2{font-size:30px} h3{font-size:23px} h4{font-size:19px}}
+
+.graticule{background-image:linear-gradient(to right, rgba(239,233,222,.09) 1px, transparent 1px),linear-gradient(to bottom, rgba(239,233,222,.09) 1px, transparent 1px); background-size:34px 34px}
+
+.cover{min-height:100vh; background:var(--obsidiana); color:var(--cal); padding:6vh 7vw 5vh; display:flex; flex-direction:column; justify-content:space-between}
+.cover-mark{width:92px}
+.cover h1{font-size:clamp(38px,7.2vw,76px); font-weight:400; line-height:1.06; letter-spacing:-.02em; max-width:17ch; margin:0 0 .5rem}
+.cover h1 em{font-style:italic}
+.cover-sub{font-family:var(--sans); font-size:clamp(16px,2.2vw,21px); color:var(--g400); max-width:48ch; line-height:1.5}
+.cover-meta{font-family:var(--sans); font-size:14px; color:var(--g500); border-top:1px solid rgba(239,233,222,.18); padding-top:1.1rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem 2rem}
+.cover-meta b{display:block; color:var(--cal); font-weight:500; font-size:15px}
+.cover-band{height:9px; display:flex; margin-top:1.4rem}
+.cover-band i{display:block; height:100%}
+
+.sheet{max-width:1040px; margin:0 auto; padding:0 7vw}
+.runner{position:sticky; top:0; z-index:20; background:var(--cal); border-bottom:var(--rule); display:flex; align-items:center; gap:11px; padding:.65rem 7vw; font-family:var(--sans); font-size:13.5px; color:var(--g600)}
+.runner svg{width:20px; flex:none}
+.runner span{margin-left:auto}
+section{padding:3.4rem 0 4.2rem}
+section:first-of-type{padding-top:4.2rem}
+.sec-head{display:flex; align-items:baseline; gap:18px; margin-bottom:1.6rem}
+.sec-num{font-family:var(--sans); font-size:15px; font-weight:500; color:var(--barro); border:1px solid var(--barro); border-radius:2px; padding:2px 9px; flex:none}
+.lead{font-size:21px; line-height:1.55; color:var(--g800); max-width:60ch}
+
+.toc{background:var(--obsidiana); color:var(--cal); padding:3.4rem 7vw}
+.toc h2{font-size:24px; font-weight:400; color:var(--g400); max-width:780px; margin:0 auto 1.4rem}
+.toc ol{list-style:none; margin:0 auto; padding:0; max-width:780px; counter-reset:t}
+.toc li{counter-increment:t; border-top:1px solid rgba(239,233,222,.14)}
+.toc li:last-child{border-bottom:1px solid rgba(239,233,222,.14)}
+.toc a{display:flex; gap:16px; align-items:baseline; padding:.72rem 0; color:var(--cal); text-decoration:none; font-family:var(--sans); font-size:17px}
+.toc a::before{content:counter(t,decimal-leading-zero); color:var(--barro-pale); font-size:14px; flex:none; width:2.2em}
+.toc a:hover{color:var(--barro-pale)}
+.toc small{margin-left:auto; color:var(--g500); font-size:13.5px; text-align:right}
+
+.note{border-left:3px solid; padding:.95rem 1.15rem; margin:1.6rem 0; font-family:var(--sans); font-size:15.5px; line-height:1.55; max-width:var(--measure)}
+.note p{font-family:var(--sans); font-size:15.5px; margin:0}
+.note p + p{margin-top:.6rem}
+.note-supuesto{border-color:var(--warn); background:#FBF4E6}
+.note-info{border-color:var(--info); background:#EAF0F4}
+.note-ok{border-color:var(--ok); background:#EAF2EC}
+.note-err{border-color:var(--err); background:#F8ECEC}
+.tag{display:inline-block; font-family:var(--sans); font-size:12.5px; font-weight:500; padding:2px 8px; border-radius:2px; vertical-align:2px}
+.tag-supuesto{background:#F5E4C4; color:var(--warn-text)}
+.tag-v1{background:var(--jade-wash); color:var(--jade-deep)}
+.tag-f2{background:var(--g200); color:var(--g700)}
+
+table{width:100%; border-collapse:collapse; font-family:var(--sans); font-size:15px; margin:1.4rem 0}
+caption{text-align:left; font-family:var(--sans); font-size:14px; color:var(--g600); padding-bottom:.5rem}
+th{text-align:left; font-weight:700; font-size:14px; color:var(--g700); border-bottom:2px solid var(--g400); padding:.5rem .7rem .45rem}
+td{border-bottom:1px solid var(--g200); padding:.55rem .7rem; vertical-align:top}
+tbody tr:nth-child(odd){background:rgba(20,17,15,.022)}
+.num{font-variant-numeric:tabular-nums}
+code{font-family:var(--mono); font-size:.85em; background:var(--g200); padding:1px 5px; border-radius:2px}
+.url{font-family:var(--mono); font-size:13px}
+
+.dark-box{background:var(--obsidiana); color:var(--cal); border-radius:3px; padding:1.9rem 2rem; margin:1.7rem 0}
+.dark-box h4{color:var(--cal); margin-top:0}
+.dark-box p{color:var(--g300); max-width:62ch}
+.dark-box p:last-child{margin-bottom:0}
+.metric{font-family:var(--serif); font-size:26px; color:var(--barro-pale); line-height:1.3; margin-top:1rem; max-width:56ch}
+
+.numcards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin:1.6rem 0}
+.numcard{border-top:2px solid var(--barro); padding-top:.9rem}
+.numcard b{display:block; font-family:var(--sans); font-size:13px; color:var(--barro); font-weight:500; margin-bottom:.3rem}
+.numcard h5{font-size:19px; margin:0 0 .35rem; font-family:var(--serif)}
+.numcard p{font-family:var(--sans); font-size:15px; margin:0; color:var(--g700)}
+
+ul.plain{list-style:none; padding:0; margin:1rem 0; max-width:var(--measure); font-family:var(--sans); font-size:15.5px}
+ul.plain li{padding:.42rem 0 .42rem 1.15rem; border-bottom:1px solid var(--g200); position:relative}
+ul.plain li::before{content:''; position:absolute; left:0; top:1.05em; width:5px; height:5px; background:var(--barro)}
+
+/* ---------- perfiles ---------- */
+.persona{border:1px solid var(--g300); border-left:3px solid var(--jade); border-radius:0; padding:1.3rem 1.5rem; margin:1.2rem 0; background:#fff}
+.persona h5{font-family:var(--serif); font-size:21px; margin:0 0 .2rem}
+.persona .who{font-family:var(--sans); font-size:14px; color:var(--g600); margin:0 0 .9rem}
+.persona p{font-family:var(--sans); font-size:15.5px; max-width:64ch}
+.journey{display:flex; flex-wrap:wrap; align-items:center; gap:7px; margin:1rem 0 .9rem}
+.journey span{font-family:var(--sans); font-size:13px; background:var(--jade-wash); color:var(--jade-deep); padding:5px 11px; border-radius:12px; white-space:nowrap}
+.journey span:last-child{background:var(--barro-wash); color:var(--barro-deep)}
+.journey i{width:14px; height:1px; background:var(--g400); flex:none}
+.needs{font-family:var(--sans); font-size:15px; color:var(--g700); border-top:1px solid var(--g200); padding-top:.75rem; margin:0}
+
+/* ---------- mapa del sitio ---------- */
+.map{margin:1.6rem 0; font-family:var(--sans)}
+.map-root{background:var(--obsidiana); color:var(--cal); padding:.7rem 1rem; border-radius:2px; font-size:16px; display:inline-block}
+.map-lvl{display:grid; grid-template-columns:repeat(auto-fit,minmax(174px,1fr)); gap:11px; margin-top:11px}
+.map-node{border:1px solid var(--g400); background:#fff; border-radius:2px; padding:.6rem .75rem; font-size:14.5px}
+.map-node b{display:block; font-size:15px; margin-bottom:.15rem}
+.map-node ul{list-style:none; margin:.5rem 0 0; padding:0; font-size:13.5px; color:var(--g600)}
+.map-node li{padding:.2rem 0 .2rem .7rem; border-top:1px solid var(--g200); position:relative}
+.map-node li::before{content:''; position:absolute; left:0; top:.95em; width:4px; height:1px; background:var(--g400)}
+.map-node.legal{background:var(--g100); border-style:dashed}
+
+/* ---------- wireframes ---------- */
+.wf{border:1px solid var(--g400); background:#fff; border-radius:2px; padding:11px; margin:1.3rem 0}
+.wf-title{font-family:var(--sans); font-size:13.5px; color:var(--g600); margin:0 0 .6rem}
+.wf-row{display:flex; gap:9px; margin-bottom:9px}
+.wf-row:last-child{margin-bottom:0}
+.wb{border:1px dashed var(--g400); background:var(--g100); border-radius:2px; padding:11px 10px; font-family:var(--sans); font-size:12.5px; color:var(--g600); min-height:46px; display:flex; flex-direction:column; justify-content:center; flex:1}
+.wb b{display:block; color:var(--g800); font-size:13px; font-weight:700; margin-bottom:2px}
+.wb.solid{background:var(--obsidiana); border:1px solid var(--obsidiana); color:var(--g400)}
+.wb.solid b{color:var(--cal)}
+.wb.accent{border:1px solid var(--barro); background:var(--barro-wash); color:var(--barro-deep)}
+.wb.accent b{color:var(--barro-deep)}
+.wb.data{border:1px solid var(--jade); background:var(--jade-wash); color:var(--jade-deep)}
+.wb.data b{color:var(--jade-deep)}
+.wb.tall{min-height:118px}
+.wb.short{min-height:34px; padding:7px 10px}
+.wf-scale{font-family:var(--sans); font-size:12px; color:var(--g500); margin:.4rem 0 0}
+
+.phones{display:flex; gap:26px; flex-wrap:wrap; margin:1.6rem 0}
+.phone{width:262px; border:9px solid var(--obsidiana); border-radius:26px; background:#fff; padding:9px 7px; flex:none}
+.phone .wb{font-size:11.5px; min-height:40px; padding:8px}
+.phone .wb b{font-size:12px}
+.phone .wf-row{gap:6px; margin-bottom:6px}
+.phone-cap{font-family:var(--sans); font-size:13.5px; color:var(--g600); width:262px; margin:.55rem 0 0}
+
+pre{background:var(--obsidiana); color:var(--g300); border-radius:3px; padding:1.4rem 1.5rem; overflow-x:auto; font-family:var(--mono); font-size:13px; line-height:1.62; margin:1.4rem 0}
+pre b{color:var(--barro-pale); font-weight:400}
+pre i{color:var(--g500); font-style:normal}
+
+.scope{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:1.6rem 0}
+@media(max-width:720px){.scope{grid-template-columns:1fr}}
+.scope-col{padding:1.2rem 1.4rem; border-radius:3px}
+.scope-v1{background:var(--jade-wash); border-left:3px solid var(--jade)}
+.scope-f2{background:var(--g100); border-left:3px solid var(--g400)}
+.scope-col h5{font-family:var(--sans); font-size:14px; font-weight:700; margin:0 0 .8rem; color:var(--g700)}
+.scope-col ul{list-style:none; margin:0; padding:0; font-family:var(--sans); font-size:15px}
+.scope-col li{padding:.4rem 0; border-bottom:1px solid rgba(20,17,15,.08)}
+.scope-col li:last-child{border-bottom:0}
+
+/* ---------- separadores ---------- */
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+.sep{display:flex; align-items:center; gap:20px; padding:1.1rem 0}
+.sep-line{flex:1; height:1px; background:var(--g300)}
+.sep-btn{background:none; border:0; padding:6px 10px; margin:0; line-height:0; cursor:pointer; border-radius:2px; flex:none}
+.sep-btn:focus-visible{outline:2px solid var(--barro); outline-offset:2px}
+.sep-track{stroke:var(--g300)}
+.sep-fill{stroke:var(--barro); stroke-dasharray:136; stroke-dashoffset:0; transition:stroke .3s}
+.sep.pending .sep-fill{stroke-dashoffset:136}
+.sep.is-visible .sep-fill{animation:climb 1s cubic-bezier(.42,0,.18,1) forwards}
+@keyframes climb{to{stroke-dashoffset:0}}
+.sep-dot{fill:var(--jade); offset-path:path("M4 28 V20 H40 V13 H76 V6 H114"); offset-distance:0%; offset-rotate:0deg; transition:offset-distance .85s cubic-bezier(.45,0,.2,1), fill .3s}
+.sep.pending .sep-dot{opacity:0}
+.sep.is-visible .sep-dot{animation:land .35s ease .9s backwards; opacity:1}
+@keyframes land{from{opacity:0} to{opacity:1}}
+.sep-btn:hover .sep-dot,.sep-btn:focus-visible .sep-dot{offset-distance:100%; fill:var(--jade-deep)}
+.sep-btn:hover .sep-fill,.sep-btn:focus-visible .sep-fill{stroke:var(--barro-deep)}
+.sep-hint{font-family:var(--sans); font-size:12.5px; color:var(--g500); opacity:0; transition:opacity .25s; flex:none; white-space:nowrap}
+.sep:hover .sep-hint,.sep:focus-within .sep-hint{opacity:1}
+
+.sep-next{gap:20px}
+.next-btn{display:flex; align-items:center; gap:15px; text-decoration:none; flex:none; padding:7px 10px; border-radius:2px}
+.next-btn:focus-visible{outline:2px solid var(--barro); outline-offset:2px}
+.rule-base{stroke:var(--g300); stroke-width:1.4}
+.tick{fill:var(--g400); transform-box:fill-box; transform-origin:bottom center; transition:fill .3s}
+.sep-next.pending .tick{transform:scaleY(0)}
+.sep-next.is-visible .tick{animation:tickup .38s cubic-bezier(.3,0,.2,1) backwards}
+@keyframes tickup{from{transform:scaleY(0)} to{transform:scaleY(1)}}
+.tick:nth-of-type(2){animation-delay:.05s} .tick:nth-of-type(3){animation-delay:.1s}
+.tick:nth-of-type(4){animation-delay:.15s} .tick:nth-of-type(5){animation-delay:.2s}
+.tick:nth-of-type(6){animation-delay:.25s} .tick:nth-of-type(7){animation-delay:.3s}
+.tick:nth-of-type(8){animation-delay:.35s} .tick:nth-of-type(9){animation-delay:.4s}
+.marker{fill:var(--barro); transition:transform .8s cubic-bezier(.42,0,.18,1)}
+.sep-next.pending .marker{opacity:0}
+.sep-next.is-visible .marker{animation:land .3s ease .45s backwards}
+.next-btn:hover .marker,.next-btn:focus-visible .marker{transform:translateX(72px)}
+.next-btn:hover .tick,.next-btn:focus-visible .tick{fill:var(--barro-pale)}
+.next-text{line-height:1.25}
+.next-text small{display:block; font-family:var(--sans); font-size:12.5px; color:var(--g500)}
+.next-text b{font-family:var(--serif); font-size:18.5px; color:var(--obsidiana); transition:color .2s}
+.next-btn:hover .next-text b{color:var(--barro-deep)}
+
+.closer{border-top:1px solid var(--g300); padding:3rem 0 3.6rem}
+.closer-link{display:block; text-decoration:none; max-width:640px}
+.closer-bar{display:flex; gap:3px; height:11px; margin-bottom:1.5rem}
+.closer-bar i{flex:1; border-radius:1px; transform-origin:left center; transition:background .35s}
+.closer-bar i:nth-child(1){background:var(--jade-wash)}
+.closer-bar i:nth-child(2){background:var(--jade-pale)}
+.closer-bar i:nth-child(3){background:var(--jade)}
+.closer-bar i:nth-child(4){background:var(--jade-deep)}
+.closer.pending .closer-bar i{transform:scaleX(0)}
+.closer.is-visible .closer-bar i{animation:grow .55s cubic-bezier(.35,0,.2,1) backwards}
+@keyframes grow{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+.closer.is-visible .closer-bar i:nth-child(2){animation-delay:.1s}
+.closer.is-visible .closer-bar i:nth-child(3){animation-delay:.2s}
+.closer.is-visible .closer-bar i:nth-child(4){animation-delay:.3s}
+.closer-link:hover .closer-bar i:nth-child(1){background:var(--jade-pale)}
+.closer-link:hover .closer-bar i:nth-child(2){background:var(--jade)}
+.closer-link:hover .closer-bar i:nth-child(3){background:var(--jade-deep)}
+.closer-link:hover .closer-bar i:nth-child(4){background:var(--barro)}
+.closer-link:focus-visible{outline:2px solid var(--barro); outline-offset:6px}
+.closer-text small{display:block; font-family:var(--sans); font-size:13.5px; color:var(--g500); margin-bottom:.3rem}
+.closer-text b{display:block; font-family:var(--serif); font-size:31px; font-weight:700; color:var(--obsidiana); line-height:1.15; transition:color .2s}
+.closer-link:hover .closer-text b{color:var(--barro-deep)}
+.closer-text em{display:block; font-style:normal; font-family:var(--sans); font-size:16px; color:var(--g700); margin-top:.45rem; max-width:54ch}
+.closer-note{font-family:var(--sans); font-size:14px; color:var(--g600); margin-top:1.6rem; max-width:60ch}
+@media(max-width:640px){.closer-text b{font-size:24px}}
+
+footer{background:var(--obsidiana); color:var(--g500); padding:2.6rem 7vw; font-family:var(--sans); font-size:14px}
+footer .lockup{display:flex; align-items:center; gap:15px; margin-bottom:1rem}
+footer .wordmark{font-family:var(--serif); font-weight:700; font-size:22px; color:var(--cal); line-height:1}
+footer .wordmark small{display:block; font-family:var(--sans); font-weight:400; font-size:10px; letter-spacing:.19em; color:var(--g500); margin-top:5px}
+
+@media (prefers-reduced-motion: reduce){
+  .sep.pending .sep-fill,.sep.pending .sep-dot{stroke-dashoffset:0; opacity:1}
+  .sep.is-visible .sep-fill,.sep.is-visible .sep-dot{animation:none}
+  .sep-next.pending .tick,.closer.pending .closer-bar i{transform:none}
+  .sep-next.pending .marker{opacity:1}
+  .sep-next.is-visible .tick,.sep-next.is-visible .marker,.closer.is-visible .closer-bar i{animation:none}
+  .sep-dot,.sep-fill,.marker,.tick,.closer-bar i{transition:none}
+  html{scroll-behavior:auto}
+}
+@media print{
+  .runner,.sep-hint{display:none}
+  .cover{min-height:auto; page-break-after:always}
+  .sep.pending .sep-fill,.sep.pending .sep-dot{stroke-dashoffset:0; opacity:1}
+  .sep-next.pending .tick,.closer.pending .closer-bar i{transform:none}
+  .sep-next.pending .marker{opacity:1}
+  body{font-size:11pt; background:#fff}
+  .wf,.persona,.numcard,.note,.dark-box,table,.phone,.scope-col,.map-node,.closer{page-break-inside:avoid}
+  h2,h3,h4{page-break-after:avoid}
+  pre{background:#fff; color:#000; border:1px solid #999}
+  pre b,pre i{color:#000}
+  a{color:#000; text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="cover graticule">
+  <div>
+    <svg class="cover-mark" viewBox="0 0 120 120" role="img" aria-label="Marca Yaocalli">
+      <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#EFE9DE" stroke-width="11" stroke-linejoin="round"/>
+      <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#C98F72" stroke-width="10" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div>
+    <h1>Arquitectura y <em>wireframes</em></h1>
+    <p class="cover-sub">Perfiles de usuario, mapa del sitio, estructura de URLs y estructura dibujada de cada pantalla, en escritorio y en teléfono.</p>
+    <div class="cover-band">
+      <i style="background:#14110F; flex:5"></i><i style="background:#8C4A2F; flex:2"></i>
+      <i style="background:#3F6B5A; flex:1"></i><i style="background:#EFE9DE; flex:2"></i>
+    </div>
+  </div>
+  <div class="cover-meta">
+    <div><b>Documento</b>02 — Arquitectura</div>
+    <div><b>Cliente</b>Yaocalli Consultoría y Estrategia</div>
+    <div><b>Depende de</b>Documento 01 — Identidad</div>
+    <div><b>Versión</b>1.0 — borrador para aprobación</div>
+    <div><b>Fecha</b>1 de septiembre de 2026</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>Contenido</h2>
+  <ol>
+    <li><a href="#s1">Objetivo del sitio<small>La métrica única que importa</small></a></li>
+    <li><a href="#s2">Criterios de diseño<small>Seis decisiones que gobiernan el proyecto</small></a></li>
+    <li><a href="#s3">Perfiles de usuario<small>Cuatro visitantes y su recorrido</small></a></li>
+    <li><a href="#s4">Mapa del sitio<small>Jerarquía completa de páginas</small></a></li>
+    <li><a href="#s5">Estructura de URLs<small>Direcciones y prioridad de posicionamiento</small></a></li>
+    <li><a href="#s6">Wireframes de escritorio<small>Seis pantallas dibujadas</small></a></li>
+    <li><a href="#s7">Contenido de cada bloque<small>Qué va dentro de cada sección</small></a></li>
+    <li><a href="#s8">Vistas móviles<small>Inicio y ficha de servicio en teléfono</small></a></li>
+    <li><a href="#s9">Conversión<small>Formulario y WhatsApp, con código</small></a></li>
+    <li><a href="#s10">Componentes reutilizables<small>Inventario del sistema</small></a></li>
+    <li><a href="#s11">Alcance<small>Versión 1 contra fase 2</small></a></li>
+  </ol>
+</nav>
+
+<div class="runner">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#14110F" stroke-width="11" stroke-linejoin="round"/>
+    <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#8C4A2F" stroke-width="10" stroke-linejoin="round"/>
+  </svg>
+  Yaocalli — Arquitectura y wireframes
+  <span>Versión 1.0</span>
+</div>
+
+<main class="sheet">
+
+<!-- ===== 1 ===== -->
+<section id="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Objetivo del sitio</h2></div>
+
+  <div class="dark-box">
+    <h4>Que una persona con capacidad de contratar entienda el método en menos de tres minutos y pida una propuesta técnica.</h4>
+    <p>El sitio no vende en línea, no genera volumen y no compite por tráfico masivo. Sostiene una venta consultiva larga en la que quien decide necesita, antes que nada, confiar en el procedimiento. Su trabajo es sustituir las tres reuniones que hoy hacen falta para explicar cómo trabaja Yaocalli.</p>
+    <p class="metric">Métrica única: solicitudes de propuesta calificadas al mes, entendidas como aquellas que identifican institución, necesidad y ventana de tiempo.</p>
+  </div>
+
+  <p>Todo lo demás —visitas, tiempo en página, seguidores, descargas— son indicadores de apoyo. Si suben y la métrica única no se mueve, el sitio está entreteniendo en lugar de convertir.</p>
+
+  <div class="note note-info"><p><b>Por qué no es «generar tráfico».</b> El universo de compra es reducido y nominal: en un estado hay 84 ayuntamientos, un puñado de secretarías, unos cuantos partidos y algunos organismos. No hay millones de compradores potenciales. Un sitio con 900 visitas al mes y cuatro solicitudes serias vale más que uno con 40 000 y ninguna.</p></div>
+
+  <div class="note note-supuesto"><p><span class="tag tag-supuesto">Supuesto por validar</span> Se asume venta consultiva por propuesta técnica, sin precios públicos ni contratación en línea. Si existe algún producto con precio cerrado —un tablero estándar, un curso, una suscripción a monitoreo— cambia la arquitectura, porque aparece una página de producto con precio y otro tipo de conversión.</p></div>
+</section>
+
+<!-- ===== 2 ===== -->
+<section id="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Criterios de diseño</h2></div>
+
+  <p class="lead">Seis decisiones tomadas de una vez, para no volver a discutirlas en cada pantalla. Cuando una duda de diseño aparezca, se resuelve contra esta lista.</p>
+
+  <div class="numcards">
+    <div class="numcard"><b>Criterio 1</b><h5>La evidencia antes que la promesa</h5><p>Ninguna afirmación sin su respaldo visible: cifra, ficha técnica, fuente o metodología. Una página de servicio sin método explicado no se publica.</p></div>
+    <div class="numcard"><b>Criterio 2</b><h5>Neutralidad demostrable</h5><p>Sin colores de partido, sin nombres de candidatos, sin fotografías de actos políticos identificables. La neutralidad es un argumento de venta, y se demuestra visualmente antes de declararla.</p></div>
+    <div class="numcard"><b>Criterio 3</b><h5>Algo que se pueda reenviar</h5><p>En gobierno, quien navega rara vez firma. Cada servicio ofrece una ficha técnica descargable de dos páginas para que el enlace se la mande a su superior. Es el verdadero objeto de conversión.</p></div>
+    <div class="numcard"><b>Criterio 4</b><h5>Confidencialidad por diseño</h5><p>Los casos se publican con autorización expresa o anonimizados. Ninguna captura de tablero muestra datos personales ni cifras no públicas de un cliente.</p></div>
+    <div class="numcard"><b>Criterio 5</b><h5>Ligero antes que espectacular</h5><p>Se consulta desde oficinas municipales con conexiones malas y desde teléfonos en campo. Sin video de fondo, sin librerías pesadas, sin mapas interactivos en el inicio. Objetivo: menos de 1.5 s para el primer contenido visible.</p></div>
+    <div class="numcard"><b>Criterio 6</b><h5>El método es la pieza de contenido</h5><p>Lo que atrae por buscador no son los servicios, son las notas metodológicas. La sección de publicaciones no es un adorno: es la puerta principal del tráfico calificado.</p></div>
+  </div>
+</section>
+
+<!-- ===== 3 ===== -->
+<section id="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Perfiles de usuario</h2></div>
+
+  <p class="lead">Cuatro visitantes reales, no arquetipos de manual. Cada uno llega por una puerta distinta y necesita una prueba distinta antes de escribir.</p>
+
+  <div class="persona">
+    <h5>La directora que tiene que justificar una decisión</h5>
+    <p class="who">Titular de área en un ayuntamiento o secretaría estatal. Debe repartir un presupuesto limitado y que la decisión resista una auditoría o una pregunta en cabildo.</p>
+    <p>No busca una encuesta: busca un criterio defendible. Llega por recomendación de otra dependencia o buscando «cómo priorizar apoyos» o «índice de vulnerabilidad municipal». Lo que la convence es ver que existe una memoria de cálculo y que alguien ya lo hizo antes en un municipio parecido al suyo.</p>
+    <div class="journey"><span>Recomendación o búsqueda</span><i></i><span>Nota metodológica</span><i></i><span>Servicio: índices y priorización</span><i></i><span>Caso similar</span><i></i><span>Descarga la ficha técnica</span><i></i><span>Solicita propuesta</span></div>
+    <p class="needs"><b>Qué necesita del sitio:</b> un caso comparable con su tamaño de municipio, la memoria de cálculo explicada sin fórmulas, y un documento de dos páginas que pueda llevar a su jefe.</p>
+  </div>
+
+  <div class="persona">
+    <h5>El coordinador de campaña con el reloj corriendo</h5>
+    <p class="who">Responsable de estrategia de una candidatura o de la estructura territorial de un partido. Tiene semanas, no meses.</p>
+    <p>Le urge saber tres cosas: si se puede levantar en su territorio, en cuánto tiempo y con qué margen de error. Entra desde el teléfono, casi siempre de noche, y decide si escribe en los primeros treinta segundos. Le importa la capacidad operativa —cuánta gente en campo— tanto como la técnica.</p>
+    <div class="journey"><span>Referencia de un tercero</span><i></i><span>Inicio en teléfono</span><i></i><span>Servicio: encuestas</span><i></i><span>Capacidad de campo</span><i></i><span>WhatsApp</span></div>
+    <p class="needs"><b>Qué necesita del sitio:</b> tiempos de levantamiento, cobertura territorial demostrada, ficha técnica de ejemplo y un canal inmediato. Es el único perfil para el que WhatsApp es la conversión principal.</p>
+  </div>
+
+  <div class="persona">
+    <h5>El enlace administrativo que verifica al proveedor</h5>
+    <p class="who">Área de adquisiciones, jurídico o contraloría. No decide la compra: decide si el expediente procede.</p>
+    <p>Llega con el nombre de la firma ya en la mano, mandado por alguien más. Busca señales de formalidad: razón social, domicilio, antigüedad, experiencia comprobable, aviso de privacidad. Si no las encuentra en dos minutos, el proceso se atora aunque el trabajo técnico sea excelente.</p>
+    <div class="journey"><span>Busca el nombre de la firma</span><i></i><span>Quiénes somos</span><i></i><span>Experiencia y capacidades</span><i></i><span>Aviso de privacidad</span><i></i><span>Correo institucional</span></div>
+    <p class="needs"><b>Qué necesita del sitio:</b> datos fiscales y de contacto verificables, trayectoria con instituciones nombradas, y política de protección de datos personales visible. Este perfil es la razón por la que existe la página legal.</p>
+  </div>
+
+  <div class="persona">
+    <h5>La colega técnica que llega por el método</h5>
+    <p class="who">Investigadora, evaluadora de un organismo internacional, consultora de otra firma, estudiante de posgrado.</p>
+    <p>No contrata hoy, pero recomienda y cita. Llega buscando algo muy específico —cómo se pondera un índice de rezago, cómo se calcula el efecto de diseño en un muestreo por conglomerados— y se queda si el texto es serio. Con el tiempo es la fuente de las mejores referencias.</p>
+    <div class="journey"><span>Búsqueda técnica</span><i></i><span>Publicación</span><i></i><span>Otras publicaciones</span><i></i><span>Metodología</span><i></i><span>Suscripción o cita</span></div>
+    <p class="needs"><b>Qué necesita del sitio:</b> notas metodológicas con referencias, posibilidad de citar y una forma de suscribirse. Es el perfil que sostiene el posicionamiento a doce meses.</p>
+  </div>
+
+  <div class="note note-supuesto"><p><span class="tag tag-supuesto">Supuesto por validar</span> Los cuatro perfiles se derivaron del portafolio de proyectos, donde predomina el trabajo con gobiernos municipales y estatales y con organismos como la OIT. Si el peso comercial real está en campañas y partidos, el segundo perfil sube al primer lugar y el inicio del sitio debe reordenarse alrededor de él.</p></div>
+</section>
+
+<!-- ===== 4 ===== -->
+<section id="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Mapa del sitio</h2></div>
+
+  <p class="lead">Estructura plana de dos niveles. Ninguna página queda a más de dos clics del inicio, porque cada nivel adicional cuesta visitantes y complica el posicionamiento.</p>
+
+  <div class="map">
+    <span class="map-root">Inicio</span>
+    <div class="map-lvl">
+      <div class="map-node">
+        <b>Servicios</b>Listado con las seis líneas
+        <ul>
+          <li>Encuestas y opinión pública</li>
+          <li>Cartografía y análisis territorial</li>
+          <li>Escucha digital y análisis de actores</li>
+          <li>Índices y priorización</li>
+          <li>Tableros y visualización</li>
+          <li>Software y automatización</li>
+        </ul>
+      </div>
+      <div class="map-node">
+        <b>Casos</b>Proyectos con resultado verificable
+        <ul>
+          <li>Ficha de caso individual</li>
+          <li>Filtro por línea de servicio</li>
+          <li>Filtro por tipo de institución</li>
+        </ul>
+      </div>
+      <div class="map-node">
+        <b>Metodología</b>Cómo trabaja la firma
+        <ul>
+          <li>Diseño de instrumentos</li>
+          <li>Levantamiento y control de calidad</li>
+          <li>Procesamiento y modelado</li>
+          <li>Entrega y transferencia</li>
+        </ul>
+      </div>
+      <div class="map-node">
+        <b>Publicaciones</b>Notas metodológicas y análisis
+        <ul>
+          <li>Nota individual</li>
+          <li>Índice por tema</li>
+        </ul>
+      </div>
+      <div class="map-node">
+        <b>Quiénes somos</b>Equipo, trayectoria, capacidades
+        <ul>
+          <li>Perfil del equipo</li>
+          <li>Capacidad instalada</li>
+          <li>Datos de la firma</li>
+        </ul>
+      </div>
+      <div class="map-node">
+        <b>Contacto</b>Formulario y canales directos
+        <ul>
+          <li>Solicitud de propuesta</li>
+          <li>WhatsApp</li>
+          <li>Correo institucional</li>
+        </ul>
+      </div>
+      <div class="map-node legal">
+        <b>Legal</b>Requisito para el enlace administrativo
+        <ul>
+          <li>Aviso de privacidad</li>
+          <li>Protección de datos personales</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="note note-ok"><p><b>La página de protección de datos no es trámite, es argumento.</b> Yaocalli trata datos de personas en situación de vulnerabilidad y opera bajo la Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados publicada en marzo de 2025. Explicar cómo se resguardan esos datos —consentimiento informado, minimización, resguardo, destrucción— es una ventaja competitiva frente a proveedores que ni lo mencionan.</p></div>
+</section>
+
+<!-- ===== 5 ===== -->
+<section id="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Estructura de URLs</h2></div>
+
+  <p class="lead">Direcciones en español, sin acentos, separadas por guiones, sin fechas ni números de categoría. Legibles al pegarlas en un oficio.</p>
+
+  <table>
+    <caption>Estructura completa con prioridad de posicionamiento. Prioridad alta significa que esa página se optimiza y se enlaza activamente desde el primer mes.</caption>
+    <thead><tr><th>URL</th><th>Página</th><th>Intención que atiende</th><th>Prioridad</th></tr></thead>
+    <tbody>
+      <tr><td class="url">/</td><td>Inicio</td><td>Marca y orientación</td><td>Alta</td></tr>
+      <tr><td class="url">/servicios/</td><td>Listado de servicios</td><td>Comercial amplia</td><td>Alta</td></tr>
+      <tr><td class="url">/servicios/encuestas-y-opinion-publica/</td><td>Encuestas</td><td>«casa encuestadora», «encuesta de percepción ciudadana»</td><td>Alta</td></tr>
+      <tr><td class="url">/servicios/cartografia-y-analisis-territorial/</td><td>Cartografía</td><td>«cartografía electoral», «análisis territorial SIG»</td><td>Alta</td></tr>
+      <tr><td class="url">/servicios/escucha-digital-y-analisis-de-actores/</td><td>Escucha digital</td><td>«monitoreo de redes», «mapeo de actores»</td><td>Media</td></tr>
+      <tr><td class="url">/servicios/indices-y-priorizacion/</td><td>Índices</td><td>«índice de priorización», «focalización de programas»</td><td>Alta</td></tr>
+      <tr><td class="url">/servicios/tableros-y-visualizacion/</td><td>Tableros</td><td>«tablero de indicadores», «Power BI gobierno»</td><td>Media</td></tr>
+      <tr><td class="url">/servicios/software-y-automatizacion/</td><td>Software</td><td>«app de levantamiento», «sistema de encuestas»</td><td>Media</td></tr>
+      <tr><td class="url">/casos/</td><td>Listado de casos</td><td>Prueba</td><td>Media</td></tr>
+      <tr><td class="url">/casos/[nombre-del-caso]/</td><td>Ficha de caso</td><td>Prueba específica</td><td>Media</td></tr>
+      <tr><td class="url">/metodologia/</td><td>Metodología</td><td>Confianza técnica</td><td>Alta</td></tr>
+      <tr><td class="url">/publicaciones/</td><td>Índice de publicaciones</td><td>Descubrimiento</td><td>Media</td></tr>
+      <tr><td class="url">/publicaciones/[titulo-de-la-nota]/</td><td>Nota</td><td>Búsqueda informativa de cola larga</td><td>Alta</td></tr>
+      <tr><td class="url">/quienes-somos/</td><td>Quiénes somos</td><td>Verificación del proveedor</td><td>Media</td></tr>
+      <tr><td class="url">/contacto/</td><td>Contacto</td><td>Conversión</td><td>Alta</td></tr>
+      <tr><td class="url">/aviso-de-privacidad/</td><td>Aviso de privacidad</td><td>Requisito legal</td><td>Baja</td></tr>
+      <tr><td class="url">/proteccion-de-datos/</td><td>Protección de datos</td><td>Confianza institucional</td><td>Media</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-err"><p><b>Reglas que no se rompen.</b> Sin mayúsculas, sin caracteres acentuados, sin <code>?id=</code>, sin fechas en la ruta. Toda URL termina con diagonal y solo existe en una versión: <code>https://</code> con o sin <code>www</code>, elegida una vez y redirigida siempre. Un cambio posterior de estructura obliga a redirección 301 permanente, nunca a borrar.</p></div>
+</section>
+
+<!-- ===== 6 ===== -->
+<section id="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Wireframes de escritorio</h2></div>
+
+  <p class="lead">Estructura, no diseño. Las cajas punteadas son contenedores, las oscuras son bloques de fondo obsidiana y las de barro marcan la acción principal de cada pantalla. Una sola acción principal por página.</p>
+
+  <h3>Inicio</h3>
+  <div class="wf">
+    <p class="wf-title">/ — Inicio</p>
+    <div class="wf-row"><div class="wb short" style="flex:2"><b>Logotipo</b></div><div class="wb short" style="flex:5">Servicios · Casos · Metodología · Publicaciones · Quiénes somos</div><div class="wb short accent" style="flex:2"><b>Solicitar propuesta</b></div></div>
+    <div class="wf-row"><div class="wb solid tall"><b>Encabezado principal</b>Enunciado de posicionamiento en una frase. Subtítulo de dos líneas con las seis líneas de trabajo. Retícula cartográfica de fondo. Una acción: solicitar propuesta. Sin carrusel, sin video.</div></div>
+    <div class="wf-row">
+      <div class="wb data"><b>Cifra 1</b>84 municipios cubiertos</div>
+      <div class="wb data"><b>Cifra 2</b>80 encuestadores en campo</div>
+      <div class="wb data"><b>Cifra 3</b>900 trámites analizados</div>
+      <div class="wb data"><b>Cifra 4</b>600 usuarios diarios</div>
+    </div>
+    <div class="wf-row"><div class="wb short">Franja de capacidad comprobada, con nota al pie de la fuente de cada cifra</div></div>
+    <div class="wf-row">
+      <div class="wb tall"><b>Servicio 1</b>Encuestas y opinión pública</div>
+      <div class="wb tall"><b>Servicio 2</b>Cartografía y análisis territorial</div>
+      <div class="wb tall"><b>Servicio 3</b>Escucha digital y actores</div>
+    </div>
+    <div class="wf-row">
+      <div class="wb tall"><b>Servicio 4</b>Índices y priorización</div>
+      <div class="wb tall"><b>Servicio 5</b>Tableros y visualización</div>
+      <div class="wb tall"><b>Servicio 6</b>Software y automatización</div>
+    </div>
+    <div class="wf-row"><div class="wb tall" style="flex:3"><b>Bloque de método</b>Los cuatro pasos de trabajo en línea horizontal: diseño, levantamiento, procesamiento, transferencia. Enlace a metodología.</div><div class="wb tall" style="flex:2"><b>Caso destacado</b>Un solo caso, con resultado verificable y enlace a la ficha completa</div></div>
+    <div class="wf-row"><div class="wb"><b>Últimas publicaciones</b>Tres notas metodológicas recientes, con tiempo de lectura</div></div>
+    <div class="wf-row"><div class="wb accent tall"><b>Pórtico de cierre</b>Barra de índice animada y llamada única: solicitar propuesta técnica. Alternativa secundaria en texto: escribir por WhatsApp.</div></div>
+    <div class="wf-row"><div class="wb solid"><b>Pie</b>Marca, mapa del sitio, datos de la firma, aviso de privacidad, protección de datos, correo y teléfono</div></div>
+  </div>
+  <p class="wf-scale">Orden deliberado: primero la promesa, luego la prueba en cifras, luego la oferta, luego el método y solo al final la conversión. El visitante de gobierno no pide propuesta hasta haber visto el procedimiento.</p>
+
+  <h3>Listado de servicios</h3>
+  <div class="wf">
+    <p class="wf-title">/servicios/ — Listado</p>
+    <div class="wf-row"><div class="wb short" style="flex:2"><b>Logotipo</b></div><div class="wb short" style="flex:5">Navegación</div><div class="wb short accent" style="flex:2"><b>Solicitar propuesta</b></div></div>
+    <div class="wf-row"><div class="wb"><b>Encabezado de sección</b>Título, párrafo de contexto de tres líneas, sin imagen</div></div>
+    <div class="wf-row"><div class="wb tall"><b>Ficha 1</b>Nombre, una línea de qué resuelve, tres entregables, enlace</div><div class="wb tall"><b>Ficha 2</b></div><div class="wb tall"><b>Ficha 3</b></div></div>
+    <div class="wf-row"><div class="wb tall"><b>Ficha 4</b></div><div class="wb tall"><b>Ficha 5</b></div><div class="wb tall"><b>Ficha 6</b></div></div>
+    <div class="wf-row"><div class="wb data"><b>Bloque combinado</b>Nota sobre proyectos que integran varias líneas, con ejemplo real</div></div>
+    <div class="wf-row"><div class="wb accent"><b>Pórtico</b>¿No sabe cuál necesita? Cuéntenos el problema</div></div>
+    <div class="wf-row"><div class="wb solid"><b>Pie</b></div></div>
+  </div>
+
+  <h3>Ficha de servicio</h3>
+  <div class="wf">
+    <p class="wf-title">/servicios/[servicio]/ — La pantalla más importante del sitio</p>
+    <div class="wf-row"><div class="wb short" style="flex:2"><b>Logotipo</b></div><div class="wb short" style="flex:5">Navegación</div><div class="wb short accent" style="flex:2"><b>Solicitar propuesta</b></div></div>
+    <div class="wf-row"><div class="wb tall" style="flex:3"><b>Encabezado</b>Nombre del servicio, qué problema resuelve en una frase, para quién es</div><div class="wb tall accent" style="flex:2"><b>Ficha técnica descargable</b>PDF de dos páginas. Es el objeto que el visitante reenvía a quien decide.</div></div>
+    <div class="wf-row"><div class="wb"><b>Qué entrega</b>Lista de entregables concretos: bases, informe, tablero, capacitación</div></div>
+    <div class="wf-row"><div class="wb tall" style="flex:2"><b>Cómo se hace</b>El método paso a paso, con los criterios técnicos que lo sostienen</div><div class="wb tall data" style="flex:1"><b>Ficha de rigor</b>Tamaño de muestra, error, cobertura, tiempos</div></div>
+    <div class="wf-row"><div class="wb"><b>Preguntas frecuentes</b>Cuatro a seis, redactadas con las dudas reales del cliente institucional</div></div>
+    <div class="wf-row"><div class="wb" style="flex:2"><b>Casos con este servicio</b>Dos fichas de caso</div><div class="wb" style="flex:1"><b>Publicaciones relacionadas</b>Dos notas</div></div>
+    <div class="wf-row"><div class="wb accent tall"><b>Pórtico</b>Solicitar propuesta para este servicio, con el servicio ya preseleccionado en el formulario</div></div>
+    <div class="wf-row"><div class="wb solid"><b>Pie</b></div></div>
+  </div>
+
+  <h3>Ficha de caso</h3>
+  <div class="wf">
+    <p class="wf-title">/casos/[caso]/</p>
+    <div class="wf-row"><div class="wb short" style="flex:2"><b>Logotipo</b></div><div class="wb short" style="flex:5">Navegación</div><div class="wb short accent" style="flex:2"><b>Solicitar propuesta</b></div></div>
+    <div class="wf-row"><div class="wb tall"><b>Encabezado del caso</b>Tipo de institución, año, líneas de servicio aplicadas. Nombre del cliente solo si hay autorización expresa.</div></div>
+    <div class="wf-row"><div class="wb data"><b>Escala</b>Cobertura</div><div class="wb data"><b>Escala</b>Volumen</div><div class="wb data"><b>Escala</b>Duración</div><div class="wb data"><b>Escala</b>Equipo</div></div>
+    <div class="wf-row"><div class="wb tall" style="flex:2"><b>El problema</b>Qué tenía que decidir la institución y por qué no podía con lo que tenía</div><div class="wb tall" style="flex:2"><b>Qué se hizo</b>Método y decisiones técnicas, con lo que se descartó y por qué</div></div>
+    <div class="wf-row"><div class="wb tall"><b>Visualización</b>Captura de tablero, mapa o gráfica, anonimizada si aplica</div></div>
+    <div class="wf-row"><div class="wb"><b>Resultado</b>Qué cambió en la decisión. Sin adjetivos: qué se priorizó, qué se recortó, qué quedó instalado.</div></div>
+    <div class="wf-row"><div class="wb accent"><b>Pórtico</b>Siguiente caso, o solicitar propuesta</div></div>
+    <div class="wf-row"><div class="wb solid"><b>Pie</b></div></div>
+  </div>
+
+  <h3>Publicaciones y nota</h3>
+  <div class="wf">
+    <p class="wf-title">/publicaciones/ y /publicaciones/[nota]/</p>
+    <div class="wf-row"><div class="wb short" style="flex:2"><b>Logotipo</b></div><div class="wb short" style="flex:5">Navegación</div><div class="wb short accent" style="flex:2"><b>Solicitar propuesta</b></div></div>
+    <div class="wf-row"><div class="wb" style="flex:3"><b>Listado</b>Título, tema, fecha y tiempo de lectura. Sin imagen destacada: el título hace el trabajo.</div><div class="wb" style="flex:1"><b>Temas</b>Filtro por pilar editorial</div></div>
+    <div class="wf-row"><div class="wb tall" style="flex:3"><b>Cuerpo de la nota</b>Una sola columna de 68 caracteres, tipografía serifada, subtítulos jerarquizados, tablas y gráficas propias, referencias al final</div><div class="wb tall" style="flex:1"><b>Índice lateral</b>Navegación dentro de la nota, fija al desplazar</div></div>
+    <div class="wf-row"><div class="wb data"><b>Bloque de método</b>Al pie de cada nota: cómo se obtuvieron los datos que sostienen el texto</div></div>
+    <div class="wf-row"><div class="wb accent"><b>Pórtico</b>Suscripción a nuevas notas, o servicio relacionado</div></div>
+    <div class="wf-row"><div class="wb solid"><b>Pie</b></div></div>
+  </div>
+
+  <h3>Contacto</h3>
+  <div class="wf">
+    <p class="wf-title">/contacto/</p>
+    <div class="wf-row"><div class="wb short" style="flex:2"><b>Logotipo</b></div><div class="wb short" style="flex:5">Navegación</div><div class="wb short accent" style="flex:2"><b>Solicitar propuesta</b></div></div>
+    <div class="wf-row"><div class="wb"><b>Encabezado</b>Qué pasa después de enviar el formulario y en cuánto tiempo hay respuesta</div></div>
+    <div class="wf-row"><div class="wb tall accent" style="flex:3"><b>Formulario</b>Institución, nombre, cargo, correo, teléfono, servicio de interés, necesidad, ventana de tiempo, consentimiento de datos</div><div class="wb tall" style="flex:2"><b>Canales directos</b>WhatsApp, correo institucional, teléfono, domicilio fiscal y horario</div></div>
+    <div class="wf-row"><div class="wb"><b>Nota de datos personales</b>Enlace al aviso de privacidad y qué se hace con lo que se envía</div></div>
+    <div class="wf-row"><div class="wb solid"><b>Pie</b></div></div>
+  </div>
+</section>
+
+<!-- ===== 7 ===== -->
+<section id="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Contenido de cada bloque</h2></div>
+
+  <p class="lead">Qué texto va exactamente en cada caja de los wireframes anteriores, con su extensión. Sirve para redactar sin volver a preguntar y para calcular cuánto contenido hay que producir antes de publicar.</p>
+
+  <table>
+    <caption>Inventario de contenido de la página de inicio.</caption>
+    <thead><tr><th>Bloque</th><th>Contenido</th><th class="num">Extensión</th><th>Quién lo produce</th></tr></thead>
+    <tbody>
+      <tr><td>Encabezado principal</td><td>Frase de posicionamiento, subtítulo, botón</td><td class="num">12 y 25 palabras</td><td>Yaocalli, a partir del documento 01</td></tr>
+      <tr><td>Cifras de capacidad</td><td>Cuatro números con etiqueta y fuente</td><td class="num">4 líneas</td><td>Yaocalli, con verificación</td></tr>
+      <tr><td>Fichas de servicio</td><td>Nombre, qué resuelve, tres entregables</td><td class="num">35 palabras cada una</td><td>Redacción, revisión técnica</td></tr>
+      <tr><td>Bloque de método</td><td>Cuatro pasos con una línea cada uno</td><td class="num">60 palabras</td><td>Yaocalli</td></tr>
+      <tr><td>Caso destacado</td><td>Institución, problema, resultado</td><td class="num">45 palabras</td><td>Yaocalli, con autorización</td></tr>
+      <tr><td>Publicaciones</td><td>Tres títulos con tema y tiempo de lectura</td><td class="num">Automático</td><td>Sistema</td></tr>
+      <tr><td>Pórtico</td><td>Llamada única y alternativa secundaria</td><td class="num">18 palabras</td><td>Redacción</td></tr>
+    </tbody>
+  </table>
+
+  <table>
+    <caption>Inventario de contenido de una ficha de servicio. Se repite seis veces.</caption>
+    <thead><tr><th>Bloque</th><th>Contenido</th><th class="num">Extensión</th><th>Obligatorio</th></tr></thead>
+    <tbody>
+      <tr><td>Encabezado</td><td>Nombre, problema que resuelve, para quién</td><td class="num">40 palabras</td><td>Sí</td></tr>
+      <tr><td>Ficha técnica</td><td>PDF de dos páginas con alcance, método, entregables y tiempos</td><td class="num">2 páginas</td><td>Sí</td></tr>
+      <tr><td>Qué entrega</td><td>Entregables concretos con formato de archivo</td><td class="num">5 a 8 puntos</td><td>Sí</td></tr>
+      <tr><td>Cómo se hace</td><td>Método por etapas con criterios técnicos</td><td class="num">300 a 450 palabras</td><td>Sí</td></tr>
+      <tr><td>Ficha de rigor</td><td>Parámetros técnicos según el servicio</td><td class="num">6 datos</td><td>Sí</td></tr>
+      <tr><td>Preguntas frecuentes</td><td>Dudas reales del cliente institucional</td><td class="num">4 a 6 preguntas</td><td>Sí</td></tr>
+      <tr><td>Casos y publicaciones</td><td>Enlaces cruzados</td><td class="num">2 y 2</td><td>Cuando existan</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-info"><p><b>Carga total antes de publicar.</b> Seis fichas de servicio completas, seis fichas técnicas en PDF, tres casos, cuatro páginas de metodología, quiénes somos, contacto y dos páginas legales. Son alrededor de 6 500 palabras de contenido final más seis documentos descargables. Es el trabajo real que separa un sitio publicado de un sitio en construcción.</p></div>
+</section>
+
+<!-- ===== 8 ===== -->
+<section id="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Vistas móviles</h2></div>
+
+  <p class="lead">Más de la mitad de las visitas llegarán de teléfono, y el coordinador de campaña casi siempre. El teléfono no es una versión reducida: es donde ocurre una de las dos conversiones.</p>
+
+  <div class="phones">
+    <div>
+      <div class="phone">
+        <div class="wf-row"><div class="wb short" style="flex:3"><b>Logo</b></div><div class="wb short" style="flex:1">Menú</div></div>
+        <div class="wf-row"><div class="wb solid tall"><b>Encabezado</b>Frase de posicionamiento. Una acción.</div></div>
+        <div class="wf-row"><div class="wb short accent"><b>Solicitar propuesta</b></div></div>
+        <div class="wf-row"><div class="wb data short">84 municipios</div><div class="wb data short">80 en campo</div></div>
+        <div class="wf-row"><div class="wb"><b>Servicio 1</b></div></div>
+        <div class="wf-row"><div class="wb"><b>Servicio 2</b></div></div>
+        <div class="wf-row"><div class="wb short">Ver los seis servicios</div></div>
+        <div class="wf-row"><div class="wb"><b>Método en 4 pasos</b>Apilados</div></div>
+        <div class="wf-row"><div class="wb accent"><b>Pórtico</b></div></div>
+      </div>
+      <p class="phone-cap">Inicio. Las seis fichas de servicio se reducen a dos visibles más un enlace al listado: seis tarjetas apiladas entierran todo lo demás.</p>
+    </div>
+
+    <div>
+      <div class="phone">
+        <div class="wf-row"><div class="wb short" style="flex:3"><b>Logo</b></div><div class="wb short" style="flex:1">Menú</div></div>
+        <div class="wf-row"><div class="wb"><b>Nombre del servicio</b>Qué resuelve</div></div>
+        <div class="wf-row"><div class="wb accent short"><b>Descargar ficha técnica</b></div></div>
+        <div class="wf-row"><div class="wb"><b>Qué entrega</b>Lista</div></div>
+        <div class="wf-row"><div class="wb data"><b>Ficha de rigor</b>Tabla de dos columnas</div></div>
+        <div class="wf-row"><div class="wb tall"><b>Cómo se hace</b>Etapas con acordeón</div></div>
+        <div class="wf-row"><div class="wb"><b>Preguntas frecuentes</b>Acordeón</div></div>
+        <div class="wf-row"><div class="wb accent short"><b>Barra fija: WhatsApp</b></div></div>
+      </div>
+      <p class="phone-cap">Ficha de servicio. La descarga sube justo debajo del encabezado y aparece una barra fija de WhatsApp al pie, que solo existe en teléfono.</p>
+    </div>
+  </div>
+
+  <h3>Reglas de comportamiento móvil</h3>
+  <ul class="plain">
+    <li><b>Barra fija de WhatsApp solo en teléfono.</b> Aparece al pasar el primer 25 % de la página, nunca antes: mostrarla de entrada interrumpe al visitante que aún no sabe qué está viendo.</li>
+    <li><b>Menú desplegable con siete destinos como máximo.</b> Servicios se abre en su listado, no en un submenú anidado. Un nivel, sin excepción.</li>
+    <li><b>Acordeones para método y preguntas frecuentes.</b> Abiertos en escritorio, cerrados en teléfono, con el primero abierto para que se entienda que se pueden abrir.</li>
+    <li><b>Tablas de ficha técnica en dos columnas apiladas.</b> Nunca desplazamiento horizontal: en la ficha de rigor cada dato pasa a par de etiqueta y valor.</li>
+    <li><b>Área de toque de 44 píxeles.</b> Se usa con una mano, a veces en la calle y a veces con guantes.</li>
+    <li><b>Sin mapas interactivos en móvil.</b> La cartografía se muestra como imagen estática con enlace a la versión completa. Un mapa vectorial en una conexión mala arruina la visita.</li>
+    <li><b>Formulario en un solo paso.</b> Nada de asistentes de varias pantallas: nueve campos visibles, teclado adecuado por tipo de campo y guardado del texto si la conexión falla.</li>
+  </ul>
+</section>
+
+<!-- ===== 9 ===== -->
+<section id="s9">
+  <div class="sec-head"><span class="sec-num">09</span><h2>Conversión</h2></div>
+
+  <p class="lead">Dos mecanismos, uno por perfil. El formulario para gobierno, que necesita constancia de lo que pidió. WhatsApp para campaña, que necesita respuesta ahora.</p>
+
+  <h4>Formulario de solicitud de propuesta</h4>
+  <p>Nueve campos. Cada uno existe porque sirve para calificar la solicitud o porque la ley lo exige; ninguno es de relleno.</p>
+
+  <table>
+    <caption>Campos del formulario y su función.</caption>
+    <thead><tr><th>Campo</th><th>Tipo</th><th>Por qué está</th><th>Obligatorio</th></tr></thead>
+    <tbody>
+      <tr><td>Institución u organización</td><td>Texto</td><td>Califica el tipo de cliente y el marco de contratación</td><td>Sí</td></tr>
+      <tr><td>Nombre</td><td>Texto</td><td>Trato</td><td>Sí</td></tr>
+      <tr><td>Cargo</td><td>Texto</td><td>Indica si quien escribe decide o consulta</td><td>Sí</td></tr>
+      <tr><td>Correo institucional</td><td>Correo</td><td>Canal formal, y señal de que la solicitud es real</td><td>Sí</td></tr>
+      <tr><td>Teléfono</td><td>Teléfono</td><td>Seguimiento</td><td>No</td></tr>
+      <tr><td>Servicio de interés</td><td>Selección</td><td>Preseleccionado si viene de una ficha de servicio</td><td>Sí</td></tr>
+      <tr><td>Qué necesita decidir</td><td>Texto largo</td><td>La pregunta más útil del formulario: revela el problema real, no el servicio que cree necesitar</td><td>Sí</td></tr>
+      <tr><td>Ventana de tiempo</td><td>Selección</td><td>Separa lo urgente de lo exploratorio</td><td>Sí</td></tr>
+      <tr><td>Consentimiento de datos</td><td>Casilla</td><td>Requisito legal, con enlace al aviso de privacidad</td><td>Sí</td></tr>
+    </tbody>
+  </table>
+
+<pre><i>&lt;!-- Enlace de WhatsApp con mensaje previo. Sustituir el número por el real. --&gt;</i>
+&lt;a class="wa"
+   href="<b>https://wa.me/52XXXXXXXXXX?text=</b>Hola%2C%20escribo%20desde%20%5Binstituci%C3%B3n%5D.%20Necesito%20informaci%C3%B3n%20sobre%20%5Bservicio%5D."
+   rel="noopener"&gt;Escribir por WhatsApp&lt;/a&gt;
+
+<i>/* La barra fija aparece pasado el primer cuarto de la página, solo en teléfono */</i>
+<b>.wa-bar</b>{position:fixed; left:0; right:0; bottom:0; padding:12px 16px;
+  background:var(--barro); color:#fff; transform:translateY(100%);
+  transition:transform .3s; z-index:40;}
+<b>.wa-bar.visible</b>{transform:translateY(0);}
+@media (min-width:721px){ <b>.wa-bar</b>{display:none;} }</pre>
+
+<pre><i>// Mostrar la barra al pasar el 25 % de la página</i>
+var bar = document.querySelector('.wa-bar');
+window.addEventListener('scroll', function(){
+  var avance = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  bar.classList.toggle('visible', avance &gt; 0.25);
+}, {passive:true});</pre>
+
+  <div class="note note-supuesto"><p><span class="tag tag-supuesto">Pendiente</span> Falta el número de WhatsApp, el correo institucional del dominio propio y la decisión sobre a qué bandeja llega el formulario. Sin eso, el mecanismo de conversión queda escrito pero no operativo.</p></div>
+</section>
+
+<!-- ===== 10 ===== -->
+<section id="s10">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Componentes reutilizables</h2></div>
+
+  <p class="lead">Doce componentes cubren todo el sitio. Construirlos una vez y reutilizarlos es lo que permite publicar seis fichas de servicio en el tiempo que normalmente toma una.</p>
+
+  <table>
+    <caption>Inventario de componentes, con su origen en el sistema de identidad.</caption>
+    <thead><tr><th>Componente</th><th>Dónde aparece</th><th>Elemento de marca que usa</th></tr></thead>
+    <tbody>
+      <tr><td>Encabezado de navegación</td><td>Todas</td><td>Lockup horizontal, acción en barro</td></tr>
+      <tr><td>Encabezado de página oscuro</td><td>Inicio, listados</td><td>Obsidiana con retícula cartográfica</td></tr>
+      <tr><td>Tarjeta de cifra</td><td>Inicio, casos</td><td>Jade lavado, cifras tabulares</td></tr>
+      <tr><td>Ficha de servicio</td><td>Inicio, listado, cruces</td><td>Filete de escalinata como separador</td></tr>
+      <tr><td>Bloque de ficha técnica</td><td>Servicios, casos</td><td>Jade, tabla de dos columnas</td></tr>
+      <tr><td>Barra de índice</td><td>Casos, tableros, publicaciones</td><td>Rampa de jade en cuatro tramos</td></tr>
+      <tr><td>Tarjeta de caso</td><td>Casos, servicios, inicio</td><td>Borde superior en barro</td></tr>
+      <tr><td>Acordeón</td><td>Método, preguntas frecuentes</td><td>Filete de escalinata al abrir</td></tr>
+      <tr><td>Separador de sección</td><td>Todas las páginas largas</td><td>Escalinata y regla cartográfica</td></tr>
+      <tr><td>Pórtico de cierre</td><td>Final de cada página</td><td>Barra de índice animada</td></tr>
+      <tr><td>Formulario</td><td>Contacto, servicios</td><td>Campos en cal, acción en barro</td></tr>
+      <tr><td>Pie</td><td>Todas</td><td>Obsidiana, lockup y datos de la firma</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-ok"><p><b>Los separadores ya están especificados.</b> La escalinata, la regla cartográfica y el pórtico están definidos en la sección 07 del documento 01, con su regla de alternancia, su destino y su comportamiento. Se implementan una vez y se usan en todo el sitio sin volver a decidir nada.</p></div>
+</section>
+
+<!-- ===== 11 ===== -->
+<section id="s11">
+  <div class="sec-head"><span class="sec-num">11</span><h2>Alcance</h2></div>
+
+  <p class="lead">Publicar antes con menos vale más que publicar tarde con todo. La versión 1 es lo que hace falta para que la métrica única empiece a moverse; lo demás espera a tener datos de uso.</p>
+
+  <div class="scope">
+    <div class="scope-col scope-v1">
+      <h5>Versión 1 — se publica</h5>
+      <ul>
+        <li>Inicio completo</li>
+        <li>Listado y seis fichas de servicio</li>
+        <li>Seis fichas técnicas en PDF</li>
+        <li>Metodología en una sola página</li>
+        <li>Tres casos publicables</li>
+        <li>Quiénes somos</li>
+        <li>Contacto con formulario y WhatsApp</li>
+        <li>Aviso de privacidad y protección de datos</li>
+        <li>Publicaciones con las primeras cuatro notas</li>
+        <li>Medición configurada desde el primer día</li>
+      </ul>
+    </div>
+    <div class="scope-col scope-f2">
+      <h5>Fase 2 — espera</h5>
+      <ul>
+        <li>Filtros en el listado de casos</li>
+        <li>Metodología dividida en cuatro subpáginas</li>
+        <li>Mapa interactivo de cobertura territorial</li>
+        <li>Suscripción a notas metodológicas</li>
+        <li>Versión en inglés para organismos internacionales</li>
+        <li>Área privada de cliente para consultar tableros</li>
+        <li>Calculadora de tamaño de muestra como herramienta pública</li>
+        <li>Biblioteca de documentos descargables</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note note-info"><p><b>La calculadora de tamaño de muestra merece una nota.</b> Es la pieza de fase 2 con más potencial: una herramienta pública que resuelve un problema real de quien va a contratar una encuesta, atrae exactamente al perfil correcto y demuestra competencia técnica sin decir una palabra de venta. Se deja para después solo porque la versión 1 tiene que salir primero.</p></div>
+
+  <h3>Lo que falta para producir</h3>
+  <ul class="plain">
+    <li><b>Casos publicables.</b> De los proyectos del portafolio, cuáles pueden llevar el nombre del cliente, cuáles van anonimizados y cuáles no se muestran.</li>
+    <li><b>Datos de la firma.</b> Razón social, domicilio fiscal, correo del dominio propio y número de WhatsApp.</li>
+    <li><b>Equipo.</b> Cuántas personas y con qué perfiles, para decidir si quiénes somos lleva fichas individuales o un solo bloque de capacidades.</li>
+    <li><b>Cifras verificables.</b> Confirmar las cuatro cifras del inicio y su fuente, porque van a ser citadas.</li>
+    <li><b>Fotografía.</b> Si existe material de campo o si la versión 1 se resuelve con cartografía y visualizaciones propias.</li>
+    <li><b>Prioridad comercial.</b> Si el primer perfil es gobierno o campaña, porque define el orden del inicio.</li>
+  </ul>
+</section>
+
+</main>
+
+<div class="closer" id="closer">
+  <div class="sheet">
+    <a class="closer-link" href="./3_Plan_de_Contenidos_Yaocalli.html">
+      <span class="closer-bar" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="closer-text">
+        <small>Siguiente documento de la serie</small>
+        <b>03 — Plan de contenidos</b>
+        <em>Pilares editoriales, calendario de seis meses con títulos finales, anatomía de una nota metodológica y sistema de despiece a redes.</em>
+      </span>
+    </a>
+    <p class="closer-note"><span class="tag tag-supuesto">Pendiente</span> El enlace resolverá en cuanto el archivo esté en la misma carpeta que este.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="lockup">
+    <svg width="42" height="42" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#EFE9DE" stroke-width="11" stroke-linejoin="round"/>
+      <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#C98F72" stroke-width="10" stroke-linejoin="round"/>
+    </svg>
+    <div class="wordmark">Yaocalli<small>CONSULTORÍA Y ESTRATEGIA</small></div>
+  </div>
+  <p style="max-width:62ch; margin:0">Documento 02 de la serie de identidad y estrategia digital. Versión 1.0, borrador para aprobación, 1 de septiembre de 2026. Los apartados marcados como supuesto requieren validación antes de escribir una sola línea de código.</p>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var STAIR = '<span class="sep-line"></span>'
+    + '<span class="sep-hint">Volver al contenido</span>'
+    + '<button class="sep-btn" type="button">'
+    + '<svg width="126" height="36" viewBox="0 0 118 34" aria-hidden="true">'
+    + '<path class="sep-track" d="M4 28 V20 H40 V13 H76 V6 H114" fill="none" stroke-width="4" stroke-linejoin="round"/>'
+    + '<path class="sep-fill" d="M4 28 V20 H40 V13 H76 V6 H114" fill="none" stroke-width="4" stroke-linejoin="round"/>'
+    + '<circle class="sep-dot" r="4.5"/></svg>'
+    + '<span class="sr-only">Volver al contenido</span></button>'
+    + '<span class="sep-line"></span>';
+
+  function ruleSvg(){
+    var t = '';
+    for (var k = 0; k < 9; k++){
+      var x = 2 + k * 10, tall = (k % 2 === 0);
+      t += '<rect class="tick" x="' + x + '" y="' + (tall ? 7 : 13) + '" width="1.6" height="' + (tall ? 13 : 7) + '"/>';
+    }
+    return '<svg width="96" height="26" viewBox="0 0 92 24" aria-hidden="true">'
+      + '<line class="rule-base" x1="2" y1="20.7" x2="84" y2="20.7"/>'
+      + t + '<path class="marker" d="M0 0 H9 L4.5 7 Z"/></svg>';
+  }
+
+  function nextSep(target){
+    var num = target.querySelector('.sec-num');
+    var ttl = target.querySelector('h2');
+    return '<span class="sep-line"></span>'
+      + '<a class="next-btn" href="#' + target.id + '">' + ruleSvg()
+      + '<span class="next-text"><small>Siguiente</small><b>'
+      + (num ? num.textContent + ' ' : '') + (ttl ? ttl.textContent : '')
+      + '</b></span></a>';
+  }
+
+  var secs = document.querySelectorAll('main.sheet > section');
+  var seps = [];
+  for (var i = 1; i < secs.length; i++){
+    var d = document.createElement('div');
+    var isNext = (i % 2 === 0);
+    d.className = isNext ? 'sep sep-next' : 'sep';
+    d.setAttribute('role','separator');
+    d.innerHTML = isNext ? nextSep(secs[i]) : STAIR;
+    if (!reduce) d.classList.add('pending');
+    secs[i].parentNode.insertBefore(d, secs[i]);
+    seps.push(d);
+  }
+  var closer = document.getElementById('closer');
+  if (closer){ if (!reduce) closer.classList.add('pending'); seps.push(closer); }
+
+  document.addEventListener('click', function(e){
+    var b = e.target.closest && e.target.closest('.sep-btn');
+    if (b){ document.querySelector('.toc').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'}); }
+  });
+
+  if (!reduce && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          en.target.classList.remove('pending');
+          en.target.classList.add('is-visible');
+          io.unobserve(en.target);
+        }
+      });
+    }, {rootMargin: '0px 0px -18% 0px'});
+    seps.forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+
+</body>
+</html>

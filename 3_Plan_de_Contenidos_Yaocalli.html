@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan de contenidos — Yaocalli Consultoría y Estrategia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --obsidiana:#14110F; --obsidiana-80:#2A2521;
+  --barro:#8C4A2F; --barro-deep:#6B3722; --barro-pale:#C98F72; --barro-wash:#F7EDE7;
+  --jade:#3F6B5A; --jade-deep:#2C4C3F; --jade-pale:#7FA593; --jade-wash:#E8EFEB;
+  --cal:#EFE9DE;
+  --g100:#F5F2EC; --g200:#E6E1D7; --g300:#D2CCBF; --g400:#B0A99B;
+  --g500:#8A8377; --g600:#6A645A; --g700:#4D4841; --g800:#33302B; --g900:#1D1A17;
+  --ok:#3E7A55; --ok-text:#2F5E41; --warn:#B8862B; --warn-text:#8A6218;
+  --err:#A33131; --info:#35617A;
+  --serif:'Alegreya', Georgia, serif; --sans:'Alegreya Sans', system-ui, sans-serif;
+  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --measure:68ch; --rule:1px solid var(--g300);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--cal); color:var(--obsidiana); font-family:var(--serif); font-size:17.5px; line-height:1.62; -webkit-font-smoothing:antialiased}
+p{max-width:var(--measure); margin:0 0 1em}
+a{color:var(--barro-deep)}
+h1,h2,h3,h4{font-family:var(--serif); font-weight:700; line-height:1.18; margin:0}
+h2{font-size:40px; letter-spacing:-.01em}
+h3{font-size:28px; margin-top:2.6rem}
+h4{font-size:21px; margin-top:1.9rem}
+@media(max-width:640px){body{font-size:17px} h2{font-size:30px} h3{font-size:23px} h4{font-size:19px}}
+.graticule{background-image:linear-gradient(to right, rgba(239,233,222,.09) 1px, transparent 1px),linear-gradient(to bottom, rgba(239,233,222,.09) 1px, transparent 1px); background-size:34px 34px}
+
+.cover{min-height:100vh; background:var(--obsidiana); color:var(--cal); padding:6vh 7vw 5vh; display:flex; flex-direction:column; justify-content:space-between}
+.cover-mark{width:92px}
+.cover h1{font-size:clamp(38px,7.2vw,76px); font-weight:400; line-height:1.06; letter-spacing:-.02em; max-width:16ch; margin:0 0 .5rem}
+.cover h1 em{font-style:italic}
+.cover-sub{font-family:var(--sans); font-size:clamp(16px,2.2vw,21px); color:var(--g400); max-width:48ch; line-height:1.5}
+.cover-meta{font-family:var(--sans); font-size:14px; color:var(--g500); border-top:1px solid rgba(239,233,222,.18); padding-top:1.1rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem 2rem}
+.cover-meta b{display:block; color:var(--cal); font-weight:500; font-size:15px}
+.cover-band{height:9px; display:flex; margin-top:1.4rem}
+.cover-band i{display:block; height:100%}
+
+.sheet{max-width:1040px; margin:0 auto; padding:0 7vw}
+.runner{position:sticky; top:0; z-index:20; background:var(--cal); border-bottom:var(--rule); display:flex; align-items:center; gap:11px; padding:.65rem 7vw; font-family:var(--sans); font-size:13.5px; color:var(--g600)}
+.runner svg{width:20px; flex:none}
+.runner span{margin-left:auto}
+section{padding:3.4rem 0 4.2rem}
+section:first-of-type{padding-top:4.2rem}
+.sec-head{display:flex; align-items:baseline; gap:18px; margin-bottom:1.6rem}
+.sec-num{font-family:var(--sans); font-size:15px; font-weight:500; color:var(--barro); border:1px solid var(--barro); border-radius:2px; padding:2px 9px; flex:none}
+.lead{font-size:21px; line-height:1.55; color:var(--g800); max-width:60ch}
+
+.toc{background:var(--obsidiana); color:var(--cal); padding:3.4rem 7vw}
+.toc h2{font-size:24px; font-weight:400; color:var(--g400); max-width:780px; margin:0 auto 1.4rem}
+.toc ol{list-style:none; margin:0 auto; padding:0; max-width:780px; counter-reset:t}
+.toc li{counter-increment:t; border-top:1px solid rgba(239,233,222,.14)}
+.toc li:last-child{border-bottom:1px solid rgba(239,233,222,.14)}
+.toc a{display:flex; gap:16px; align-items:baseline; padding:.72rem 0; color:var(--cal); text-decoration:none; font-family:var(--sans); font-size:17px}
+.toc a::before{content:counter(t,decimal-leading-zero); color:var(--barro-pale); font-size:14px; flex:none; width:2.2em}
+.toc a:hover{color:var(--barro-pale)}
+.toc small{margin-left:auto; color:var(--g500); font-size:13.5px; text-align:right}
+
+.note{border-left:3px solid; padding:.95rem 1.15rem; margin:1.6rem 0; font-family:var(--sans); font-size:15.5px; line-height:1.55; max-width:var(--measure)}
+.note p{font-family:var(--sans); font-size:15.5px; margin:0}
+.note p + p{margin-top:.6rem}
+.note-supuesto{border-color:var(--warn); background:#FBF4E6}
+.note-info{border-color:var(--info); background:#EAF0F4}
+.note-ok{border-color:var(--ok); background:#EAF2EC}
+.note-err{border-color:var(--err); background:#F8ECEC}
+.tag{display:inline-block; font-family:var(--sans); font-size:12.5px; font-weight:500; padding:2px 8px; border-radius:2px; vertical-align:2px}
+.tag-supuesto{background:#F5E4C4; color:var(--warn-text)}
+.p1{background:var(--barro-wash); color:var(--barro-deep)}
+.p2{background:var(--jade-wash); color:var(--jade-deep)}
+.p3{background:var(--g200); color:var(--g800)}
+.p4{background:#EAF0F4; color:var(--info)}
+
+table{width:100%; border-collapse:collapse; font-family:var(--sans); font-size:15px; margin:1.4rem 0}
+caption{text-align:left; font-family:var(--sans); font-size:14px; color:var(--g600); padding-bottom:.5rem}
+th{text-align:left; font-weight:700; font-size:14px; color:var(--g700); border-bottom:2px solid var(--g400); padding:.5rem .7rem .45rem}
+td{border-bottom:1px solid var(--g200); padding:.55rem .7rem; vertical-align:top}
+tbody tr:nth-child(odd){background:rgba(20,17,15,.022)}
+.num{font-variant-numeric:tabular-nums}
+.kw{font-family:var(--mono); font-size:12.5px; color:var(--jade-deep)}
+code{font-family:var(--mono); font-size:.85em; background:var(--g200); padding:1px 5px; border-radius:2px}
+
+.metrics{display:grid; grid-template-columns:repeat(auto-fit,minmax(178px,1fr)); gap:12px; margin:1.7rem 0}
+.metric{background:var(--obsidiana); color:var(--cal); border-radius:3px; padding:1.2rem 1.3rem}
+.metric b{display:block; font-family:var(--serif); font-size:38px; font-weight:700; line-height:1; color:var(--barro-pale); font-variant-numeric:tabular-nums}
+.metric span{display:block; font-family:var(--sans); font-size:13.5px; color:var(--g400); margin-top:.5rem; line-height:1.4}
+
+.dark-box{background:var(--obsidiana); color:var(--cal); border-radius:3px; padding:1.9rem 2rem; margin:1.7rem 0}
+.dark-box h4{color:var(--cal); margin-top:0}
+.dark-box p{color:var(--g300); max-width:62ch}
+.dark-box p:last-child{margin-bottom:0}
+
+.numcards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin:1.6rem 0}
+.numcard{border-top:2px solid var(--barro); padding-top:.9rem}
+.numcard b{display:block; font-family:var(--sans); font-size:13px; color:var(--barro); font-weight:500; margin-bottom:.3rem}
+.numcard h5{font-size:19px; margin:0 0 .35rem; font-family:var(--serif)}
+.numcard p{font-family:var(--sans); font-size:15px; margin:0; color:var(--g700)}
+
+ul.plain{list-style:none; padding:0; margin:1rem 0; max-width:var(--measure); font-family:var(--sans); font-size:15.5px}
+ul.plain li{padding:.42rem 0 .42rem 1.15rem; border-bottom:1px solid var(--g200); position:relative}
+ul.plain li::before{content:''; position:absolute; left:0; top:1.05em; width:5px; height:5px; background:var(--barro)}
+
+/* pilares */
+.pillar{border:1px solid var(--g300); background:#fff; border-radius:3px; padding:1.3rem 1.5rem; margin:1.2rem 0}
+.pillar-head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:.5rem}
+.pillar-head h5{font-family:var(--serif); font-size:22px; margin:0}
+.weight{font-family:var(--sans); font-size:13px; color:var(--g600)}
+.pillar p{font-family:var(--sans); font-size:15.5px; max-width:66ch}
+.bar{display:flex; height:34px; border-radius:3px; overflow:hidden; margin:1.4rem 0 .5rem}
+.bar i{display:flex; align-items:center; justify-content:center; font-family:var(--sans); font-size:12.5px; font-style:normal; font-weight:500}
+
+/* mes del calendario */
+.month{margin:1.8rem 0}
+.month-head{font-family:var(--sans); font-size:14px; font-weight:700; color:var(--g700); border-bottom:2px solid var(--g400); padding-bottom:.4rem; margin-bottom:.9rem; display:flex; gap:10px; align-items:baseline}
+.month-head span{margin-left:auto; font-weight:400; color:var(--g600)}
+.art{border-left:3px solid var(--g300); padding:.75rem 0 .75rem 1rem; margin-bottom:.9rem}
+.art.p-1{border-color:var(--barro)} .art.p-2{border-color:var(--jade)}
+.art.p-3{border-color:var(--g500)} .art.p-4{border-color:var(--info)}
+.art h5{font-family:var(--serif); font-size:20px; margin:0 0 .35rem; line-height:1.25}
+.art-meta{font-family:var(--sans); font-size:13.5px; color:var(--g600); display:flex; flex-wrap:wrap; gap:10px 16px; margin-bottom:.4rem}
+.art-why{font-family:var(--sans); font-size:15px; color:var(--g700); margin:0; max-width:70ch}
+
+/* cascada de despiece */
+.cascade{margin:1.6rem 0}
+.casc{display:flex; gap:14px; align-items:flex-start; margin-bottom:10px}
+.casc-day{font-family:var(--sans); font-size:12.5px; color:var(--g600); width:82px; flex:none; padding-top:.85rem; text-align:right}
+.casc-box{flex:1; border:1px solid var(--g300); background:#fff; border-radius:3px; padding:.8rem 1rem; font-family:var(--sans); font-size:15px}
+.casc-box b{display:block; font-size:15.5px; margin-bottom:.2rem}
+.casc-box span{color:var(--g600); font-size:14px}
+.casc-0 .casc-box{background:var(--obsidiana); border-color:var(--obsidiana); color:var(--g300)}
+.casc-0 .casc-box b{color:var(--cal)}
+.casc-0 .casc-box span{color:var(--g400)}
+.casc-1 .casc-box{margin-left:24px} .casc-2 .casc-box{margin-left:48px}
+.casc-3 .casc-box{margin-left:72px} .casc-4 .casc-box{margin-left:96px}
+.casc-5 .casc-box{margin-left:120px}
+@media(max-width:720px){
+  .casc{gap:8px} .casc-day{width:64px; font-size:11.5px}
+  .casc-1 .casc-box,.casc-2 .casc-box,.casc-3 .casc-box,.casc-4 .casc-box,.casc-5 .casc-box{margin-left:0}
+}
+
+.ideas{columns:2; column-gap:26px; font-family:var(--sans); font-size:15px; margin:1.4rem 0}
+@media(max-width:720px){.ideas{columns:1}}
+.ideas li{break-inside:avoid; padding:.4rem 0; border-bottom:1px solid var(--g200)}
+
+/* separadores */
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+.sep{display:flex; align-items:center; gap:20px; padding:1.1rem 0}
+.sep-line{flex:1; height:1px; background:var(--g300)}
+.sep-btn{background:none; border:0; padding:6px 10px; margin:0; line-height:0; cursor:pointer; border-radius:2px; flex:none}
+.sep-btn:focus-visible{outline:2px solid var(--barro); outline-offset:2px}
+.sep-track{stroke:var(--g300)}
+.sep-fill{stroke:var(--barro); stroke-dasharray:136; stroke-dashoffset:0; transition:stroke .3s}
+.sep.pending .sep-fill{stroke-dashoffset:136}
+.sep.is-visible .sep-fill{animation:climb 1s cubic-bezier(.42,0,.18,1) forwards}
+@keyframes climb{to{stroke-dashoffset:0}}
+.sep-dot{fill:var(--jade); offset-path:path("M4 28 V20 H40 V13 H76 V6 H114"); offset-distance:0%; offset-rotate:0deg; transition:offset-distance .85s cubic-bezier(.45,0,.2,1), fill .3s}
+.sep.pending .sep-dot{opacity:0}
+.sep.is-visible .sep-dot{animation:land .35s ease .9s backwards; opacity:1}
+@keyframes land{from{opacity:0} to{opacity:1}}
+.sep-btn:hover .sep-dot,.sep-btn:focus-visible .sep-dot{offset-distance:100%; fill:var(--jade-deep)}
+.sep-btn:hover .sep-fill,.sep-btn:focus-visible .sep-fill{stroke:var(--barro-deep)}
+.sep-hint{font-family:var(--sans); font-size:12.5px; color:var(--g500); opacity:0; transition:opacity .25s; flex:none; white-space:nowrap}
+.sep:hover .sep-hint,.sep:focus-within .sep-hint{opacity:1}
+.sep-next{gap:20px}
+.next-btn{display:flex; align-items:center; gap:15px; text-decoration:none; flex:none; padding:7px 10px; border-radius:2px}
+.next-btn:focus-visible{outline:2px solid var(--barro); outline-offset:2px}
+.rule-base{stroke:var(--g300); stroke-width:1.4}
+.tick{fill:var(--g400); transform-box:fill-box; transform-origin:bottom center; transition:fill .3s}
+.sep-next.pending .tick{transform:scaleY(0)}
+.sep-next.is-visible .tick{animation:tickup .38s cubic-bezier(.3,0,.2,1) backwards}
+@keyframes tickup{from{transform:scaleY(0)} to{transform:scaleY(1)}}
+.tick:nth-of-type(2){animation-delay:.05s} .tick:nth-of-type(3){animation-delay:.1s}
+.tick:nth-of-type(4){animation-delay:.15s} .tick:nth-of-type(5){animation-delay:.2s}
+.tick:nth-of-type(6){animation-delay:.25s} .tick:nth-of-type(7){animation-delay:.3s}
+.tick:nth-of-type(8){animation-delay:.35s} .tick:nth-of-type(9){animation-delay:.4s}
+.marker{fill:var(--barro); transition:transform .8s cubic-bezier(.42,0,.18,1)}
+.sep-next.pending .marker{opacity:0}
+.sep-next.is-visible .marker{animation:land .3s ease .45s backwards}
+.next-btn:hover .marker,.next-btn:focus-visible .marker{transform:translateX(72px)}
+.next-btn:hover .tick,.next-btn:focus-visible .tick{fill:var(--barro-pale)}
+.next-text{line-height:1.25}
+.next-text small{display:block; font-family:var(--sans); font-size:12.5px; color:var(--g500)}
+.next-text b{font-family:var(--serif); font-size:18.5px; color:var(--obsidiana); transition:color .2s}
+.next-btn:hover .next-text b{color:var(--barro-deep)}
+
+.closer{border-top:1px solid var(--g300); padding:3rem 0 3.6rem}
+.closer-link{display:block; text-decoration:none; max-width:640px}
+.closer-bar{display:flex; gap:3px; height:11px; margin-bottom:1.5rem}
+.closer-bar i{flex:1; border-radius:1px; transform-origin:left center; transition:background .35s}
+.closer-bar i:nth-child(1){background:var(--jade-wash)}
+.closer-bar i:nth-child(2){background:var(--jade-pale)}
+.closer-bar i:nth-child(3){background:var(--jade)}
+.closer-bar i:nth-child(4){background:var(--jade-deep)}
+.closer.pending .closer-bar i{transform:scaleX(0)}
+.closer.is-visible .closer-bar i{animation:grow .55s cubic-bezier(.35,0,.2,1) backwards}
+@keyframes grow{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+.closer.is-visible .closer-bar i:nth-child(2){animation-delay:.1s}
+.closer.is-visible .closer-bar i:nth-child(3){animation-delay:.2s}
+.closer.is-visible .closer-bar i:nth-child(4){animation-delay:.3s}
+.closer-link:hover .closer-bar i:nth-child(1){background:var(--jade-pale)}
+.closer-link:hover .closer-bar i:nth-child(2){background:var(--jade)}
+.closer-link:hover .closer-bar i:nth-child(3){background:var(--jade-deep)}
+.closer-link:hover .closer-bar i:nth-child(4){background:var(--barro)}
+.closer-link:focus-visible{outline:2px solid var(--barro); outline-offset:6px}
+.closer-text small{display:block; font-family:var(--sans); font-size:13.5px; color:var(--g500); margin-bottom:.3rem}
+.closer-text b{display:block; font-family:var(--serif); font-size:31px; font-weight:700; color:var(--obsidiana); line-height:1.15; transition:color .2s}
+.closer-link:hover .closer-text b{color:var(--barro-deep)}
+.closer-text em{display:block; font-style:normal; font-family:var(--sans); font-size:16px; color:var(--g700); margin-top:.45rem; max-width:54ch}
+.closer-note{font-family:var(--sans); font-size:14px; color:var(--g600); margin-top:1.6rem; max-width:60ch}
+@media(max-width:640px){.closer-text b{font-size:24px}}
+
+footer{background:var(--obsidiana); color:var(--g500); padding:2.6rem 7vw; font-family:var(--sans); font-size:14px}
+footer .lockup{display:flex; align-items:center; gap:15px; margin-bottom:1rem}
+footer .wordmark{font-family:var(--serif); font-weight:700; font-size:22px; color:var(--cal); line-height:1}
+footer .wordmark small{display:block; font-family:var(--sans); font-weight:400; font-size:10px; letter-spacing:.19em; color:var(--g500); margin-top:5px}
+
+@media (prefers-reduced-motion: reduce){
+  .sep.pending .sep-fill,.sep.pending .sep-dot{stroke-dashoffset:0; opacity:1}
+  .sep.is-visible .sep-fill,.sep.is-visible .sep-dot{animation:none}
+  .sep-next.pending .tick,.closer.pending .closer-bar i{transform:none}
+  .sep-next.pending .marker{opacity:1}
+  .sep-next.is-visible .tick,.sep-next.is-visible .marker,.closer.is-visible .closer-bar i{animation:none}
+  .sep-dot,.sep-fill,.marker,.tick,.closer-bar i{transition:none}
+  html{scroll-behavior:auto}
+}
+@media print{
+  .runner,.sep-hint{display:none}
+  .cover{min-height:auto; page-break-after:always}
+  .sep.pending .sep-fill,.sep.pending .sep-dot{stroke-dashoffset:0; opacity:1}
+  .sep-next.pending .tick,.closer.pending .closer-bar i{transform:none}
+  .sep-next.pending .marker{opacity:1}
+  body{font-size:11pt; background:#fff}
+  .pillar,.numcard,.note,.dark-box,table,.metric,.art,.casc,.month,.closer{page-break-inside:avoid}
+  h2,h3,h4{page-break-after:avoid}
+  a{color:#000; text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="cover graticule">
+  <div>
+    <svg class="cover-mark" viewBox="0 0 120 120" role="img" aria-label="Marca Yaocalli">
+      <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#EFE9DE" stroke-width="11" stroke-linejoin="round"/>
+      <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#C98F72" stroke-width="10" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div>
+    <h1>Plan de <em>contenidos</em></h1>
+    <p class="cover-sub">Pilares editoriales, calendario de seis meses con títulos finales, anatomía de una nota metodológica y sistema de despiece a redes.</p>
+    <div class="cover-band">
+      <i style="background:#14110F; flex:5"></i><i style="background:#8C4A2F; flex:2"></i>
+      <i style="background:#3F6B5A; flex:1"></i><i style="background:#EFE9DE; flex:2"></i>
+    </div>
+  </div>
+  <div class="cover-meta">
+    <div><b>Documento</b>03 — Contenidos</div>
+    <div><b>Cliente</b>Yaocalli Consultoría y Estrategia</div>
+    <div><b>Periodo</b>Octubre 2026 a marzo 2027</div>
+    <div><b>Versión</b>1.0 — borrador para aprobación</div>
+    <div><b>Fecha</b>1 de septiembre de 2026</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>Contenido</h2>
+  <ol>
+    <li><a href="#s1">Por qué el contenido<small>El argumento con números</small></a></li>
+    <li><a href="#s2">Los tres trabajos<small>Qué tiene que lograr cada nota</small></a></li>
+    <li><a href="#s3">Pilares editoriales<small>Cuatro temas con su peso</small></a></li>
+    <li><a href="#s4">Calendario de seis meses<small>Doce notas con título final</small></a></li>
+    <li><a href="#s5">Anatomía de una nota<small>Siete pasos de producción</small></a></li>
+    <li><a href="#s6">Especificaciones técnicas<small>Extensión, metadatos, enlaces</small></a></li>
+    <li><a href="#s7">Despiece a redes<small>De una nota a cinco piezas</small></a></li>
+    <li><a href="#s8">Calendario semanal<small>Qué se publica cada día</small></a></li>
+    <li><a href="#s9">Formatos para redes<small>Cinco piezas con su regla</small></a></li>
+    <li><a href="#s10">Banco de reserva<small>Veinte ideas listas</small></a></li>
+    <li><a href="#s11">Producción<small>Tiempos y carga mensual real</small></a></li>
+    <li><a href="#s12">Qué medir<small>Metas a tres y seis meses</small></a></li>
+  </ol>
+</nav>
+
+<div class="runner">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#14110F" stroke-width="11" stroke-linejoin="round"/>
+    <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#8C4A2F" stroke-width="10" stroke-linejoin="round"/>
+  </svg>
+  Yaocalli — Plan de contenidos
+  <span>Versión 1.0</span>
+</div>
+
+<main class="sheet">
+
+<!-- 1 -->
+<section id="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Por qué el contenido</h2></div>
+
+  <p class="lead">Porque es la única vía por la que una firma sin dominio y sin marca puede aparecer antes que casas encuestadoras con décadas de prensa. No por presupuesto: por especificidad.</p>
+
+  <div class="metrics">
+    <div class="metric"><b>0</b><span>Autoridad de dominio de partida</span></div>
+    <div class="metric"><b>84</b><span>Municipios que pueden ser tema de una nota cada uno</span></div>
+    <div class="metric"><b>12</b><span>Notas en seis meses, con título ya definido</span></div>
+    <div class="metric"><b>60</b><span>Piezas para redes que salen de esas doce notas</span></div>
+  </div>
+
+  <p>El benchmark encontró que las primeras posiciones de las búsquedas del sector las ocupan listas que las propias firmas escriben para colocarse primero. Ese es contenido de venta disfrazado de contenido editorial y se derrota con material que resuelve de verdad la duda de quien busca.</p>
+
+  <p>La ventaja de Yaocalli aquí es poco común: el material ya está escrito. Las notas metodológicas del Índice Municipal de Prioridad para la Asistencia Social y del diseño del diagnóstico participativo son, literalmente, artículos de nivel publicable esperando edición. Producir contenido no es empezar de cero, es abrir el archivo.</p>
+
+  <div class="dark-box">
+    <h4>La prueba de si una nota vale la pena.</h4>
+    <p>Si un director de área en un municipio de veinte mil habitantes puede leerla, entender qué hacer el lunes y no necesitar contratar a nadie para entenderla, la nota está bien. Si además, al llegar al final, sospecha que hacerlo bien requiere ayuda, la nota está haciendo su trabajo completo.</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Los tres trabajos</h2></div>
+
+  <p class="lead">Cada nota hace tres cosas a la vez o no se publica. No son tres tipos de nota: son tres exigencias sobre la misma pieza.</p>
+
+  <div class="numcards">
+    <div class="numcard"><b>Trabajo 1</b><h5>Traer a quien busca</h5><p>Responder una pregunta que alguien escribe de verdad en un buscador. No un tema, una pregunta: cómo se calcula el tamaño de muestra de una encuesta municipal, qué diferencia hay entre marginación y rezago social.</p></div>
+    <div class="numcard"><b>Trabajo 2</b><h5>Demostrar el método</h5><p>Cada nota es una muestra gratuita del rigor de la firma. Enseña el procedimiento, cita la fuente oficial y admite el límite. Esa honestidad sobre lo que un método no puede hacer es la parte que más vende.</p></div>
+    <div class="numcard"><b>Trabajo 3</b><h5>Llevar al servicio</h5><p>Al final, un puente natural hacia la ficha de servicio correspondiente. Sin ruego ni promoción: quien acaba de entender un método suele querer saber cuánto cuesta que alguien lo haga bien.</p></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section id="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Pilares editoriales</h2></div>
+
+  <p class="lead">Cuatro temas, con peso desigual a propósito. El reparto responde al calendario: la ventana electoral de 2027 sube de peso conforme se acerca.</p>
+
+  <div class="bar">
+    <i style="background:#8C4A2F; color:#F7EDE7; flex:35">Método a la vista 35 %</i>
+    <i style="background:#3F6B5A; color:#E8EFEB; flex:25">Territorio y datos 25 %</i>
+    <i style="background:#8A8377; color:#F5F2EC; flex:25">Decisión pública 25 %</i>
+    <i style="background:#35617A; color:#fff; flex:15">Ventana 2027 15 %</i>
+  </div>
+
+  <div class="pillar">
+    <div class="pillar-head"><h5>Método a la vista</h5><span class="tag p1">35 %</span><span class="weight">4 de 12 notas</span></div>
+    <p>Cómo se hace bien lo que la firma vende. Muestreo, error, ponderación, control de calidad en campo, diseño de instrumentos. Ataca directamente el hueco 1 del benchmark: ninguna firma mexicana publica su procedimiento.</p>
+    <p><b>Objetivo:</b> ser la fuente que se cita cuando alguien pregunta cómo se hace una encuesta seria. <b>Enlaza a:</b> encuestas y opinión pública, metodología.</p>
+  </div>
+
+  <div class="pillar">
+    <div class="pillar-head"><h5>Territorio y datos abiertos</h5><span class="tag p2">25 %</span><span class="weight">3 de 12 notas</span></div>
+    <p>Qué se puede saber de un municipio con fuentes públicas y cómo se cruza. INEGI, CONEVAL, CONAPO, Red Nacional de Caminos, secciones electorales del INE. Cada nota es una demostración de capacidad geoespacial sin revelar nada de un cliente.</p>
+    <p><b>Objetivo:</b> capturar las búsquedas que combinan dato con territorio, que es donde no hay competencia. <b>Enlaza a:</b> cartografía y análisis territorial, índices y priorización.</p>
+  </div>
+
+  <div class="pillar">
+    <div class="pillar-head"><h5>Decisión pública</h5><span class="tag p3">25 %</span><span class="weight">3 de 12 notas</span></div>
+    <p>Cómo se decide bien con recursos escasos: focalización, priorización, presupuesto participativo, evaluación de programas. Es el terreno donde Yaocalli tiene más obra hecha y donde el mercado no tiene dueño.</p>
+    <p><b>Objetivo:</b> atraer al perfil que decide presupuesto, que es el de contrato más grande y más recurrente. <b>Enlaza a:</b> índices y priorización, tableros y visualización.</p>
+  </div>
+
+  <div class="pillar">
+    <div class="pillar-head"><h5>Ventana 2027</h5><span class="tag p4">15 %</span><span class="weight">2 de 12 notas</span></div>
+    <p>Qué implica el proceso electoral local concurrente para quien va a competir o a gobernar. Calendario, reelección de alcaldes, qué se puede medir y cuándo. Contenido de oportunidad, con caducidad y por eso con peso limitado.</p>
+    <p><b>Objetivo:</b> captar al coordinador de campaña en el momento exacto en que empieza a buscar proveedor. <b>Enlaza a:</b> encuestas, escucha digital y análisis de actores.</p>
+  </div>
+
+  <div class="note note-err"><p><b>Lo que no se publica nunca.</b> Resultados de un cliente sin autorización expresa, pronósticos de resultado electoral, opinión sobre partidos o candidaturas, y cualquier cifra sin ficha técnica. La neutralidad demostrable es un criterio de diseño del sitio y también una regla editorial: una sola nota que tome partido cierra la mitad del mercado.</p></div>
+</section>
+
+<!-- 4 -->
+<section id="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Calendario de seis meses</h2></div>
+
+  <p class="lead">Dos notas al mes, de octubre de 2026 a marzo de 2027. Títulos finales, listos para publicar tal como están escritos. El orden no es aleatorio: arranca por lo que más se busca y termina pegado al calendario electoral.</p>
+
+  <div class="month">
+    <div class="month-head">Octubre 2026 <span>Publicación con el sitio</span></div>
+    <div class="art p-1">
+      <h5>Cuántas encuestas hacen falta para medir un municipio: el tamaño de muestra explicado sin fórmulas</h5>
+      <div class="art-meta"><span class="tag p1">Método a la vista</span><span>Semana 1</span><span class="kw">tamaño de muestra encuesta municipal</span></div>
+      <p class="art-why">Es la duda número uno de quien va a contratar una encuesta y nadie la responde en español para público no técnico. Enlaza a la ficha de encuestas y a la calculadora que llegará en fase 2.</p>
+    </div>
+    <div class="art p-2">
+      <h5>Qué se puede saber de tu municipio sin levantar una sola encuesta</h5>
+      <div class="art-meta"><span class="tag p2">Territorio y datos</span><span>Semana 3</span><span class="kw">datos abiertos municipio INEGI CONEVAL</span></div>
+      <p class="art-why">Demuestra capacidad geoespacial y genera confianza mostrando lo que es gratis, que es la forma más creíble de vender lo que no lo es. Enlaza a cartografía y a índices.</p>
+    </div>
+  </div>
+
+  <div class="month">
+    <div class="month-head">Noviembre 2026 <span>Arranque de estructuras electorales</span></div>
+    <div class="art p-1">
+      <h5>Margen de error, nivel de confianza y efecto de diseño: los tres números que debe traer toda encuesta</h5>
+      <div class="art-meta"><span class="tag p1">Método a la vista</span><span>Semana 1</span><span class="kw">margen de error encuesta qué significa</span></div>
+      <p class="art-why">Convierte al lector en comprador informado, lo que favorece a quien sí publica esos datos. Es también la nota que más se presta a ser citada por prensa local.</p>
+    </div>
+    <div class="art p-4">
+      <h5>Reelección de alcaldes en 2027: qué se mide cuando el candidato ya gobierna</h5>
+      <div class="art-meta"><span class="tag p4">Ventana 2027</span><span>Semana 3</span><span class="kw">reelección alcaldes Hidalgo 2027 encuesta</span></div>
+      <p class="art-why">Primera vez que aplica en Hidalgo y cambia el producto: aprobación y evaluación de gestión en lugar de intención de voto. Prácticamente sin competencia por esta búsqueda.</p>
+    </div>
+  </div>
+
+  <div class="month">
+    <div class="month-head">Diciembre 2026 <span>Cierre de año presupuestal</span></div>
+    <div class="art p-3">
+      <h5>Cómo decidir a quién apoyar primero cuando el presupuesto no alcanza para todos</h5>
+      <div class="art-meta"><span class="tag p3">Decisión pública</span><span>Semana 1</span><span class="kw">criterios priorización apoyos sociales municipio</span></div>
+      <p class="art-why">Coincide con el momento en que las áreas sociales cierran padrones y planean el ejercicio siguiente. Es el problema exacto que resuelve el índice de priorización.</p>
+    </div>
+    <div class="art p-2">
+      <h5>Marginación, rezago social y pobreza no son lo mismo: guía para no confundirlos en un diagnóstico</h5>
+      <div class="art-meta"><span class="tag p2">Territorio y datos</span><span>Semana 3</span><span class="kw">diferencia marginación rezago social pobreza</span></div>
+      <p class="art-why">Error frecuentísimo en diagnósticos municipales y búsqueda con volumen constante todo el año. Material ya escrito en los documentos metodológicos de la firma.</p>
+    </div>
+  </div>
+
+  <div class="month">
+    <div class="month-head">Enero 2027 <span>Inicio de precampañas</span></div>
+    <div class="art p-1">
+      <h5>Ochenta encuestadores en campo: cómo se controla la calidad de un levantamiento grande</h5>
+      <div class="art-meta"><span class="tag p1">Método a la vista</span><span>Semana 2</span><span class="kw">control de calidad levantamiento encuestas campo</span></div>
+      <p class="art-why">Es el caso de capacidad más fuerte del portafolio contado como método. Responde a la desconfianza real: cómo sé que el encuestador no llenó los cuestionarios en su casa.</p>
+    </div>
+    <div class="art p-3">
+      <h5>Presupuesto participativo: qué funciona, qué no, y qué dice la evidencia de treinta años</h5>
+      <div class="art-meta"><span class="tag p3">Decisión pública</span><span>Semana 4</span><span class="kw">presupuesto participativo municipal evidencia</span></div>
+      <p class="art-why">Tema de alto interés institucional con literatura ya revisada en el documento de diagnóstico participativo. Posiciona a la firma como interlocutor técnico, no como proveedor.</p>
+    </div>
+  </div>
+
+  <div class="month">
+    <div class="month-head">Febrero 2027 <span>Definición de candidaturas</span></div>
+    <div class="art p-2">
+      <h5>Cartografía electoral: por qué la sección es la unidad que importa y el municipio no</h5>
+      <div class="art-meta"><span class="tag p2">Territorio y datos</span><span>Semana 1</span><span class="kw">cartografía electoral secciones análisis territorial</span></div>
+      <p class="art-why">Es el argumento central contra los competidores nacionales: ellos dan la fotografía estatal, aquí se muestra la resolución fina. Alto valor para el coordinador de campaña.</p>
+    </div>
+    <div class="art p-4">
+      <h5>Qué encuestas necesita una campaña municipal y en qué momento de los seis meses</h5>
+      <div class="art-meta"><span class="tag p4">Ventana 2027</span><span>Semana 3</span><span class="kw">encuestas campaña municipal cuándo contratar</span></div>
+      <p class="art-why">Nota de conversión directa: convierte una duda de calendario en una decisión de contratación. Es la que más solicitudes debería producir de todo el plan.</p>
+    </div>
+  </div>
+
+  <div class="month">
+    <div class="month-head">Marzo 2027 <span>Campañas en curso</span></div>
+    <div class="art p-1">
+      <h5>Cómo leer una encuesta publicada en prensa sin dejarse engañar</h5>
+      <div class="art-meta"><span class="tag p1">Método a la vista</span><span>Semana 1</span><span class="kw">cómo interpretar encuestas electorales prensa</span></div>
+      <p class="art-why">Máximo volumen de búsqueda del año, porque es cuando circulan encuestas por todas partes. Nota de captación amplia que además refuerza el posicionamiento de neutralidad.</p>
+    </div>
+    <div class="art p-3">
+      <h5>Del dato al tablero: qué debe ver un alcalde en su pantalla cada lunes</h5>
+      <div class="art-meta"><span class="tag p3">Decisión pública</span><span>Semana 3</span><span class="kw">tablero indicadores gobierno municipal</span></div>
+      <p class="art-why">Cierra el ciclo hacia la línea de tableros y prepara la venta posterior a la elección, cuando quien ganó necesita gobernar con datos.</p>
+    </div>
+  </div>
+
+  <div class="note note-info"><p><b>Por qué doce y no veinticuatro.</b> Dos notas mensuales bien hechas superan a ocho apresuradas, y es la carga que una firma pequeña sostiene sin descuidar los proyectos que pagan. El banco de reserva de la sección 10 permite subir el ritmo si la respuesta lo justifica, no al revés.</p></div>
+</section>
+
+<!-- 5 -->
+<section id="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Anatomía de una nota</h2></div>
+
+  <p class="lead">Siete pasos, en este orden. Saltarse el primero es la causa más común de una nota que nadie lee.</p>
+
+  <div class="numcards">
+    <div class="numcard"><b>Paso 1</b><h5>Escribir la pregunta real</h5><p>Antes de nada, redactar la pregunta tal como la escribiría alguien en un buscador. Si no se puede formular así, el tema no está listo.</p></div>
+    <div class="numcard"><b>Paso 2</b><h5>Responderla en el primer párrafo</h5><p>La respuesta corta va arriba, completa y sin rodeos. Quien tiene prisa se va satisfecho; quien quiere el detalle sigue leyendo.</p></div>
+    <div class="numcard"><b>Paso 3</b><h5>Desarrollar el método</h5><p>El procedimiento por etapas, con los criterios técnicos y las decisiones que se tomaron. Aquí es donde se demuestra el rigor.</p></div>
+    <div class="numcard"><b>Paso 4</b><h5>Poner un ejemplo con números reales</h5><p>Datos públicos de un municipio concreto, con la fuente citada. Un ejemplo con cifras vale más que tres párrafos de explicación.</p></div>
+    <div class="numcard"><b>Paso 5</b><h5>Declarar los límites</h5><p>Qué no puede hacer este método y en qué casos falla. Es el párrafo que más credibilidad genera y el que ningún competidor escribe.</p></div>
+    <div class="numcard"><b>Paso 6</b><h5>Citar las fuentes</h5><p>Referencias completas al final, con enlace a la fuente oficial. Sostiene el texto y ayuda a que otros lo citen.</p></div>
+    <div class="numcard"><b>Paso 7</b><h5>Tender el puente</h5><p>Una línea al final que conecta con la ficha de servicio correspondiente. Sin ruego: quien acaba de entender el método sabe lo que sigue.</p></div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section id="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Especificaciones técnicas</h2></div>
+
+  <table>
+    <caption>Requisitos que cumple toda nota antes de publicarse.</caption>
+    <thead><tr><th>Elemento</th><th>Especificación</th><th>Por qué</th></tr></thead>
+    <tbody>
+      <tr><td>Extensión</td><td class="num">1 200 a 1 800 palabras</td><td>Suficiente para desarrollar el método sin agotar al lector institucional</td></tr>
+      <tr><td>Título de página</td><td class="num">Hasta 60 caracteres</td><td>Se corta en resultados de búsqueda si excede</td></tr>
+      <tr><td>Descripción</td><td class="num">150 a 160 caracteres</td><td>Debe contener la promesa concreta, no un resumen genérico</td></tr>
+      <tr><td>URL</td><td>Corta, en español, sin fecha</td><td>Permite actualizar la nota sin cambiar la dirección</td></tr>
+      <tr><td>Subtítulos</td><td>Uno cada 250 a 350 palabras</td><td>Jerarquía correcta y lectura en pantalla de teléfono</td></tr>
+      <tr><td>Enlaces internos</td><td class="num">2 a 4 por nota</td><td>Al menos uno a la ficha de servicio y uno a otra nota</td></tr>
+      <tr><td>Enlaces externos</td><td class="num">2 a 5, a fuente oficial</td><td>Sostienen el argumento y son señal de calidad</td></tr>
+      <tr><td>Elemento visual propio</td><td class="num">1 mínimo</td><td>Tabla, mapa o gráfica hecha por la firma, nunca de banco de imágenes</td></tr>
+      <tr><td>Ficha de método al pie</td><td>Obligatoria</td><td>De dónde salieron los datos que sostienen el texto</td></tr>
+      <tr><td>Fecha de actualización</td><td>Visible</td><td>Señal de vigencia, y permite reeditar sin republicar</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 7 -->
+<section id="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Despiece a redes</h2></div>
+
+  <p class="lead">Cada nota se convierte en cinco piezas durante los doce días siguientes a su publicación. Nada se escribe dos veces: se recorta.</p>
+
+  <div class="cascade">
+    <div class="casc casc-0"><div class="casc-day">Día 0</div><div class="casc-box"><b>La nota completa</b><span>Publicada en el sitio, con su elemento visual propio y su ficha de método</span></div></div>
+    <div class="casc casc-1"><div class="casc-day">Día 1</div><div class="casc-box"><b>Publicación de anuncio en LinkedIn</b><span>El hallazgo principal en cuatro líneas, con la gráfica de la nota y el enlace</span></div></div>
+    <div class="casc casc-2"><div class="casc-day">Día 4</div><div class="casc-box"><b>Carrusel de método</b><span>Los pasos del procedimiento en cinco a siete imágenes, sin enlace, para que circule</span></div></div>
+    <div class="casc casc-3"><div class="casc-day">Día 7</div><div class="casc-box"><b>Gráfica suelta con lectura</b><span>El elemento visual solo, con dos líneas de interpretación. La pieza que más se comparte</span></div></div>
+    <div class="casc casc-4"><div class="casc-day">Día 10</div><div class="casc-box"><b>El límite del método</b><span>El párrafo de límites convertido en publicación breve. Genera más conversación que el hallazgo</span></div></div>
+    <div class="casc casc-5"><div class="casc-day">Día 12</div><div class="casc-box"><b>Pregunta abierta al gremio</b><span>Una duda técnica real dirigida a colegas, con enlace a la nota en el primer comentario</span></div></div>
+  </div>
+
+  <p>Doce notas por seis meses producen sesenta piezas de red sin escribir una sola idea nueva. Ese es el punto: el contenido de redes no es un canal aparte con su propio esfuerzo, es la sombra del trabajo que ya se hizo.</p>
+</section>
+
+<!-- 8 -->
+<section id="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Calendario semanal</h2></div>
+
+  <table>
+    <caption>Ritmo de publicación sostenible para una firma pequeña.</caption>
+    <thead><tr><th>Día</th><th>Qué se publica</th><th>Canal</th></tr></thead>
+    <tbody>
+      <tr><td>Martes de semana 1</td><td>Nota del mes, primera</td><td>Sitio</td></tr>
+      <tr><td>Miércoles de semana 1</td><td>Publicación de anuncio</td><td>LinkedIn</td></tr>
+      <tr><td>Lunes de semana 2</td><td>Carrusel de método</td><td>LinkedIn e Instagram</td></tr>
+      <tr><td>Jueves de semana 2</td><td>Gráfica suelta con lectura</td><td>LinkedIn y X</td></tr>
+      <tr><td>Martes de semana 3</td><td>Nota del mes, segunda</td><td>Sitio</td></tr>
+      <tr><td>Miércoles de semana 3</td><td>Publicación de anuncio y límite del método de la nota anterior</td><td>LinkedIn</td></tr>
+      <tr><td>Lunes de semana 4</td><td>Pregunta abierta al gremio</td><td>LinkedIn</td></tr>
+      <tr><td>Jueves de semana 4</td><td>Carrusel y gráfica de la segunda nota</td><td>LinkedIn e Instagram</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-info"><p><b>Martes y jueves por la mañana.</b> El público objetivo son funcionarios y operadores políticos que revisan redes profesionales en horario de oficina. Publicar en fin de semana desperdicia la pieza.</p></div>
+</section>
+
+<!-- 9 -->
+<section id="s9">
+  <div class="sec-head"><span class="sec-num">09</span><h2>Formatos para redes</h2></div>
+
+  <div class="numcards">
+    <div class="numcard"><b>Formato 1</b><h5>Anuncio de nota</h5><p>Cuatro líneas con el hallazgo principal, la gráfica de la nota y el enlace al final. Nunca el enlace en la primera línea.</p></div>
+    <div class="numcard"><b>Formato 2</b><h5>Carrusel de método</h5><p>De cinco a siete imágenes en 1080 por 1350, una idea por lámina, tipografía de la marca, sin enlace. Se diseña para guardarse.</p></div>
+    <div class="numcard"><b>Formato 3</b><h5>Gráfica con lectura</h5><p>El elemento visual propio con dos líneas de interpretación y la fuente al pie. Es la pieza que otros reutilizan citando a la firma.</p></div>
+    <div class="numcard"><b>Formato 4</b><h5>El límite del método</h5><p>Publicación breve que admite qué no puede hacer una técnica. Contraintuitivo y eficaz: genera respeto profesional y conversación.</p></div>
+    <div class="numcard"><b>Formato 5</b><h5>Pregunta al gremio</h5><p>Una duda técnica real dirigida a colegas. Construye red profesional, que es de donde salen las referencias que traen contratos.</p></div>
+  </div>
+
+  <div class="note note-err"><p><b>Lo que no se publica en redes.</b> Resultados de encuesta sin ficha técnica, comentarios sobre coyuntura partidista, celebraciones de contrato ganado y contenido motivacional. Cualquiera de los cuatro daña el posicionamiento de neutralidad que sostiene todo el modelo.</p></div>
+</section>
+
+<!-- 10 -->
+<section id="s10">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Banco de reserva</h2></div>
+
+  <p class="lead">Veinte ideas listas para cuando falte tiempo, se caiga una nota o convenga subir el ritmo. Todas nacen de material que la firma ya produjo.</p>
+
+  <ul class="ideas plain">
+    <li>Qué es una ficha técnica de encuesta y cómo leerla renglón por renglón</li>
+    <li>Encuesta en vivienda, telefónica o en línea: cuál sirve para qué</li>
+    <li>Por qué una encuesta con mil casos puede ser mejor que una con cinco mil</li>
+    <li>Cómo se construye un índice compuesto y por qué los ponderadores importan tanto</li>
+    <li>Qué es el efecto de diseño y por qué encarece las muestras por conglomerados</li>
+    <li>Cómo detectar cuestionarios llenados en escritorio en un levantamiento grande</li>
+    <li>Georreferenciar una encuesta: qué se gana y qué se complica</li>
+    <li>Análisis de sentimiento en redes: qué mide de verdad y qué no</li>
+    <li>Mapeo de actores: cómo se dibuja el poder real de un municipio</li>
+    <li>Qué dice la Red Nacional de Caminos sobre el acceso a servicios en tu municipio</li>
+    <li>Diseñar un cuestionario que no induzca la respuesta: seis errores comunes</li>
+    <li>Consentimiento informado en levantamientos con población vulnerable</li>
+    <li>Qué cambió la nueva ley de protección de datos personales para un municipio</li>
+    <li>Cómo cruzar el padrón de un programa social con datos censales</li>
+    <li>Muestreo por cuotas contra muestreo probabilístico: cuándo se justifica cada uno</li>
+    <li>Qué indicadores debe tener el tablero de una dirección de obras públicas</li>
+    <li>Modelar los trámites de un municipio como red: dónde están los cuellos de botella</li>
+    <li>Cómo se prioriza qué calle pavimentar con criterios técnicos y sociales</li>
+    <li>Encuestas de salida: para qué sirven realmente y para qué no</li>
+    <li>Qué preguntar en un foro de consulta para que los resultados sean utilizables</li>
+  </ul>
+</section>
+
+<!-- 11 -->
+<section id="s11">
+  <div class="sec-head"><span class="sec-num">11</span><h2>Producción</h2></div>
+
+  <p class="lead">El plan solo sirve si cabe en el calendario real de una firma que además tiene proyectos que entregar. Estos son los tiempos honestos.</p>
+
+  <table>
+    <caption>Tiempo por tarea, en horas de trabajo efectivo.</caption>
+    <thead><tr><th>Tarea</th><th class="num">Horas</th><th>Quién</th></tr></thead>
+    <tbody>
+      <tr><td>Definir el ángulo y la pregunta real</td><td class="num">0.5</td><td>Dirección</td></tr>
+      <tr><td>Reunir fuentes y datos del ejemplo</td><td class="num">2</td><td>Analista</td></tr>
+      <tr><td>Redacción del borrador</td><td class="num">3</td><td>Dirección o redacción</td></tr>
+      <tr><td>Producción del elemento visual</td><td class="num">1.5</td><td>Analista</td></tr>
+      <tr><td>Revisión técnica y de tono</td><td class="num">1</td><td>Dirección</td></tr>
+      <tr><td>Montaje, metadatos y enlaces internos</td><td class="num">0.75</td><td>Quien opere el sitio</td></tr>
+      <tr><td>Despiece a cinco piezas de red</td><td class="num">2</td><td>Quien opere redes</td></tr>
+      <tr><td><b>Total por nota</b></td><td class="num"><b>10.75</b></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div class="dark-box">
+    <h4>Carga mensual: unas 22 horas.</h4>
+    <p>Dos notas completas con su despiece equivalen a algo menos de tres jornadas al mes. Es sostenible para una firma pequeña siempre que se bloquee en el calendario como si fuera un proyecto de cliente. La causa habitual del abandono de un plan de contenidos no es la falta de ideas: es no reservar el tiempo.</p>
+  </div>
+
+  <div class="note note-supuesto"><p><span class="tag tag-supuesto">Supuesto por validar</span> La asignación de tareas supone al menos dos personas: dirección con criterio técnico y alguien que opere sitio y redes. Si el equipo es una sola persona, la carga real sube a unas 26 horas por el cambio de contexto, y conviene bajar a una nota mensual antes que abandonar el plan al tercer mes.</p></div>
+</section>
+
+<!-- 12 -->
+<section id="s12">
+  <div class="sec-head"><span class="sec-num">12</span><h2>Qué medir</h2></div>
+
+  <table>
+    <caption>Indicadores del plan de contenidos, con metas. La meta a seis meses supone publicar las doce notas.</caption>
+    <thead><tr><th>Indicador</th><th>Meta a 3 meses</th><th>Meta a 6 meses</th><th>Qué significa si no se cumple</th></tr></thead>
+    <tbody>
+      <tr><td>Notas publicadas</td><td class="num">6</td><td class="num">12</td><td>Problema de calendario, no de estrategia</td></tr>
+      <tr><td>Visitas orgánicas mensuales</td><td class="num">120</td><td class="num">450</td><td>Los títulos no coinciden con lo que se busca</td></tr>
+      <tr><td>Palabras clave posicionadas</td><td class="num">25</td><td class="num">90</td><td>Falta profundidad o faltan enlaces internos</td></tr>
+      <tr><td>Lectura completa de nota</td><td class="num">35 %</td><td class="num">45 %</td><td>La respuesta no está en el primer párrafo</td></tr>
+      <tr><td>Clics de nota hacia ficha de servicio</td><td class="num">4 %</td><td class="num">7 %</td><td>El puente final está mal escrito o falta</td></tr>
+      <tr><td>Solicitudes atribuibles a contenido</td><td class="num">1</td><td class="num">4</td><td>Se atrae al público equivocado</td></tr>
+      <tr><td>Piezas de red publicadas</td><td class="num">30</td><td class="num">60</td><td>El despiece se está saltando</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-info"><p><b>El único indicador que decide.</b> Solicitudes atribuibles a contenido. Todos los demás explican por qué ese sube o no sube. Cuatro solicitudes serias en seis meses, en un mercado donde un contrato municipal se mide en cientos de miles de pesos, pagan el plan completo varias veces.</p></div>
+</section>
+
+</main>
+
+<div class="closer" id="closer">
+  <div class="sheet">
+    <a class="closer-link" href="./4_Guia_SEO_y_Medicion_Yaocalli.html">
+      <span class="closer-bar" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="closer-text">
+        <small>Siguiente documento de la serie</small>
+        <b>04 — Guía de posicionamiento y medición</b>
+        <em>Requisitos técnicos, datos estructurados listos para copiar, palabras clave en tres niveles, cronología honesta de resultados e indicadores con metas.</em>
+      </span>
+    </a>
+    <p class="closer-note">Los cinco documentos deben estar en la misma carpeta para que los enlaces funcionen.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="lockup">
+    <svg width="42" height="42" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#EFE9DE" stroke-width="11" stroke-linejoin="round"/>
+      <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#C98F72" stroke-width="10" stroke-linejoin="round"/>
+    </svg>
+    <div class="wordmark">Yaocalli<small>CONSULTORÍA Y ESTRATEGIA</small></div>
+  </div>
+  <p style="max-width:62ch; margin:0">Documento 03 de la serie de identidad y estrategia digital. Versión 1.0, borrador para aprobación, 1 de septiembre de 2026. Los doce títulos del calendario son finales y publicables tal como están escritos.</p>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STAIR = '<span class="sep-line"></span><span class="sep-hint">Volver al contenido</span>'
+    + '<button class="sep-btn" type="button"><svg width="126" height="36" viewBox="0 0 118 34" aria-hidden="true">'
+    + '<path class="sep-track" d="M4 28 V20 H40 V13 H76 V6 H114" fill="none" stroke-width="4" stroke-linejoin="round"/>'
+    + '<path class="sep-fill" d="M4 28 V20 H40 V13 H76 V6 H114" fill="none" stroke-width="4" stroke-linejoin="round"/>'
+    + '<circle class="sep-dot" r="4.5"/></svg><span class="sr-only">Volver al contenido</span></button>'
+    + '<span class="sep-line"></span>';
+  function ruleSvg(){
+    var t='';
+    for (var k=0;k<9;k++){ var x=2+k*10, tall=(k%2===0);
+      t+='<rect class="tick" x="'+x+'" y="'+(tall?7:13)+'" width="1.6" height="'+(tall?13:7)+'"/>'; }
+    return '<svg width="96" height="26" viewBox="0 0 92 24" aria-hidden="true">'
+      + '<line class="rule-base" x1="2" y1="20.7" x2="84" y2="20.7"/>' + t
+      + '<path class="marker" d="M0 0 H9 L4.5 7 Z"/></svg>';
+  }
+  function nextSep(t){
+    var n=t.querySelector('.sec-num'), h=t.querySelector('h2');
+    return '<span class="sep-line"></span><a class="next-btn" href="#'+t.id+'">'+ruleSvg()
+      + '<span class="next-text"><small>Siguiente</small><b>'+(n?n.textContent+' ':'')+(h?h.textContent:'')+'</b></span></a>';
+  }
+  var secs=document.querySelectorAll('main.sheet > section'), seps=[];
+  for (var i=1;i<secs.length;i++){
+    var d=document.createElement('div'), isNext=(i%2===0);
+    d.className=isNext?'sep sep-next':'sep'; d.setAttribute('role','separator');
+    d.innerHTML=isNext?nextSep(secs[i]):STAIR;
+    if(!reduce) d.classList.add('pending');
+    secs[i].parentNode.insertBefore(d,secs[i]); seps.push(d);
+  }
+  var closer=document.getElementById('closer');
+  if(closer){ if(!reduce) closer.classList.add('pending'); seps.push(closer); }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest && e.target.closest('.sep-btn');
+    if(b){ document.querySelector('.toc').scrollIntoView({behavior:reduce?'auto':'smooth'}); }
+  });
+  if(!reduce && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(en){
+      en.forEach(function(x){ if(x.isIntersecting){ x.target.classList.remove('pending'); x.target.classList.add('is-visible'); io.unobserve(x.target);} });
+    },{rootMargin:'0px 0px -18% 0px'});
+    seps.forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+
+</body>
+</html>

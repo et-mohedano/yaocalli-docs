@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmark de competencia — Yaocalli Consultoría y Estrategia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --obsidiana:#14110F; --obsidiana-80:#2A2521;
+  --barro:#8C4A2F; --barro-deep:#6B3722; --barro-pale:#C98F72; --barro-wash:#F7EDE7;
+  --jade:#3F6B5A; --jade-deep:#2C4C3F; --jade-pale:#7FA593; --jade-wash:#E8EFEB;
+  --cal:#EFE9DE;
+  --g100:#F5F2EC; --g200:#E6E1D7; --g300:#D2CCBF; --g400:#B0A99B;
+  --g500:#8A8377; --g600:#6A645A; --g700:#4D4841; --g800:#33302B; --g900:#1D1A17;
+  --ok:#3E7A55; --ok-text:#2F5E41; --warn:#B8862B; --warn-text:#8A6218;
+  --err:#A33131; --info:#35617A;
+  --serif:'Alegreya', Georgia, serif;
+  --sans:'Alegreya Sans', system-ui, sans-serif;
+  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --measure:68ch; --rule:1px solid var(--g300);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--cal); color:var(--obsidiana); font-family:var(--serif); font-size:17.5px; line-height:1.62; -webkit-font-smoothing:antialiased}
+p{max-width:var(--measure); margin:0 0 1em}
+a{color:var(--barro-deep)}
+h1,h2,h3,h4{font-family:var(--serif); font-weight:700; line-height:1.18; margin:0}
+h2{font-size:40px; letter-spacing:-.01em}
+h3{font-size:28px; margin-top:2.6rem}
+h4{font-size:21px; margin-top:1.9rem}
+@media(max-width:640px){body{font-size:17px} h2{font-size:30px} h3{font-size:23px} h4{font-size:19px}}
+.graticule{background-image:linear-gradient(to right, rgba(239,233,222,.09) 1px, transparent 1px),linear-gradient(to bottom, rgba(239,233,222,.09) 1px, transparent 1px); background-size:34px 34px}
+
+.cover{min-height:100vh; background:var(--obsidiana); color:var(--cal); padding:6vh 7vw 5vh; display:flex; flex-direction:column; justify-content:space-between}
+.cover-mark{width:92px}
+.cover h1{font-size:clamp(38px,7.2vw,76px); font-weight:400; line-height:1.06; letter-spacing:-.02em; max-width:16ch; margin:0 0 .5rem}
+.cover h1 em{font-style:italic}
+.cover-sub{font-family:var(--sans); font-size:clamp(16px,2.2vw,21px); color:var(--g400); max-width:48ch; line-height:1.5}
+.cover-meta{font-family:var(--sans); font-size:14px; color:var(--g500); border-top:1px solid rgba(239,233,222,.18); padding-top:1.1rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem 2rem}
+.cover-meta b{display:block; color:var(--cal); font-weight:500; font-size:15px}
+.cover-band{height:9px; display:flex; margin-top:1.4rem}
+.cover-band i{display:block; height:100%}
+
+.sheet{max-width:1040px; margin:0 auto; padding:0 7vw}
+.runner{position:sticky; top:0; z-index:20; background:var(--cal); border-bottom:var(--rule); display:flex; align-items:center; gap:11px; padding:.65rem 7vw; font-family:var(--sans); font-size:13.5px; color:var(--g600)}
+.runner svg{width:20px; flex:none}
+.runner span{margin-left:auto}
+section{padding:3.4rem 0 4.2rem}
+section:first-of-type{padding-top:4.2rem}
+.sec-head{display:flex; align-items:baseline; gap:18px; margin-bottom:1.6rem}
+.sec-num{font-family:var(--sans); font-size:15px; font-weight:500; color:var(--barro); border:1px solid var(--barro); border-radius:2px; padding:2px 9px; flex:none}
+.lead{font-size:21px; line-height:1.55; color:var(--g800); max-width:60ch}
+
+.toc{background:var(--obsidiana); color:var(--cal); padding:3.4rem 7vw}
+.toc h2{font-size:24px; font-weight:400; color:var(--g400); max-width:780px; margin:0 auto 1.4rem}
+.toc ol{list-style:none; margin:0 auto; padding:0; max-width:780px; counter-reset:t}
+.toc li{counter-increment:t; border-top:1px solid rgba(239,233,222,.14)}
+.toc li:last-child{border-bottom:1px solid rgba(239,233,222,.14)}
+.toc a{display:flex; gap:16px; align-items:baseline; padding:.72rem 0; color:var(--cal); text-decoration:none; font-family:var(--sans); font-size:17px}
+.toc a::before{content:counter(t,decimal-leading-zero); color:var(--barro-pale); font-size:14px; flex:none; width:2.2em}
+.toc a:hover{color:var(--barro-pale)}
+.toc small{margin-left:auto; color:var(--g500); font-size:13.5px; text-align:right}
+
+.note{border-left:3px solid; padding:.95rem 1.15rem; margin:1.6rem 0; font-family:var(--sans); font-size:15.5px; line-height:1.55; max-width:var(--measure)}
+.note p{font-family:var(--sans); font-size:15.5px; margin:0}
+.note p + p{margin-top:.6rem}
+.note-supuesto{border-color:var(--warn); background:#FBF4E6}
+.note-info{border-color:var(--info); background:#EAF0F4}
+.note-ok{border-color:var(--ok); background:#EAF2EC}
+.note-err{border-color:var(--err); background:#F8ECEC}
+.tag{display:inline-block; font-family:var(--sans); font-size:12.5px; font-weight:500; padding:2px 8px; border-radius:2px; vertical-align:2px}
+.tag-supuesto{background:#F5E4C4; color:var(--warn-text)}
+.tag-verif{background:var(--jade-wash); color:var(--jade-deep)}
+.tag-int{background:var(--g200); color:var(--g800)}
+.tag-nac{background:var(--barro-wash); color:var(--barro-deep)}
+.tag-loc{background:var(--jade-wash); color:var(--jade-deep)}
+
+table{width:100%; border-collapse:collapse; font-family:var(--sans); font-size:15px; margin:1.4rem 0}
+caption{text-align:left; font-family:var(--sans); font-size:14px; color:var(--g600); padding-bottom:.5rem}
+th{text-align:left; font-weight:700; font-size:14px; color:var(--g700); border-bottom:2px solid var(--g400); padding:.5rem .7rem .45rem}
+td{border-bottom:1px solid var(--g200); padding:.55rem .7rem; vertical-align:top}
+tbody tr:nth-child(odd){background:rgba(20,17,15,.022)}
+.num{font-variant-numeric:tabular-nums}
+.activo{color:var(--ok-text); font-weight:700}
+.bloq{color:var(--warn-text); font-weight:700}
+.nores{color:var(--err); font-weight:700}
+code{font-family:var(--mono); font-size:.85em; background:var(--g200); padding:1px 5px; border-radius:2px}
+
+.metrics{display:grid; grid-template-columns:repeat(auto-fit,minmax(178px,1fr)); gap:12px; margin:1.7rem 0}
+.metric{background:var(--obsidiana); color:var(--cal); border-radius:3px; padding:1.2rem 1.3rem}
+.metric b{display:block; font-family:var(--serif); font-size:38px; font-weight:700; line-height:1; color:var(--barro-pale); font-variant-numeric:tabular-nums}
+.metric span{display:block; font-family:var(--sans); font-size:13.5px; color:var(--g400); margin-top:.5rem; line-height:1.4}
+
+.dark-box{background:var(--obsidiana); color:var(--cal); border-radius:3px; padding:1.9rem 2rem; margin:1.7rem 0}
+.dark-box h4{color:var(--cal); margin-top:0}
+.dark-box p{color:var(--g300); max-width:62ch}
+.dark-box p:last-child{margin-bottom:0}
+
+.numcards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin:1.6rem 0}
+.numcard{border-top:2px solid var(--barro); padding-top:.9rem}
+.numcard b{display:block; font-family:var(--sans); font-size:13px; color:var(--barro); font-weight:500; margin-bottom:.3rem}
+.numcard h5{font-size:19px; margin:0 0 .35rem; font-family:var(--serif)}
+.numcard p{font-family:var(--sans); font-size:15px; margin:0; color:var(--g700)}
+
+ul.plain{list-style:none; padding:0; margin:1rem 0; max-width:var(--measure); font-family:var(--sans); font-size:15.5px}
+ul.plain li{padding:.42rem 0 .42rem 1.15rem; border-bottom:1px solid var(--g200); position:relative}
+ul.plain li::before{content:''; position:absolute; left:0; top:1.05em; width:5px; height:5px; background:var(--barro)}
+
+/* ficha de competidor */
+.comp{border:1px solid var(--g300); background:#fff; border-radius:3px; padding:1.3rem 1.5rem; margin:1.2rem 0}
+.comp-head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:.2rem}
+.comp-head h5{font-family:var(--serif); font-size:22px; margin:0}
+.comp-url{font-family:var(--mono); font-size:12.5px; color:var(--g600)}
+.comp-model{font-family:var(--sans); font-size:14.5px; color:var(--g600); margin:0 0 .9rem}
+.comp p{font-family:var(--sans); font-size:15.5px; max-width:66ch}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin:.9rem 0}
+.chip{font-family:var(--sans); font-size:12.5px; padding:3px 9px; border-radius:2px}
+.chip-si{background:var(--jade-wash); color:var(--jade-deep)}
+.chip-no{background:#F8ECEC; color:var(--err)}
+.reading{font-family:var(--sans); font-size:15.5px; border-top:1px solid var(--g200); padding-top:.75rem; margin:0; color:var(--g800)}
+.reading b{color:var(--barro-deep)}
+
+.foda{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:1.6rem 0}
+@media(max-width:720px){.foda{grid-template-columns:1fr}}
+.foda div{padding:1.1rem 1.3rem; border-radius:3px}
+.foda h5{font-family:var(--sans); font-size:14px; font-weight:700; margin:0 0 .7rem; color:var(--g700)}
+.foda ul{list-style:none; margin:0; padding:0; font-family:var(--sans); font-size:15px}
+.foda li{padding:.35rem 0; border-bottom:1px solid rgba(20,17,15,.07)}
+.foda li:last-child{border-bottom:0}
+.f-fort{background:var(--jade-wash); border-left:3px solid var(--jade)}
+.f-opor{background:var(--barro-wash); border-left:3px solid var(--barro)}
+.f-debi{background:#FBF4E6; border-left:3px solid var(--warn)}
+.f-amen{background:#F8ECEC; border-left:3px solid var(--err)}
+
+/* separadores */
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+.sep{display:flex; align-items:center; gap:20px; padding:1.1rem 0}
+.sep-line{flex:1; height:1px; background:var(--g300)}
+.sep-btn{background:none; border:0; padding:6px 10px; margin:0; line-height:0; cursor:pointer; border-radius:2px; flex:none}
+.sep-btn:focus-visible{outline:2px solid var(--barro); outline-offset:2px}
+.sep-track{stroke:var(--g300)}
+.sep-fill{stroke:var(--barro); stroke-dasharray:136; stroke-dashoffset:0; transition:stroke .3s}
+.sep.pending .sep-fill{stroke-dashoffset:136}
+.sep.is-visible .sep-fill{animation:climb 1s cubic-bezier(.42,0,.18,1) forwards}
+@keyframes climb{to{stroke-dashoffset:0}}
+.sep-dot{fill:var(--jade); offset-path:path("M4 28 V20 H40 V13 H76 V6 H114"); offset-distance:0%; offset-rotate:0deg; transition:offset-distance .85s cubic-bezier(.45,0,.2,1), fill .3s}
+.sep.pending .sep-dot{opacity:0}
+.sep.is-visible .sep-dot{animation:land .35s ease .9s backwards; opacity:1}
+@keyframes land{from{opacity:0} to{opacity:1}}
+.sep-btn:hover .sep-dot,.sep-btn:focus-visible .sep-dot{offset-distance:100%; fill:var(--jade-deep)}
+.sep-btn:hover .sep-fill,.sep-btn:focus-visible .sep-fill{stroke:var(--barro-deep)}
+.sep-hint{font-family:var(--sans); font-size:12.5px; color:var(--g500); opacity:0; transition:opacity .25s; flex:none; white-space:nowrap}
+.sep:hover .sep-hint,.sep:focus-within .sep-hint{opacity:1}
+.sep-next{gap:20px}
+.next-btn{display:flex; align-items:center; gap:15px; text-decoration:none; flex:none; padding:7px 10px; border-radius:2px}
+.next-btn:focus-visible{outline:2px solid var(--barro); outline-offset:2px}
+.rule-base{stroke:var(--g300); stroke-width:1.4}
+.tick{fill:var(--g400); transform-box:fill-box; transform-origin:bottom center; transition:fill .3s}
+.sep-next.pending .tick{transform:scaleY(0)}
+.sep-next.is-visible .tick{animation:tickup .38s cubic-bezier(.3,0,.2,1) backwards}
+@keyframes tickup{from{transform:scaleY(0)} to{transform:scaleY(1)}}
+.tick:nth-of-type(2){animation-delay:.05s} .tick:nth-of-type(3){animation-delay:.1s}
+.tick:nth-of-type(4){animation-delay:.15s} .tick:nth-of-type(5){animation-delay:.2s}
+.tick:nth-of-type(6){animation-delay:.25s} .tick:nth-of-type(7){animation-delay:.3s}
+.tick:nth-of-type(8){animation-delay:.35s} .tick:nth-of-type(9){animation-delay:.4s}
+.marker{fill:var(--barro); transition:transform .8s cubic-bezier(.42,0,.18,1)}
+.sep-next.pending .marker{opacity:0}
+.sep-next.is-visible .marker{animation:land .3s ease .45s backwards}
+.next-btn:hover .marker,.next-btn:focus-visible .marker{transform:translateX(72px)}
+.next-btn:hover .tick,.next-btn:focus-visible .tick{fill:var(--barro-pale)}
+.next-text{line-height:1.25}
+.next-text small{display:block; font-family:var(--sans); font-size:12.5px; color:var(--g500)}
+.next-text b{font-family:var(--serif); font-size:18.5px; color:var(--obsidiana); transition:color .2s}
+.next-btn:hover .next-text b{color:var(--barro-deep)}
+
+.closer{border-top:1px solid var(--g300); padding:3rem 0 3.6rem}
+.closer-link{display:block; text-decoration:none; max-width:640px}
+.closer-bar{display:flex; gap:3px; height:11px; margin-bottom:1.5rem}
+.closer-bar i{flex:1; border-radius:1px; transform-origin:left center; transition:background .35s}
+.closer-bar i:nth-child(1){background:var(--jade-wash)}
+.closer-bar i:nth-child(2){background:var(--jade-pale)}
+.closer-bar i:nth-child(3){background:var(--jade)}
+.closer-bar i:nth-child(4){background:var(--jade-deep)}
+.closer.pending .closer-bar i{transform:scaleX(0)}
+.closer.is-visible .closer-bar i{animation:grow .55s cubic-bezier(.35,0,.2,1) backwards}
+@keyframes grow{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+.closer.is-visible .closer-bar i:nth-child(2){animation-delay:.1s}
+.closer.is-visible .closer-bar i:nth-child(3){animation-delay:.2s}
+.closer.is-visible .closer-bar i:nth-child(4){animation-delay:.3s}
+.closer-link:hover .closer-bar i:nth-child(1){background:var(--jade-pale)}
+.closer-link:hover .closer-bar i:nth-child(2){background:var(--jade)}
+.closer-link:hover .closer-bar i:nth-child(3){background:var(--jade-deep)}
+.closer-link:hover .closer-bar i:nth-child(4){background:var(--barro)}
+.closer-link:focus-visible{outline:2px solid var(--barro); outline-offset:6px}
+.closer-text small{display:block; font-family:var(--sans); font-size:13.5px; color:var(--g500); margin-bottom:.3rem}
+.closer-text b{display:block; font-family:var(--serif); font-size:31px; font-weight:700; color:var(--obsidiana); line-height:1.15; transition:color .2s}
+.closer-link:hover .closer-text b{color:var(--barro-deep)}
+.closer-text em{display:block; font-style:normal; font-family:var(--sans); font-size:16px; color:var(--g700); margin-top:.45rem; max-width:54ch}
+.closer-note{font-family:var(--sans); font-size:14px; color:var(--g600); margin-top:1.6rem; max-width:60ch}
+@media(max-width:640px){.closer-text b{font-size:24px}}
+
+footer{background:var(--obsidiana); color:var(--g500); padding:2.6rem 7vw; font-family:var(--sans); font-size:14px}
+footer .lockup{display:flex; align-items:center; gap:15px; margin-bottom:1rem}
+footer .wordmark{font-family:var(--serif); font-weight:700; font-size:22px; color:var(--cal); line-height:1}
+footer .wordmark small{display:block; font-family:var(--sans); font-weight:400; font-size:10px; letter-spacing:.19em; color:var(--g500); margin-top:5px}
+
+@media (prefers-reduced-motion: reduce){
+  .sep.pending .sep-fill,.sep.pending .sep-dot{stroke-dashoffset:0; opacity:1}
+  .sep.is-visible .sep-fill,.sep.is-visible .sep-dot{animation:none}
+  .sep-next.pending .tick,.closer.pending .closer-bar i{transform:none}
+  .sep-next.pending .marker{opacity:1}
+  .sep-next.is-visible .tick,.sep-next.is-visible .marker,.closer.is-visible .closer-bar i{animation:none}
+  .sep-dot,.sep-fill,.marker,.tick,.closer-bar i{transition:none}
+  html{scroll-behavior:auto}
+}
+@media print{
+  .runner,.sep-hint{display:none}
+  .cover{min-height:auto; page-break-after:always}
+  .sep.pending .sep-fill,.sep.pending .sep-dot{stroke-dashoffset:0; opacity:1}
+  .sep-next.pending .tick,.closer.pending .closer-bar i{transform:none}
+  .sep-next.pending .marker{opacity:1}
+  body{font-size:11pt; background:#fff}
+  .comp,.numcard,.note,.dark-box,table,.metric,.foda div,.closer{page-break-inside:avoid}
+  h2,h3,h4{page-break-after:avoid}
+  a{color:#000; text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="cover graticule">
+  <div>
+    <svg class="cover-mark" viewBox="0 0 120 120" role="img" aria-label="Marca Yaocalli">
+      <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#EFE9DE" stroke-width="11" stroke-linejoin="round"/>
+      <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#C98F72" stroke-width="10" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div>
+    <h1>Benchmark de <em>competencia</em></h1>
+    <p class="cover-sub">Quién compite por el mismo cliente en el mundo, en México y en Hidalgo, qué hace cada uno, y dónde está el hueco que ninguno está ocupando.</p>
+    <div class="cover-band">
+      <i style="background:#14110F; flex:5"></i><i style="background:#8C4A2F; flex:2"></i>
+      <i style="background:#3F6B5A; flex:1"></i><i style="background:#EFE9DE; flex:2"></i>
+    </div>
+  </div>
+  <div class="cover-meta">
+    <div><b>Documento</b>00 — Benchmark</div>
+    <div><b>Cliente</b>Yaocalli Consultoría y Estrategia</div>
+    <div><b>Verificación de dominios</b>1 de septiembre de 2026</div>
+    <div><b>Versión</b>1.0 — borrador para aprobación</div>
+    <div><b>Fecha</b>1 de septiembre de 2026</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>Contenido</h2>
+  <ol>
+    <li><a href="#s1">Resumen ejecutivo<small>Siete hallazgos y las cifras de la ventana</small></a></li>
+    <li><a href="#s2">Contexto del negocio<small>Qué se está posicionando y contra qué</small></a></li>
+    <li><a href="#s3">Competencia internacional<small>Cuatro referentes que marcan el estándar</small></a></li>
+    <li><a href="#s4">Competencia nacional<small>Cinco firmas que compiten por el mismo cliente</small></a></li>
+    <li><a href="#s5">Competencia local<small>El estado real del mercado en Hidalgo</small></a></li>
+    <li><a href="#s6">Autoridad y tráfico<small>Comparativa y por qué está incompleta</small></a></li>
+    <li><a href="#s7">Visibilidad en motores de IA<small>El dato que casi nadie está mirando</small></a></li>
+    <li><a href="#s8">Análisis FODA<small>Orientado al producto web, no a la empresa</small></a></li>
+    <li><a href="#s9">El hueco<small>Qué no está haciendo ninguno</small></a></li>
+    <li><a href="#s10">Prioridades<small>Qué construir primero y con cuánto esfuerzo</small></a></li>
+  </ol>
+</nav>
+
+<div class="runner">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#14110F" stroke-width="11" stroke-linejoin="round"/>
+    <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#8C4A2F" stroke-width="10" stroke-linejoin="round"/>
+  </svg>
+  Yaocalli — Benchmark de competencia
+  <span>Versión 1.0</span>
+</div>
+
+<main class="sheet">
+
+<!-- ===== 1 ===== -->
+<section id="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Resumen ejecutivo</h2></div>
+
+  <p class="lead">La conclusión no es sobre diseño web. Es que la ventana comercial más grande que Yaocalli va a ver en años acaba de abrirse a treinta kilómetros de su oficina, y que no hay ningún competidor local con presencia digital para disputarla.</p>
+
+  <div class="metrics">
+    <div class="metric"><b>84</b><span>Ayuntamientos en disputa en Hidalgo en 2027</span></div>
+    <div class="metric"><b>30</b><span>Diputaciones locales del Congreso del Estado</span></div>
+    <div class="metric"><b>10 000</b><span>Candidaturas previstas por el IEEH</span></div>
+    <div class="metric"><b>130</b><span>Cargos del Poder Judicial estatal que también se renuevan</span></div>
+  </div>
+  <p style="font-family:var(--sans); font-size:14px; color:var(--g600)">Fuente: Instituto Estatal Electoral de Hidalgo, declaraciones del consejero Alfredo Alcalá Montaño y acuerdos del Consejo General de agosto de 2026, recogidos por El Universal Hidalgo, News Hidalgo y Diario Vía Libre.</p>
+
+  <h3>Siete hallazgos</h3>
+
+  <div class="numcards">
+    <div class="numcard"><b>Hallazgo 1</b><h5>El proceso electoral ya arrancó</h5><p>El IEEH aprobó el 28 de agosto de 2026 el convenio con el INE para el Proceso Electoral Local Concurrente 2026-2027. La demanda de encuestas, cartografía y análisis de actores no llega en 2027: empieza ahora.</p></div>
+    <div class="numcard"><b>Hallazgo 2</b><h5>Por primera vez habrá reelección de alcaldes</h5><p>Eso cambia el producto que se vende: un alcalde que busca reelegirse necesita medición de aprobación y evaluación de gestión, no solo intención de voto. Es exactamente el trabajo que Yaocalli ya hace.</p></div>
+    <div class="numcard"><b>Hallazgo 3</b><h5>No hay competidor local con presencia digital</h5><p>La búsqueda de consultoría de datos políticos en Hidalgo no devuelve una sola firma local con sitio propio. El único despacho identificado en Pachuca existe apenas como perfil en un directorio.</p></div>
+    <div class="numcard"><b>Hallazgo 4</b><h5>Quien mide Hidalgo son firmas nacionales</h5><p>Mitofsky y Demoscopia Digital publican mediciones sobre el estado desde fuera. Ninguna tiene equipo permanente en territorio, y ese es el flanco que Yaocalli puede atacar con su cobertura de los 84 municipios.</p></div>
+    <div class="numcard"><b>Hallazgo 5</b><h5>El buscador está tomado por listas autopromocionales</h5><p>Las primeras posiciones de «casas encuestadoras en México» las ocupan firmas que escriben rankings donde ellas mismas aparecen primero. Es contenido de venta disfrazado de contenido editorial, y es fácil de superar con material metodológico real.</p></div>
+    <div class="numcard"><b>Hallazgo 6</b><h5>Todos venden el dato, ninguno vende el sistema</h5><p>Ninguna de las firmas revisadas ofrece como producto la app de campo, el pipeline de datos o el tablero que queda instalado. Ese es el activo diferencial de Yaocalli y hoy no tiene competencia declarada.</p></div>
+    <div class="numcard"><b>Hallazgo 7</b><h5>El mercado está partido en dos y nadie ocupa el centro</h5><p>De un lado las encuestadoras electorales; del otro las consultoras de asuntos públicos y cabildeo. La focalización de programas sociales y la priorización presupuestal quedan en tierra de nadie, y es donde Yaocalli tiene más obra hecha.</p></div>
+  </div>
+
+  <div class="note note-supuesto"><p><span class="tag tag-supuesto">Alcance de esta investigación</span> No se contó con acceso a Ahrefs, Semrush ni herramienta equivalente. El benchmark se construyó con investigación web directa, verificación de dominios y análisis cualitativo de las propuestas de valor publicadas. Todo lo que aquí se afirma sobre volumen de tráfico o autoridad de dominio está marcado explícitamente como estimación y debe confirmarse antes de presentarlo a un tercero.</p></div>
+</section>
+
+<!-- ===== 2 ===== -->
+<section id="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Contexto del negocio</h2></div>
+
+  <p class="lead">Yaocalli no compite en una sola categoría. Su portafolio cruza tres mercados que en México suelen estar en manos de empresas distintas, y esa combinación es la que define contra quién se mide.</p>
+
+  <table>
+    <caption>Las tres categorías que cruza el portafolio y quién domina cada una.</caption>
+    <thead><tr><th>Categoría</th><th>Qué vende</th><th>Quién la domina hoy</th><th>Posición de Yaocalli</th></tr></thead>
+    <tbody>
+      <tr><td>Demoscopia electoral</td><td>Encuestas de intención de voto, aprobación, salida</td><td>Mitofsky, Parametría, De las Heras Demotecnia, Demoscopia Digital</td><td>Entrante, con capacidad de campo demostrada</td></tr>
+      <tr><td>Consultoría de asuntos públicos</td><td>Cabildeo, comunicación política, estrategia</td><td>Grupo Estrategia Política, Integralia, Electoralia</td><td>No compite de frente ni conviene que lo haga</td></tr>
+      <tr><td>Inteligencia de datos para gobierno</td><td>Índices, GIS, tableros, software, ETL</td><td>Nadie con una propuesta pública articulada</td><td>Ventaja clara y sin disputa aparente</td></tr>
+    </tbody>
+  </table>
+
+  <p>La lectura estratégica es directa: entrar por la tercera categoría, donde no hay competencia declarada y donde el portafolio ya tiene obra terminada, y usarla como puerta hacia la primera, que es donde está el dinero de campaña.</p>
+
+  <div class="dark-box">
+    <h4>Ninguna firma revisada dice lo que Yaocalli puede decir.</h4>
+    <p>Ochenta encuestadores coordinados en campo, treinta auditores de gabinete, los 84 municipios de un estado cubiertos con seguimiento georreferenciado, doscientos scripts de R orquestados para un laboratorio nacional de indicadores, novecientos trámites modelados como grafo, seiscientos usuarios diarios en un sistema propio. Eso no es un argumento de marketing: es capacidad instalada verificable, y es lo que separa a un proveedor de encuestas de un proveedor de infraestructura de decisión.</p>
+  </div>
+</section>
+
+<!-- ===== 3 ===== -->
+<section id="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Competencia internacional</h2></div>
+
+  <p class="lead">No compiten por los mismos contratos, pero fijan el estándar de qué se espera del sitio de una firma de datos. Sirven para saber a qué altura hay que construir.</p>
+
+  <div class="comp">
+    <div class="comp-head"><h5>Pew Research Center</h5><span class="tag tag-int">Internacional</span><span class="comp-url">pewresearch.org</span><span class="tag tag-verif">Activo</span></div>
+    <p class="comp-model">Centro de investigación sin fines de lucro. No vende servicios: vende autoridad.</p>
+    <p>Es el estándar mundial de transparencia metodológica. Cada estudio publica su ficha técnica completa, y existe una sección entera dedicada a explicar cómo se hacen las encuestas, dirigida al público general. Esa sección es, por sí sola, un motor de posicionamiento: quien busca cómo se calcula un margen de error termina ahí.</p>
+    <div class="chips"><span class="chip chip-si">Metodología publicada íntegra</span><span class="chip chip-si">Sección explicativa para no técnicos</span><span class="chip chip-si">Datos descargables</span><span class="chip chip-si">Volumen editorial altísimo</span></div>
+    <p class="reading"><b>Qué copiar:</b> la idea de que explicar el método es contenido de marketing, no una concesión. Es el modelo que sostiene el pilar de método auditable de Yaocalli.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h5>Civis Analytics</h5><span class="tag tag-int">Internacional</span><span class="comp-url">civisanalytics.com</span><span class="tag tag-verif">Activo</span></div>
+    <p class="comp-model">Ciencia de datos aplicada a campañas, gobierno y sector social. Nació del equipo de datos de una campaña presidencial estadounidense.</p>
+    <p>Es el referente más cercano a lo que Yaocalli hace: no vende encuestas, vende modelos, plataforma y ciencia de datos como servicio continuo. Su sitio organiza la oferta por problema a resolver, no por técnica empleada, que es la decisión de arquitectura más útil de todo este benchmark.</p>
+    <div class="chips"><span class="chip chip-si">Oferta organizada por problema</span><span class="chip chip-si">Casos con resultado medible</span><span class="chip chip-si">Producto de software propio</span><span class="chip chip-no">Sin precios públicos</span></div>
+    <p class="reading"><b>Qué copiar:</b> el encuadre. Nombrar el problema del cliente antes que la técnica. Un director municipal no busca «modelo de clasificación», busca «a quién le doy el apoyo primero».</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h5>Faculty</h5><span class="tag tag-int">Internacional</span><span class="comp-url">faculty.ai</span><span class="tag tag-verif">Activo</span></div>
+    <p class="comp-model">Inteligencia artificial aplicada al sector público y a industrias reguladas, con fuerte presencia en gobierno británico.</p>
+    <p>Interesa por cómo resuelve un problema que Yaocalli va a tener: vender inteligencia artificial a instituciones públicas sin sonar a promesa vacía. Lo hace anclando cada capacidad a un caso de uso institucional concreto y a resultados operativos, no a adjetivos sobre la tecnología.</p>
+    <div class="chips"><span class="chip chip-si">Casos de sector público</span><span class="chip chip-si">Lenguaje sobrio sobre IA</span><span class="chip chip-si">Materia de seguridad y ética</span><span class="chip chip-no">Poco contenido metodológico abierto</span></div>
+    <p class="reading"><b>Qué copiar:</b> hablar de IA nombrando la técnica y el caso, nunca la categoría. Coincide con el principio de escritura del manual de identidad.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h5>Bully Pulpit International</h5><span class="tag tag-int">Internacional</span><span class="comp-url">bpimedia.com</span><span class="bloq">Servidor bloquea la consulta automatizada</span></div>
+    <p class="comp-model">Agencia de comunicación política y de marca basada en datos, nacida también del entorno de campañas estadounidenses.</p>
+    <p>Representa el modelo híbrido de campaña y comunicación con analítica al centro. Es el camino que Yaocalli podría tomar si decidiera crecer hacia la comunicación, y por eso mismo conviene tenerlo identificado: es la dirección que se está eligiendo no tomar por ahora.</p>
+    <div class="chips"><span class="chip chip-si">Modelo híbrido datos y creatividad</span><span class="chip chip-no">Método poco explícito</span><span class="chip chip-no">Sin material técnico abierto</span></div>
+    <p class="reading"><b>Qué no copiar:</b> la opacidad metodológica. Funciona para una agencia creativa; hundiría el posicionamiento de una firma que vende rigor.</p>
+  </div>
+</section>
+
+<!-- ===== 4 ===== -->
+<section id="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Competencia nacional</h2></div>
+
+  <p class="lead">Estas sí compiten por el mismo cliente. Todas tienen ventaja de marca y antigüedad; ninguna tiene la combinación de campo, geoespacial y software.</p>
+
+  <div class="comp">
+    <div class="comp-head"><h5>Consulta Mitofsky</h5><span class="tag tag-nac">Nacional</span><span class="comp-url">mitofsky.mx</span><span class="tag tag-verif">Activo</span></div>
+    <p class="comp-model">Casa encuestadora de tradición. Ingresos por estudios contratados y por la visibilidad de sus mediciones en medios.</p>
+    <p>Es la marca de referencia del sector y opera en Hidalgo: sus mediciones de aprobación de alcaldes y del gobernador circulan en la prensa local, incluido el ranking de 150 presidentes municipales que se citó en Pachuca en abril de 2026. Su fuerza es la credibilidad histórica y la alianza con medios nacionales.</p>
+    <div class="chips"><span class="chip chip-si">Marca reconocida</span><span class="chip chip-si">Presencia constante en medios</span><span class="chip chip-si">Fichas técnicas publicadas</span><span class="chip chip-no">Sin oferta de software ni tableros</span><span class="chip chip-no">Sin producto territorial fino</span></div>
+    <p class="reading"><b>Lectura estratégica:</b> imposible competir por marca. Se compite por profundidad territorial: Mitofsky da la fotografía estatal, Yaocalli puede dar la sección electoral y la colonia.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h5>Demoscopia Digital</h5><span class="tag tag-nac">Nacional</span><span class="comp-url">demoscopiadigital.com</span><span class="tag tag-verif">Activo</span></div>
+    <p class="comp-model">Casa encuestadora con más de 25 años, posicionada como investigación social y consultoría estratégica.</p>
+    <p>Es el competidor nacional más parecido en discurso: combina opinión pública con consultoría y mide Hidalgo con regularidad. Su sitio declara enfoque riguroso y equipo multidisciplinario, pero no publica material metodológico abierto ni casos con resultado verificable.</p>
+    <div class="chips"><span class="chip chip-si">Mide Hidalgo con frecuencia</span><span class="chip chip-si">Discurso de rigor</span><span class="chip chip-si">Premios sectoriales</span><span class="chip chip-no">Sin biblioteca metodológica</span><span class="chip chip-no">Sin casos detallados</span></div>
+    <p class="reading"><b>Lectura estratégica:</b> ocupa el mismo terreno discursivo pero con la casa vacía. Publicar método real es la forma más rápida de diferenciarse de él.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h5>Parametría</h5><span class="tag tag-nac">Nacional</span><span class="comp-url">parametria.com.mx</span><span class="tag tag-verif">Activo</span></div>
+    <p class="comp-model">Investigación estratégica y opinión pública, con publicación periódica de resultados propios.</p>
+    <p>Sostiene su autoridad con producción editorial constante de encuestas nacionales sobre temas de coyuntura. Es el modelo de firma que se posiciona publicando datos propios en lugar de vender servicios en la portada.</p>
+    <div class="chips"><span class="chip chip-si">Publicación periódica propia</span><span class="chip chip-si">Archivo histórico consultable</span><span class="chip chip-no">Sin servicios de datos ni GIS</span><span class="chip chip-no">Enfoque nacional, no municipal</span></div>
+    <p class="reading"><b>Lectura estratégica:</b> confirma que publicar datos propios genera autoridad. Yaocalli puede hacerlo a escala estatal, que es un nicho que nadie cubre.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h5>Electoralia</h5><span class="tag tag-nac">Nacional</span><span class="comp-url">electoralia.com.mx</span><span class="tag tag-verif">Activo</span></div>
+    <p class="comp-model">Firma híbrida de inteligencia política y consultoría estratégica, con modelo propio de microsegmentación geodigital.</p>
+    <p>Es el competidor conceptualmente más cercano: también dice traducir el dato en decisión táctica y también reivindica un modelo geodigital. Además juega fuerte en posicionamiento por buscador, publicando rankings de encuestadoras donde se coloca a sí misma como firma de referencia.</p>
+    <div class="chips"><span class="chip chip-si">Posicionamiento activo por contenido</span><span class="chip chip-si">Discurso de cuarto de guerra</span><span class="chip chip-si">Modelo propio nombrado</span><span class="chip chip-no">Modelo no documentado técnicamente</span><span class="chip chip-no">Contenido autopromocional</span></div>
+    <p class="reading"><b>Lectura estratégica:</b> el rival más directo en discurso. Se le gana con lo que no puede mostrar: la memoria de cálculo y el sistema funcionando.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h5>Integralia Consultores</h5><span class="tag tag-nac">Nacional</span><span class="comp-url">integralia.com.mx</span><span class="tag tag-verif">Activo</span></div>
+    <p class="comp-model">Consultoría de riesgo político y asuntos públicos, con producción de reportes y análisis institucional.</p>
+    <p>No compite por encuestas sino por el presupuesto de análisis estratégico de la misma institución. Su activo es la reputación editorial: reportes que se citan. Es el ejemplo nacional de que el contenido serio abre puertas de alto nivel.</p>
+    <div class="chips"><span class="chip chip-si">Reportes citados</span><span class="chip chip-si">Autoridad institucional</span><span class="chip chip-no">Sin levantamiento propio en campo</span><span class="chip chip-no">Sin producto de datos</span></div>
+    <p class="reading"><b>Lectura estratégica:</b> comparte el terreno del análisis, no el de la producción de datos. Es más socio potencial que rival.</p>
+  </div>
+
+  <p style="font-family:var(--sans); font-size:15px; color:var(--g600); max-width:66ch">Otras firmas identificadas en el mismo mercado, no fichadas por no ser competencia directa del posicionamiento elegido: Statistical Research Corporation, Massive Caller, De las Heras Demotecnia, Enkoll, Grupo Estrategia Política, Poligrama, BEAP y el directorio Polimétrica.</p>
+</section>
+
+<!-- ===== 5 ===== -->
+<section id="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Competencia local</h2></div>
+
+  <p class="lead">Este es el nivel decisivo y el que casi siempre se ignora. En Hidalgo, el resultado de la búsqueda es tan contundente que constituye por sí mismo la conclusión del benchmark.</p>
+
+  <div class="dark-box">
+    <h4>No existe hoy una consultora de datos políticos en Hidalgo con presencia digital seria.</h4>
+    <p>La búsqueda sistemática de firmas de encuestas, análisis político o inteligencia de datos con sede en Pachuca o en el estado no devolvió una sola empresa local con sitio propio, casos publicados o material metodológico. El único despacho identificado en Pachuca, BGI Consultores, aparece únicamente como perfil en un directorio personal, sin sitio institucional.</p>
+    <p>Quien mide Hidalgo lo hace desde fuera: firmas nacionales que publican una fotografía estatal y firmas regionales de estados vecinos que incluyen a Hidalgo dentro de una cobertura amplia. Ninguna tiene estructura permanente en territorio.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h5>BGI Consultores</h5><span class="tag tag-loc">Local</span><span class="comp-url">Sin dominio propio localizado</span><span class="nores">Sin sitio institucional</span></div>
+    <p class="comp-model">Despacho con sede en Pachuca de Soto. Se presenta como especializado en estudios prospectivos, políticas públicas diferenciadas y modelos de evaluación de la gestión gubernamental.</p>
+    <p>Su presencia digital se reduce a un perfil en un directorio personal. No fue posible localizar sitio web, casos, publicaciones ni datos de contacto institucional. El perfil declara exactamente el mismo campo de trabajo que Yaocalli, lo que confirma que la demanda existe en la plaza.</p>
+    <div class="chips"><span class="chip chip-no">Sin sitio web</span><span class="chip chip-no">Sin casos publicados</span><span class="chip chip-no">Sin contenido</span><span class="chip chip-no">Sin canal de contacto visible</span></div>
+    <p class="reading"><b>Lectura estratégica:</b> es el competidor local más cercano y no tiene con qué disputar una búsqueda. Un sitio bien construido lo desplaza el primer mes.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h5>BEAP — Buró de Estadística y Análisis de Opinión Pública</h5><span class="tag tag-loc">Regional</span><span class="comp-url">beapmexico.org</span><span class="bloq">Responde con redirección; sitio existente</span></div>
+    <p class="comp-model">Consultoría en demoscopia y comunicación política desde 1999, con sede en Puebla. Declara cobertura que incluye a Hidalgo.</p>
+    <p>Es el competidor regional real: firma establecida, con casi tres décadas de trabajo, miembro de la asociación mundial de investigadores de opinión pública, que declara explícitamente cobertura sobre Hidalgo entre otros estados. Su ventaja es la antigüedad y las certificaciones; su desventaja, que Hidalgo es para ella un mercado periférico.</p>
+    <div class="chips"><span class="chip chip-si">Trayectoria desde 1999</span><span class="chip chip-si">Membresía profesional internacional</span><span class="chip chip-si">Declara software político</span><span class="chip chip-no">Sede fuera del estado</span><span class="chip chip-no">Sitio de factura antigua</span></div>
+    <p class="reading"><b>Lectura estratégica:</b> el rival a vencer en la plaza. Se le gana por proximidad, por capacidad de campo verificable y por un sitio que hoy es mejor que el suyo sin gran esfuerzo.</p>
+  </div>
+
+  <div class="comp">
+    <div class="comp-head"><h5>Firmas nacionales operando sobre Hidalgo</h5><span class="tag tag-loc">Local por cobertura</span><span class="comp-url">mitofsky.mx · demoscopiadigital.com</span><span class="tag tag-verif">Activos</span></div>
+    <p class="comp-model">Mediciones periódicas de aprobación de alcaldes y del gobernador, publicadas en prensa estatal.</p>
+    <p>Son la competencia efectiva por el contrato de un ayuntamiento grande o del gobierno del estado. Su producto es la fotografía comparativa entre estados o municipios, útil para prensa y para posicionamiento, pero insuficiente para decidir dónde intervenir dentro de un municipio.</p>
+    <div class="chips"><span class="chip chip-si">Credibilidad de marca</span><span class="chip chip-si">Presencia en medios locales</span><span class="chip chip-no">Sin desagregación intramunicipal</span><span class="chip chip-no">Sin equipo permanente en el estado</span></div>
+    <p class="reading"><b>Lectura estratégica:</b> no se compite contra su marca, se compite contra su resolución. Ellos dicen cuánto aprueba el municipio; Yaocalli puede decir qué colonia y por qué.</p>
+  </div>
+
+  <table>
+    <caption>Verificación de dominios realizada el 1 de septiembre de 2026 mediante consulta directa. Un código bloqueado indica que el servidor rechaza consultas automatizadas, no que el sitio esté caído.</caption>
+    <thead><tr><th>Dominio</th><th>Nivel</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td class="comp-url">pewresearch.org</td><td>Internacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">civisanalytics.com</td><td>Internacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">faculty.ai</td><td>Internacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">bpimedia.com</td><td>Internacional</td><td class="bloq">Bloquea consulta automatizada</td></tr>
+      <tr><td class="comp-url">mitofsky.mx</td><td>Nacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">parametria.com.mx</td><td>Nacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">demoscopiadigital.com</td><td>Nacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">electoralia.com.mx</td><td>Nacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">integralia.com.mx</td><td>Nacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">demotecnia.com.mx</td><td>Nacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">enkoll.com</td><td>Nacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">src.org.mx</td><td>Nacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">poligrama.mx</td><td>Nacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">polimetrica.mx</td><td>Nacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">gep.com.mx</td><td>Nacional</td><td class="activo">Responde correctamente</td></tr>
+      <tr><td class="comp-url">massivecaller.com</td><td>Nacional</td><td class="bloq">Bloquea consulta automatizada</td></tr>
+      <tr><td class="comp-url">etellekt.com</td><td>Nacional</td><td class="bloq">Bloquea consulta automatizada</td></tr>
+      <tr><td class="comp-url">beapmexico.org</td><td>Regional</td><td class="bloq">Redirección; sitio existente</td></tr>
+      <tr><td class="comp-url">BGI Consultores</td><td>Local</td><td class="nores">Sin dominio propio localizado</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===== 6 ===== -->
+<section id="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Autoridad y tráfico</h2></div>
+
+  <p class="lead">Aquí falta el dato duro, y decirlo es más útil que inventarlo. Esta sección está incompleta a propósito y se cierra en cuanto haya acceso a una herramienta de análisis.</p>
+
+  <div class="note note-supuesto"><p><span class="tag tag-supuesto">Lo que falta</span> Para cerrar esta sección hacen falta, de cada dominio de la tabla anterior: autoridad de dominio, tráfico orgánico mensual estimado, número de palabras clave posicionadas, dominios de referencia y, si la herramienta lo muestra, el panel de menciones en motores de respuesta. Con capturas del panel de resumen de Ahrefs o Semrush es suficiente. Yaocalli entra a la comparación con línea base de cero, porque el dominio todavía no existe.</p></div>
+
+  <table>
+    <caption>Estimación cualitativa por observación directa, no medición. Sirve para orientar la estrategia, no para presentarse a un cliente.</caption>
+    <thead><tr><th>Dominio</th><th>Antigüedad aparente</th><th>Volumen editorial observado</th><th>Autoridad estimada</th></tr></thead>
+    <tbody>
+      <tr><td class="comp-url">pewresearch.org</td><td>Muy alta</td><td>Publicación diaria</td><td>Muy alta</td></tr>
+      <tr><td class="comp-url">mitofsky.mx</td><td>Muy alta</td><td>Publicación semanal con difusión en medios</td><td>Alta</td></tr>
+      <tr><td class="comp-url">parametria.com.mx</td><td>Alta</td><td>Publicación periódica de estudios propios</td><td>Media alta</td></tr>
+      <tr><td class="comp-url">integralia.com.mx</td><td>Alta</td><td>Reportes citados</td><td>Media alta</td></tr>
+      <tr><td class="comp-url">demoscopiadigital.com</td><td>Media</td><td>Baja, sin biblioteca de contenido</td><td>Media</td></tr>
+      <tr><td class="comp-url">electoralia.com.mx</td><td>Media</td><td>Media, orientada a posicionamiento</td><td>Media</td></tr>
+      <tr><td class="comp-url">beapmexico.org</td><td>Alta</td><td>Muy baja</td><td>Baja</td></tr>
+      <tr><td class="comp-url">Competencia local</td><td>Inexistente</td><td>Nula</td><td>Nula</td></tr>
+      <tr><td class="comp-url">Yaocalli</td><td>Sin dominio</td><td>Sin publicar</td><td>Cero, línea base</td></tr>
+    </tbody>
+  </table>
+
+  <p>La lectura honesta: contra los nacionales no hay forma de ganar por autoridad de dominio en los próximos dos años. Contra el nivel local no hay contra quién competir. La estrategia realista es no pelear por «encuestas México» y sí ocupar, desde el primer mes, todas las búsquedas que combinen el servicio con el territorio.</p>
+</section>
+
+<!-- ===== 7 ===== -->
+<section id="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Visibilidad en motores de IA</h2></div>
+
+  <p class="lead">Cada vez más funcionarios preguntan a un asistente conversacional antes que a un buscador. Casi nadie en este sector lo está midiendo, y ahí hay una ventaja disponible.</p>
+
+  <p>Cuando alguien pregunta a un asistente qué casa encuestadora contratar en México, la respuesta se construye con lo que está publicado y estructurado en la web. Hoy, las fuentes que alimentan esa respuesta son en buena medida los listados autopromocionales detectados en el hallazgo cinco: contenido escrito por las propias firmas para colocarse primero.</p>
+
+  <p>Eso significa dos cosas. Que la información que circula sobre el sector es de baja calidad, y que un cuerpo de contenido metodológico bien estructurado tiene una probabilidad alta de convertirse en fuente citada, porque no compite contra buen material sino contra publicidad disfrazada.</p>
+
+  <div class="note note-info"><p><b>Qué hacer al respecto desde el documento 04.</b> Datos estructurados de organización y de artículo en cada página, fichas técnicas con datos legibles por máquina, definiciones claras al inicio de cada nota metodológica y respuestas directas a preguntas concretas. No es una técnica distinta del buen posicionamiento: es la misma, hecha con más disciplina.</p></div>
+
+  <div class="note note-supuesto"><p><span class="tag tag-supuesto">Sin datos</span> No se dispone de panel de menciones en motores de respuesta para ninguno de los dominios analizados. Esta sección es un argumento estratégico, no una medición, y así debe presentarse.</p></div>
+</section>
+
+<!-- ===== 8 ===== -->
+<section id="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Análisis FODA</h2></div>
+
+  <p class="lead">Referido al producto web y a la posición competitiva que este puede construir, no a la empresa en general.</p>
+
+  <div class="foda">
+    <div class="f-fort">
+      <h5>Fortalezas</h5>
+      <ul>
+        <li>Capacidad instalada verificable y poco común: campo, geoespacial, software y modelado en la misma casa</li>
+        <li>Obra terminada con instituciones nombrables, incluido un organismo internacional</li>
+        <li>Escritura técnica propia de nivel publicable, que es materia prima de contenido</li>
+        <li>Proximidad física al mercado con la ventana abierta</li>
+        <li>Identidad de marca ya definida y con sistema de diseño completo</li>
+      </ul>
+    </div>
+    <div class="f-opor">
+      <h5>Oportunidades</h5>
+      <ul>
+        <li>Proceso electoral local 2026-2027 con 84 ayuntamientos y reelección de alcaldes por primera vez</li>
+        <li>Vacío total de competencia local con presencia digital</li>
+        <li>Búsquedas del sector dominadas por contenido autopromocional fácil de superar</li>
+        <li>Nadie ofrece el sistema instalado como producto</li>
+        <li>Nicho sin dueño entre demoscopia electoral y política pública</li>
+      </ul>
+    </div>
+    <div class="f-debi">
+      <h5>Debilidades</h5>
+      <ul>
+        <li>Dominio inexistente: autoridad de partida en cero</li>
+        <li>Marca desconocida frente a firmas con décadas de prensa</li>
+        <li>Colisión de nombre con un colegio y una marca deportiva ya posicionados</li>
+        <li>Casos publicables aún no definidos por confidencialidad</li>
+        <li>Sin banco fotográfico ni material visual propio confirmado</li>
+      </ul>
+    </div>
+    <div class="f-amen">
+      <h5>Amenazas</h5>
+      <ul>
+        <li>La ventana electoral se cierra: pasado 2027 la demanda cae hasta 2030</li>
+        <li>Una firma nacional puede abrir oficina en el estado en cualquier momento</li>
+        <li>El sector arrastra desconfianza pública hacia las encuestas</li>
+        <li>Dependencia del ciclo político y de cambios de administración</li>
+        <li>Exigencia legal creciente en tratamiento de datos personales</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note note-err"><p><b>La amenaza que manda sobre el calendario.</b> El proceso electoral local ya arrancó y las contrataciones de campaña se cierran meses antes de la jornada. Un sitio publicado en marzo de 2027 llega tarde a su propia oportunidad. Esto no es una recomendación de urgencia comercial: es el hecho que debe gobernar el alcance de la versión 1.</p></div>
+</section>
+
+<!-- ===== 9 ===== -->
+<section id="s9">
+  <div class="sec-head"><span class="sec-num">09</span><h2>El hueco</h2></div>
+
+  <p class="lead">El valor de un benchmark no está en describir competidores sino en encontrar qué no está haciendo ninguno. Aquí hay tres huecos, y son acumulables.</p>
+
+  <div class="numcards">
+    <div class="numcard"><b>Hueco 1</b><h5>Nadie publica su método</h5><p>Ninguna firma mexicana revisada tiene el equivalente a la sección de metodología de Pew. Se publican resultados, no procedimientos. Yaocalli ya escribe ese material para sus clientes: convertirlo en contenido público es trabajo de edición, no de creación.</p></div>
+    <div class="numcard"><b>Hueco 2</b><h5>Nadie vende el sistema</h5><p>Todos entregan un informe. Ninguno ofrece la app de campo, el pipeline, la base y el tablero que quedan operando. Es el activo más difícil de imitar del portafolio y hoy no tiene competencia declarada en el mercado nacional.</p></div>
+    <div class="numcard"><b>Hueco 3</b><h5>Nadie es de aquí</h5><p>En el estado con la ventana electoral más grande de su historia reciente, no hay una firma local visible. La combinación de proximidad, cobertura demostrada de los 84 municipios y presencia digital no la tiene nadie.</p></div>
+  </div>
+
+  <div class="dark-box">
+    <h4>La apuesta, en una frase.</h4>
+    <p>Ser la única firma de inteligencia de datos con sede en Hidalgo que publica su método, entrega el sistema y no solo el dato, y llega a la elección de 2027 con la casa construida. No se compite por ser la encuestadora más conocida de México: se compite por ser la única opción evidente para quien decide en este territorio.</p>
+  </div>
+
+  <h3>Objetivo del sitio</h3>
+  <p>Derivado de todo lo anterior, y que gobierna los documentos 02, 03 y 04: que una persona con capacidad de contratar entienda el método en menos de tres minutos y pida una propuesta técnica. Métrica única, solicitudes de propuesta calificadas al mes. Ni tráfico ni seguidores.</p>
+</section>
+
+<!-- ===== 10 ===== -->
+<section id="s10">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Prioridades</h2></div>
+
+  <p class="lead">Ordenadas por impacto sobre la métrica única y calibradas contra el calendario electoral. El esfuerzo se estima en jornadas de trabajo de una persona.</p>
+
+  <table>
+    <caption>Prioridades de la versión 1, en orden de ejecución.</caption>
+    <thead><tr><th class="num">Orden</th><th>Acción</th><th>Por qué ahora</th><th class="num">Esfuerzo</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Registrar el dominio</td><td>Aparece libre y la autoridad tarda meses en construirse: cada semana sin dominio es autoridad perdida</td><td class="num">1 hora</td></tr>
+      <tr><td class="num">2</td><td>Definir casos publicables</td><td>Bloquea la producción de tres páginas y del argumento de prueba completo</td><td class="num">1 jornada</td></tr>
+      <tr><td class="num">3</td><td>Seis fichas de servicio con su ficha técnica en PDF</td><td>Es el objeto de conversión real ante el cliente de gobierno</td><td class="num">8 a 10 jornadas</td></tr>
+      <tr><td class="num">4</td><td>Página de metodología</td><td>Ataca el hueco 1 y es lo que ningún competidor tiene</td><td class="num">3 jornadas</td></tr>
+      <tr><td class="num">5</td><td>Construcción del sitio con el sistema de identidad</td><td>El sistema de diseño ya está definido, así que es implementación y no diseño</td><td class="num">10 a 14 jornadas</td></tr>
+      <tr><td class="num">6</td><td>Cuatro primeras notas metodológicas</td><td>Arrancan el posicionamiento por búsquedas de cola larga desde el día uno</td><td class="num">4 jornadas</td></tr>
+      <tr><td class="num">7</td><td>Medición configurada antes de publicar</td><td>Sin línea base no hay forma de saber si algo funcionó</td><td class="num">1 jornada</td></tr>
+      <tr><td class="num">8</td><td>Perfil de empresa en el buscador y ficha local</td><td>Captura las búsquedas del enlace administrativo que verifica al proveedor</td><td class="num">1 jornada</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-ok"><p><b>Total aproximado: entre 28 y 34 jornadas de trabajo.</b> Con dedicación parcial, entre dos y tres meses hasta publicar. Ese calendario deja el sitio operando a finales de 2026, con margen suficiente antes de que se cierren las contrataciones del proceso electoral.</p></div>
+
+  <h3>Antes de continuar</h3>
+  <p>Este documento es el punto de control de la serie. Antes de producir el plan de contenidos y la guía de posicionamiento conviene resolver cuatro cosas:</p>
+  <ul class="plain">
+    <li><b>¿Los competidores son los correctos o falta alguno?</b> En particular, si hay firmas locales que operan sin presencia digital y que conoces por trato directo.</li>
+    <li><b>¿La oportunidad identificada es la apuesta correcta?</b> Ser la única firma local de inteligencia de datos que publica su método y entrega el sistema, con la elección de 2027 como ventana.</li>
+    <li><b>¿El objetivo del sitio coincide con lo que esperas?</b> Solicitudes de propuesta calificadas, no volumen de visitas.</li>
+    <li><b>¿El nivel de detalle sirve para presentarlo?</b> Este documento está escrito para poder mostrarse a un tercero tal como está.</li>
+  </ul>
+</section>
+
+</main>
+
+<div class="closer" id="closer">
+  <div class="sheet">
+    <a class="closer-link" href="./1_Manual_de_Identidad_Yaocalli.html">
+      <span class="closer-bar" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="closer-text">
+        <small>Siguiente documento de la serie</small>
+        <b>01 — Manual de identidad</b>
+        <em>Posicionamiento, logotipo, paleta con verificación de contraste, tipografía, tono de voz, aplicaciones y tokens de código.</em>
+      </span>
+    </a>
+    <p class="closer-note">Los cinco documentos deben estar en la misma carpeta para que los enlaces funcionen.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="lockup">
+    <svg width="42" height="42" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#EFE9DE" stroke-width="11" stroke-linejoin="round"/>
+      <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#C98F72" stroke-width="10" stroke-linejoin="round"/>
+    </svg>
+    <div class="wordmark">Yaocalli<small>CONSULTORÍA Y ESTRATEGIA</small></div>
+  </div>
+  <p style="max-width:62ch; margin:0">Documento 00 de la serie de identidad y estrategia digital. Versión 1.0, borrador para aprobación, 1 de septiembre de 2026. Verificación de dominios realizada el mismo día. Los datos de autoridad y tráfico son estimación cualitativa y están marcados como tales.</p>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STAIR = '<span class="sep-line"></span>'
+    + '<span class="sep-hint">Volver al contenido</span>'
+    + '<button class="sep-btn" type="button">'
+    + '<svg width="126" height="36" viewBox="0 0 118 34" aria-hidden="true">'
+    + '<path class="sep-track" d="M4 28 V20 H40 V13 H76 V6 H114" fill="none" stroke-width="4" stroke-linejoin="round"/>'
+    + '<path class="sep-fill" d="M4 28 V20 H40 V13 H76 V6 H114" fill="none" stroke-width="4" stroke-linejoin="round"/>'
+    + '<circle class="sep-dot" r="4.5"/></svg>'
+    + '<span class="sr-only">Volver al contenido</span></button>'
+    + '<span class="sep-line"></span>';
+  function ruleSvg(){
+    var t='';
+    for (var k=0;k<9;k++){ var x=2+k*10, tall=(k%2===0);
+      t+='<rect class="tick" x="'+x+'" y="'+(tall?7:13)+'" width="1.6" height="'+(tall?13:7)+'"/>'; }
+    return '<svg width="96" height="26" viewBox="0 0 92 24" aria-hidden="true">'
+      + '<line class="rule-base" x1="2" y1="20.7" x2="84" y2="20.7"/>'
+      + t + '<path class="marker" d="M0 0 H9 L4.5 7 Z"/></svg>';
+  }
+  function nextSep(target){
+    var num=target.querySelector('.sec-num'), ttl=target.querySelector('h2');
+    return '<span class="sep-line"></span><a class="next-btn" href="#'+target.id+'">'+ruleSvg()
+      + '<span class="next-text"><small>Siguiente</small><b>'
+      + (num?num.textContent+' ':'') + (ttl?ttl.textContent:'') + '</b></span></a>';
+  }
+  var secs=document.querySelectorAll('main.sheet > section'), seps=[];
+  for (var i=1;i<secs.length;i++){
+    var d=document.createElement('div'), isNext=(i%2===0);
+    d.className = isNext ? 'sep sep-next' : 'sep';
+    d.setAttribute('role','separator');
+    d.innerHTML = isNext ? nextSep(secs[i]) : STAIR;
+    if (!reduce) d.classList.add('pending');
+    secs[i].parentNode.insertBefore(d, secs[i]);
+    seps.push(d);
+  }
+  var closer=document.getElementById('closer');
+  if (closer){ if(!reduce) closer.classList.add('pending'); seps.push(closer); }
+  document.addEventListener('click', function(e){
+    var b=e.target.closest && e.target.closest('.sep-btn');
+    if (b){ document.querySelector('.toc').scrollIntoView({behavior: reduce?'auto':'smooth'}); }
+  });
+  if (!reduce && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.remove('pending'); en.target.classList.add('is-visible'); io.unobserve(en.target); }
+      });
+    }, {rootMargin:'0px 0px -18% 0px'});
+    seps.forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+
+</body>
+</html>

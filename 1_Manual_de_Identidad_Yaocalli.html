@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual de identidad — Yaocalli Consultoría y Estrategia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --obsidiana:#14110F;
+  --obsidiana-80:#2A2521;
+  --barro:#8C4A2F;
+  --barro-deep:#6B3722;
+  --barro-pale:#C98F72;
+  --barro-wash:#F7EDE7;
+  --jade:#3F6B5A;
+  --jade-deep:#2C4C3F;
+  --jade-pale:#7FA593;
+  --jade-wash:#E8EFEB;
+  --cal:#EFE9DE;
+
+  --g100:#F5F2EC; --g200:#E6E1D7; --g300:#D2CCBF; --g400:#B0A99B;
+  --g500:#8A8377; --g600:#6A645A; --g700:#4D4841; --g800:#33302B; --g900:#1D1A17;
+
+  --ok:#3E7A55; --ok-text:#2F5E41;
+  --warn:#B8862B; --warn-text:#8A6218;
+  --err:#A33131;
+  --info:#35617A;
+
+  --serif:'Alegreya', Georgia, 'Times New Roman', serif;
+  --sans:'Alegreya Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --measure:68ch;
+  --rule:1px solid var(--g300);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--cal); color:var(--obsidiana);
+  font-family:var(--serif); font-size:17.5px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+p{max-width:var(--measure); margin:0 0 1em}
+a{color:var(--barro-deep)}
+h1,h2,h3,h4{font-family:var(--serif); font-weight:700; line-height:1.18; margin:0}
+h2{font-size:40px; letter-spacing:-.01em}
+h3{font-size:28px; margin-top:2.6rem}
+h4{font-size:21px; margin-top:1.9rem}
+@media(max-width:640px){
+  body{font-size:17px}
+  h2{font-size:30px} h3{font-size:23px} h4{font-size:19px}
+}
+
+/* ---------- retícula cartográfica: elemento gráfico de la marca ---------- */
+.graticule{
+  background-image:
+    linear-gradient(to right, rgba(239,233,222,.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(239,233,222,.09) 1px, transparent 1px);
+  background-size:34px 34px;
+}
+.graticule-light{
+  background-image:
+    linear-gradient(to right, rgba(20,17,15,.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20,17,15,.055) 1px, transparent 1px);
+  background-size:34px 34px;
+}
+
+/* ---------- portada ---------- */
+.cover{
+  min-height:100vh; background:var(--obsidiana); color:var(--cal);
+  padding:6vh 7vw 5vh; display:flex; flex-direction:column; justify-content:space-between;
+}
+.cover-mark{width:92px}
+.cover h1{
+  font-size:clamp(38px,7.2vw,76px); font-weight:400; line-height:1.06;
+  letter-spacing:-.02em; max-width:16ch; margin:0 0 .5rem;
+}
+.cover h1 em{font-style:italic}
+.cover-sub{font-family:var(--sans); font-size:clamp(16px,2.2vw,21px); color:var(--g400); max-width:46ch; line-height:1.5}
+.cover-meta{
+  font-family:var(--sans); font-size:14px; color:var(--g500);
+  border-top:1px solid rgba(239,233,222,.18); padding-top:1.1rem;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem 2rem;
+}
+.cover-meta b{display:block; color:var(--cal); font-weight:500; font-size:15px}
+.cover-band{height:9px; display:flex; margin-top:1.4rem}
+.cover-band i{display:block; height:100%}
+
+/* ---------- estructura de página ---------- */
+.sheet{max-width:1040px; margin:0 auto; padding:0 7vw}
+.runner{
+  position:sticky; top:0; z-index:20; background:var(--cal);
+  border-bottom:var(--rule); display:flex; align-items:center; gap:11px;
+  padding:.65rem 7vw; font-family:var(--sans); font-size:13.5px; color:var(--g600);
+}
+.runner svg{width:20px; flex:none}
+.runner span{margin-left:auto}
+
+section{padding:3.4rem 0 4.2rem}
+section:first-of-type{padding-top:4.2rem}
+.sec-head{display:flex; align-items:baseline; gap:18px; margin-bottom:1.6rem}
+.sec-num{
+  font-family:var(--sans); font-size:15px; font-weight:500; color:var(--barro);
+  border:1px solid var(--barro); border-radius:2px; padding:2px 9px; flex:none;
+}
+.lead{font-size:21px; line-height:1.55; color:var(--g800); max-width:60ch}
+
+/* ---------- índice ---------- */
+.toc{background:var(--obsidiana); color:var(--cal); padding:3.4rem 7vw}
+.toc h2{font-size:24px; font-weight:400; color:var(--g400); max-width:760px; margin:0 auto 1.4rem}
+.toc ol{list-style:none; margin:0 auto; padding:0; max-width:760px; counter-reset:t}
+.toc li{counter-increment:t; border-top:1px solid rgba(239,233,222,.14)}
+.toc li:last-child{border-bottom:1px solid rgba(239,233,222,.14)}
+.toc a{
+  display:flex; gap:16px; align-items:baseline; padding:.72rem 0;
+  color:var(--cal); text-decoration:none; font-family:var(--sans); font-size:17px;
+}
+.toc a::before{content:counter(t,decimal-leading-zero); color:var(--barro-pale); font-size:14px; flex:none; width:2.2em}
+.toc a:hover{color:var(--barro-pale)}
+.toc small{margin-left:auto; color:var(--g500); font-size:13.5px; text-align:right}
+
+/* ---------- avisos ---------- */
+.note{
+  border-left:3px solid; padding:.95rem 1.15rem; margin:1.6rem 0; border-radius:0;
+  font-family:var(--sans); font-size:15.5px; line-height:1.55; max-width:var(--measure);
+}
+.note p{font-family:var(--sans); font-size:15.5px; margin:0}
+.note p + p{margin-top:.6rem}
+.note b{font-weight:700}
+.note-supuesto{border-color:var(--warn); background:#FBF4E6; color:var(--g900)}
+.note-info{border-color:var(--info); background:#EAF0F4; color:var(--g900)}
+.note-ok{border-color:var(--ok); background:#EAF2EC; color:var(--g900)}
+.note-err{border-color:var(--err); background:#F8ECEC; color:var(--g900)}
+
+.tag{
+  display:inline-block; font-family:var(--sans); font-size:12.5px; font-weight:500;
+  padding:2px 8px; border-radius:2px; vertical-align:2px;
+}
+.tag-supuesto{background:#F5E4C4; color:var(--warn-text)}
+.tag-verificado{background:var(--jade-wash); color:var(--jade-deep)}
+
+/* ---------- tablas ---------- */
+table{width:100%; border-collapse:collapse; font-family:var(--sans); font-size:15px; margin:1.4rem 0}
+caption{text-align:left; font-family:var(--sans); font-size:14px; color:var(--g600); padding-bottom:.5rem}
+th{
+  text-align:left; font-weight:700; font-size:14px; color:var(--g700);
+  border-bottom:2px solid var(--g400); padding:.5rem .7rem .45rem;
+}
+td{border-bottom:1px solid var(--g200); padding:.55rem .7rem; vertical-align:top}
+tbody tr:nth-child(odd){background:rgba(20,17,15,.022)}
+.num{font-variant-numeric:tabular-nums}
+.verdict{font-weight:700}
+.pass{color:var(--ok-text)} .fail{color:var(--err)} .partial{color:var(--warn-text)}
+
+/* ---------- paleta ---------- */
+.swatches{display:grid; grid-template-columns:repeat(auto-fit,minmax(212px,1fr)); gap:14px; margin:1.6rem 0}
+.sw{border:1px solid var(--g300); border-radius:3px; overflow:hidden; background:#fff}
+.sw-chip{height:132px; display:flex; align-items:flex-end; padding:12px}
+.sw-chip b{font-family:var(--sans); font-size:13px; font-weight:500; letter-spacing:.04em}
+.sw-body{padding:.85rem 1rem 1.05rem; font-family:var(--sans); font-size:14px; line-height:1.5}
+.sw-body dt{color:var(--g500); font-size:12.5px; float:left; clear:left; width:4.4em}
+.sw-body dd{margin:0 0 .15rem 4.6em; font-variant-numeric:tabular-nums}
+.sw-body .use{margin-top:.75rem; padding-top:.7rem; border-top:1px solid var(--g200); color:var(--g700); font-size:14px}
+.sw-name{font-family:var(--serif); font-size:19px; font-weight:700; margin:0 0 .5rem}
+
+.mini{display:grid; grid-template-columns:repeat(auto-fit,minmax(104px,1fr)); gap:9px; margin:1.2rem 0}
+.mini div{border-radius:2px; padding:.55rem .6rem; font-family:var(--sans); font-size:12.5px; line-height:1.35; min-height:66px; display:flex; flex-direction:column; justify-content:flex-end}
+.mini span{display:block; opacity:.78; font-size:11.5px}
+
+.ratio{display:flex; height:42px; border-radius:3px; overflow:hidden; margin:1.3rem 0 .5rem}
+.ratio i{display:flex; align-items:center; justify-content:center; font-family:var(--sans); font-size:12.5px; font-style:normal; font-weight:500}
+
+/* ---------- logotipo ---------- */
+.logo-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(268px,1fr)); gap:16px; margin:1.6rem 0}
+.logo-box{border:1px solid var(--g300); border-radius:3px; padding:2.2rem 1.6rem; display:flex; align-items:center; justify-content:center; min-height:180px}
+.logo-box.dark{background:var(--obsidiana); border-color:var(--obsidiana)}
+.logo-cap{font-family:var(--sans); font-size:13.5px; color:var(--g600); margin-top:.55rem}
+.lockup{display:flex; align-items:center; gap:15px}
+.lockup svg{flex:none}
+.wordmark{font-family:var(--serif); font-weight:700; letter-spacing:-.015em; line-height:1; font-size:31px}
+.wordmark small{display:block; font-family:var(--sans); font-weight:400; font-size:11.4px; letter-spacing:.19em; line-height:1; margin-top:6px}
+
+/* ---------- tipografía ---------- */
+.type-spec{border:1px solid var(--g300); border-radius:3px; padding:1.5rem 1.7rem; margin:1.4rem 0; background:#fff}
+.type-alpha{font-size:34px; line-height:1.3; margin:0 0 .5rem; word-spacing:.06em}
+.type-weights{font-family:var(--sans); font-size:14px; color:var(--g600); border-top:1px solid var(--g200); padding-top:.8rem; margin-top:1rem}
+
+/* ---------- tono de voz ---------- */
+.voice{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:1.6rem 0}
+@media(max-width:720px){.voice{grid-template-columns:1fr}}
+.voice-col{border-radius:3px; padding:1.2rem 1.35rem}
+.voice-yes{background:var(--jade-wash); border-left:3px solid var(--jade)}
+.voice-no{background:#F8ECEC; border-left:3px solid var(--err)}
+.voice-col h5{font-family:var(--sans); font-size:14px; font-weight:700; margin:0 0 .9rem; color:var(--g700)}
+.voice-col blockquote{margin:0 0 1rem; font-size:17px; line-height:1.5; font-style:italic}
+.voice-col blockquote:last-child{margin-bottom:0}
+
+.numcards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin:1.6rem 0}
+.numcard{border-top:2px solid var(--barro); padding-top:.9rem}
+.numcard b{display:block; font-family:var(--sans); font-size:13px; color:var(--barro); font-weight:500; margin-bottom:.3rem}
+.numcard h5{font-size:19px; margin:0 0 .35rem; font-family:var(--serif)}
+.numcard p{font-family:var(--sans); font-size:15px; margin:0; color:var(--g700)}
+
+/* ---------- errores ---------- */
+.dont{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:1.6rem 0}
+@media(max-width:720px){.dont{grid-template-columns:1fr}}
+.dont div{border:1px solid var(--g300); border-left:3px solid var(--err); padding:.95rem 1.1rem; font-family:var(--sans); font-size:15px; line-height:1.5}
+.dont b{display:block; margin-bottom:.25rem; font-size:15.5px}
+
+/* ---------- código ---------- */
+pre{
+  background:var(--obsidiana); color:var(--g300); border-radius:3px;
+  padding:1.4rem 1.5rem; overflow-x:auto; font-family:var(--mono);
+  font-size:13px; line-height:1.62; margin:1.4rem 0;
+}
+pre b{color:var(--barro-pale); font-weight:400}
+pre i{color:var(--g500); font-style:normal}
+code{font-family:var(--mono); font-size:.88em; background:var(--g200); padding:1px 5px; border-radius:2px}
+
+/* ---------- caja oscura ---------- */
+.dark-box{background:var(--obsidiana); color:var(--cal); border-radius:3px; padding:1.9rem 2rem; margin:1.7rem 0}
+.dark-box h4{color:var(--cal); margin-top:0}
+.dark-box p{color:var(--g300); max-width:62ch}
+.dark-box p:last-child{margin-bottom:0}
+
+ul.plain{list-style:none; padding:0; margin:1rem 0; max-width:var(--measure); font-family:var(--sans); font-size:15.5px}
+ul.plain li{padding:.42rem 0 .42rem 1.15rem; border-bottom:1px solid var(--g200); position:relative}
+ul.plain li::before{content:''; position:absolute; left:0; top:1.05em; width:5px; height:5px; background:var(--barro)}
+
+footer{background:var(--obsidiana); color:var(--g500); padding:2.6rem 7vw; font-family:var(--sans); font-size:14px}
+footer .lockup{margin-bottom:1rem}
+footer .wordmark{color:var(--cal); font-size:22px}
+footer .wordmark small{color:var(--g500); font-size:10px}
+
+/* ---------- separador de sección: la escalinata que se sube ---------- */
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+.sep{display:flex; align-items:center; gap:20px; padding:1.1rem 0}
+.sep-line{flex:1; height:1px; background:var(--g300)}
+.sep-btn{
+  background:none; border:0; padding:6px 10px; margin:0; line-height:0;
+  cursor:pointer; border-radius:2px; flex:none;
+}
+.sep-btn:focus-visible{outline:2px solid var(--barro); outline-offset:2px}
+.sep-track{stroke:var(--g300)}
+.sep-fill{stroke:var(--barro); stroke-dasharray:136; stroke-dashoffset:0; transition:stroke .3s}
+.sep.pending .sep-fill{stroke-dashoffset:136}
+.sep.is-visible .sep-fill{animation:climb 1s cubic-bezier(.42,0,.18,1) forwards}
+@keyframes climb{to{stroke-dashoffset:0}}
+.sep-dot{
+  fill:var(--jade);
+  offset-path:path("M4 28 V20 H40 V13 H76 V6 H114");
+  offset-distance:0%; offset-rotate:0deg;
+  transition:offset-distance .85s cubic-bezier(.45,0,.2,1), fill .3s;
+}
+.sep.pending .sep-dot{opacity:0}
+.sep.is-visible .sep-dot{animation:land .35s ease .9s backwards; opacity:1}
+@keyframes land{from{opacity:0} to{opacity:1}}
+.sep-btn:hover .sep-dot,.sep-btn:focus-visible .sep-dot{offset-distance:100%; fill:var(--jade-deep)}
+.sep-btn:hover .sep-fill,.sep-btn:focus-visible .sep-fill{stroke:var(--barro-deep)}
+.sep-hint{
+  font-family:var(--sans); font-size:12.5px; color:var(--g500);
+  opacity:0; transition:opacity .25s; flex:none; white-space:nowrap;
+}
+.sep:hover .sep-hint,.sep:focus-within .sep-hint{opacity:1}
+
+/* ---------- retícula de construcción del logotipo ---------- */
+.constr{stroke:var(--jade); stroke-width:1.4; fill:none; stroke-dasharray:400; stroke-dashoffset:400; opacity:0}
+.showgrid .constr{opacity:1; animation:trace .75s ease forwards}
+.constr:nth-of-type(2){animation-delay:.09s}
+.constr:nth-of-type(3){animation-delay:.18s}
+.constr:nth-of-type(4){animation-delay:.27s}
+@keyframes trace{to{stroke-dashoffset:0}}
+.constr-tick{fill:var(--jade); font-family:var(--sans); font-size:9px; opacity:0; transition:opacity .3s .5s}
+.showgrid .constr-tick{opacity:1}
+.ghost-btn{
+  font-family:var(--sans); font-size:13.5px; color:var(--barro-deep);
+  background:none; border:1px solid var(--g300); border-radius:2px;
+  padding:.35rem .8rem; cursor:pointer; margin-top:.55rem; transition:border-color .2s, background .2s;
+}
+.ghost-btn:hover{border-color:var(--barro); background:var(--barro-wash)}
+.ghost-btn:focus-visible{outline:2px solid var(--barro); outline-offset:2px}
+
+/* ---------- muestras copiables ---------- */
+.sw-chip{
+  width:100%; border:0; margin:0; text-align:left; cursor:pointer; position:relative;
+  font:inherit; transition:filter .2s;
+}
+.sw-chip:hover{filter:brightness(1.06)}
+.sw-chip:focus-visible{outline:2px solid var(--barro); outline-offset:-4px}
+.sw-chip .copied,.mini div .copied{
+  position:absolute; top:10px; right:11px; font-family:var(--sans); font-size:11.5px;
+  font-style:normal; padding:2px 7px; border-radius:2px; background:rgba(255,255,255,.9);
+  color:#14110F; opacity:0; transition:opacity .2s; pointer-events:none;
+}
+.sw-chip.done .copied,.mini div.done .copied{opacity:1}
+.mini div{cursor:pointer; position:relative; transition:filter .2s}
+.mini div:hover{filter:brightness(1.06)}
+
+/* ---------- separador de avance: la regla cartográfica ---------- */
+.sep-next{gap:20px}
+.next-btn{
+  display:flex; align-items:center; gap:15px; text-decoration:none; flex:none;
+  padding:7px 10px; border-radius:2px;
+}
+.next-btn:focus-visible{outline:2px solid var(--barro); outline-offset:2px}
+.rule-base{stroke:var(--g300); stroke-width:1.4}
+.tick{fill:var(--g400); transform-box:fill-box; transform-origin:bottom center; transition:fill .3s}
+.sep-next.pending .tick{transform:scaleY(0)}
+.sep-next.is-visible .tick{animation:tickup .38s cubic-bezier(.3,0,.2,1) backwards}
+@keyframes tickup{from{transform:scaleY(0)} to{transform:scaleY(1)}}
+.tick:nth-of-type(2){animation-delay:.05s} .tick:nth-of-type(3){animation-delay:.1s}
+.tick:nth-of-type(4){animation-delay:.15s} .tick:nth-of-type(5){animation-delay:.2s}
+.tick:nth-of-type(6){animation-delay:.25s} .tick:nth-of-type(7){animation-delay:.3s}
+.tick:nth-of-type(8){animation-delay:.35s} .tick:nth-of-type(9){animation-delay:.4s}
+.marker{fill:var(--barro); transition:transform .8s cubic-bezier(.42,0,.18,1)}
+.sep-next.pending .marker{opacity:0}
+.sep-next.is-visible .marker{animation:land .3s ease .45s backwards}
+.next-btn:hover .marker,.next-btn:focus-visible .marker{transform:translateX(72px)}
+.next-btn:hover .tick,.next-btn:focus-visible .tick{fill:var(--barro-pale)}
+.next-text{line-height:1.25}
+.next-text small{display:block; font-family:var(--sans); font-size:12.5px; color:var(--g500)}
+.next-text b{font-family:var(--serif); font-size:18.5px; color:var(--obsidiana); transition:color .2s}
+.next-btn:hover .next-text b{color:var(--barro-deep)}
+
+/* ---------- pórtico de cierre: la barra de índice ---------- */
+.closer{border-top:1px solid var(--g300); padding:3rem 0 3.6rem}
+.closer-link{display:block; text-decoration:none; max-width:640px}
+.closer-bar{display:flex; gap:3px; height:11px; margin-bottom:1.5rem}
+.closer-bar i{flex:1; border-radius:1px; transform-origin:left center; transition:background .35s}
+.closer-bar i:nth-child(1){background:var(--jade-wash)}
+.closer-bar i:nth-child(2){background:var(--jade-pale)}
+.closer-bar i:nth-child(3){background:var(--jade)}
+.closer-bar i:nth-child(4){background:var(--jade-deep)}
+.closer.pending .closer-bar i{transform:scaleX(0)}
+.closer.is-visible .closer-bar i{animation:grow .55s cubic-bezier(.35,0,.2,1) backwards}
+@keyframes grow{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+.closer.is-visible .closer-bar i:nth-child(2){animation-delay:.1s}
+.closer.is-visible .closer-bar i:nth-child(3){animation-delay:.2s}
+.closer.is-visible .closer-bar i:nth-child(4){animation-delay:.3s}
+.closer-link:hover .closer-bar i:nth-child(1){background:var(--jade-pale)}
+.closer-link:hover .closer-bar i:nth-child(2){background:var(--jade)}
+.closer-link:hover .closer-bar i:nth-child(3){background:var(--jade-deep)}
+.closer-link:hover .closer-bar i:nth-child(4){background:var(--barro)}
+.closer-link:focus-visible{outline:2px solid var(--barro); outline-offset:6px}
+.closer-text small{display:block; font-family:var(--sans); font-size:13.5px; color:var(--g500); margin-bottom:.3rem}
+.closer-text b{display:block; font-family:var(--serif); font-size:31px; font-weight:700; color:var(--obsidiana); line-height:1.15; transition:color .2s}
+.closer-link:hover .closer-text b{color:var(--barro-deep)}
+.closer-text em{display:block; font-style:normal; font-family:var(--sans); font-size:16px; color:var(--g700); margin-top:.45rem; max-width:54ch}
+.closer-note{font-family:var(--sans); font-size:14px; color:var(--g600); margin-top:1.6rem; max-width:60ch}
+@media(max-width:640px){.closer-text b{font-size:24px}}
+
+@media (prefers-reduced-motion: reduce){
+  .sep.pending .sep-fill,.sep.pending .sep-dot{stroke-dashoffset:0; opacity:1}
+  .sep.is-visible .sep-fill,.sep.is-visible .sep-dot,.showgrid .constr{animation:none}
+  .sep-next.pending .tick,.closer.pending .closer-bar i{transform:none}
+  .sep-next.pending .marker{opacity:1}
+  .sep-next.is-visible .tick,.sep-next.is-visible .marker,.closer.is-visible .closer-bar i{animation:none}
+  .showgrid .constr{stroke-dashoffset:0}
+  .sep-dot,.sep-fill,.constr-tick,.marker,.tick,.closer-bar i{transition:none}
+  html{scroll-behavior:auto}
+}
+
+@media print{
+  .sep-line{background:#999}
+  .sep-hint,.ghost-btn,.copied{display:none}
+  .sep.pending .sep-fill,.sep.pending .sep-dot{stroke-dashoffset:0; opacity:1}
+  .sep-next.pending .tick,.closer.pending .closer-bar i{transform:none}
+  .sep-next.pending .marker{opacity:1}
+  .closer,.closer-link{page-break-inside:avoid}
+  body{font-size:11pt; background:#fff}
+  .runner{display:none}
+  .cover{min-height:auto; page-break-after:always}
+  section{page-break-inside:auto; border-top:1px solid #999}
+  .sw,.logo-box,.numcard,.dont div,.note,.type-spec,.dark-box,table,.voice-col{page-break-inside:avoid}
+  h2,h3,h4{page-break-after:avoid}
+  pre{background:#fff; color:#000; border:1px solid #999}
+  pre b,pre i{color:#000}
+  a{color:#000; text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PORTADA ============ -->
+<header class="cover graticule">
+  <div>
+    <svg class="cover-mark" viewBox="0 0 120 120" role="img" aria-label="Marca Yaocalli">
+      <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#EFE9DE" stroke-width="11" stroke-linejoin="round"/>
+      <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#C98F72" stroke-width="10" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div>
+    <h1>Manual de <em>identidad</em></h1>
+    <p class="cover-sub">Sistema de marca para Yaocalli Consultoría y Estrategia: inteligencia de datos, análisis político y diseño de política pública.</p>
+    <div class="cover-band">
+      <i style="background:#14110F; flex:5"></i>
+      <i style="background:#8C4A2F; flex:2"></i>
+      <i style="background:#3F6B5A; flex:1"></i>
+      <i style="background:#EFE9DE; flex:2"></i>
+    </div>
+  </div>
+
+  <div class="cover-meta">
+    <div><b>Documento</b>01 — Identidad</div>
+    <div><b>Cliente</b>Yaocalli Consultoría y Estrategia</div>
+    <div><b>Ruta cromática</b>Obsidiana y tierra</div>
+    <div><b>Versión</b>1.0 — borrador para aprobación</div>
+    <div><b>Fecha</b>1 de septiembre de 2026</div>
+  </div>
+</header>
+
+<!-- ============ ÍNDICE ============ -->
+<nav class="toc">
+  <h2>Contenido</h2>
+  <ol>
+    <li><a href="#s1">Qué es Yaocalli<small>Posicionamiento, pilares, personalidad</small></a></li>
+    <li><a href="#s2">Logotipo<small>Construcción, versiones, zona de protección</small></a></li>
+    <li><a href="#s3">Paleta<small>Colores, proporción, contraste WCAG</small></a></li>
+    <li><a href="#s4">Tipografía<small>Familias, pesos, escala</small></a></li>
+    <li><a href="#s5">Tono de voz<small>Cómo escribe y cómo no escribe la marca</small></a></li>
+    <li><a href="#s6">Fotografía e imagen<small>Estilo, tratamiento, tomas necesarias</small></a></li>
+    <li><a href="#s7">Elementos gráficos<small>Retícula, escala de índice, curvas</small></a></li>
+    <li><a href="#s8">Aplicaciones<small>Redes, papelería, informes, tableros</small></a></li>
+    <li><a href="#s9">Errores a evitar<small>Usos incorrectos del sistema</small></a></li>
+    <li><a href="#s10">Resumen técnico<small>Tokens CSS e importación de fuentes</small></a></li>
+  </ol>
+</nav>
+
+<div class="runner">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#14110F" stroke-width="11" stroke-linejoin="round"/>
+    <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#8C4A2F" stroke-width="10" stroke-linejoin="round"/>
+  </svg>
+  Yaocalli — Manual de identidad
+  <span>Versión 1.0</span>
+</div>
+
+<main class="sheet">
+
+<!-- ============ 1 ============ -->
+<section id="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Qué es Yaocalli</h2></div>
+
+  <p class="lead">Yaocalli produce la evidencia con la que se toman decisiones políticas y presupuestales: encuestas, cartografía, índices de priorización y los sistemas que los sostienen. No vende opinión. Vende método verificable.</p>
+
+  <h3>El nombre</h3>
+  <p>En náhuatl clásico, <i>yaocalli</i> aparece registrado en el vocabulario de fray Alonso de Molina (1571) como <b>fortaleza, el edificio</b>, y en documentos coloniales del siglo XVII como <b>casa de guerra</b>. Se compone de <i>yaotl</i> (guerra, contrincante) y <i>calli</i> (casa).</p>
+  <p>Es, literalmente, la sala desde donde se planea una campaña. Ese es el relato de marca y no hubo que inventarlo: la consultoría es el lugar al que se entra antes de decidir, donde se despliega el mapa y se cuentan las cifras.</p>
+  <div class="note note-info"><p><b>Regla de traducción.</b> Al citar el origen del nombre, usar siempre <i>fortaleza</i> o <i>casa de guerra</i>, con la referencia a Molina. Circula una versión popular, «casa de la fortaleza», usada por otras marcas mexicanas; es menos precisa y no debe emplearse en materiales institucionales.</p></div>
+
+  <h3>Posicionamiento</h3>
+  <div class="dark-box">
+    <h4>La casa donde el dato se vuelve decisión.</h4>
+    <p>La mayoría de las casas encuestadoras entregan un número. Yaocalli entrega el número, el instrumento que lo produjo, la ficha técnica que lo respalda y el sistema con el que se puede volver a levantar el año que viene. Para gobiernos y campañas que tienen que defender una decisión frente a un cabildo, un auditor o un adversario.</p>
+  </div>
+
+  <h3>Tres pilares</h3>
+  <div class="numcards">
+    <div class="numcard">
+      <b>Pilar 1</b>
+      <h5>Método auditable</h5>
+      <p>Toda cifra viaja con su ficha técnica: universo, marco muestral, error por dominio, efecto de diseño, tasas de respuesta y semilla aleatoria documentada. La aleatoriedad es un hecho verificable, no una declaración.</p>
+    </div>
+    <div class="numcard">
+      <b>Pilar 2</b>
+      <h5>Territorio como unidad de análisis</h5>
+      <p>Manzana, sección, colonia y municipio. Capas de INEGI, CONEVAL y CONAPO cruzadas con levantamiento propio y georreferenciado. El promedio estatal esconde justo lo que hay que decidir.</p>
+    </div>
+    <div class="numcard">
+      <b>Pilar 3</b>
+      <h5>Sistema, no entregable suelto</h5>
+      <p>Cada proyecto deja instalada la capacidad: base de datos, tablero, app de campo, pipeline. El cliente termina con un instrumento que opera, no con un PDF que envejece.</p>
+    </div>
+  </div>
+
+  <h3>Personalidad</h3>
+  <ul class="plain">
+    <li><b>Sobria antes que enérgica.</b> Yaocalli no anima; informa. La emoción la pone el cliente cuando ve el resultado.</li>
+    <li><b>Precisa antes que rotunda.</b> Prefiere «7 de cada 10, con margen de 3.1 puntos» a «una mayoría abrumadora».</li>
+    <li><b>Neutral antes que afín.</b> Trabaja con la metodología, no con el color. Ni la paleta ni el lenguaje se alinean a ninguna fuerza política.</li>
+    <li><b>Docente antes que críptica.</b> Explica el modelo a quien debe firmarlo. Un índice que nadie entiende no se aplica.</li>
+    <li><b>Discreta antes que exhibicionista.</b> Los datos de un cliente son del cliente. Los casos se muestran con su autorización o anonimizados.</li>
+  </ul>
+
+  <div class="note note-supuesto"><p><span class="tag tag-supuesto">Supuesto por validar</span> El posicionamiento asume que el cliente principal son gobiernos municipales y estatales, y campañas, en el centro del país. Si el peso real está en organismos internacionales, sector privado o cobertura nacional, cambia el énfasis de los tres pilares.</p></div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Logotipo</h2></div>
+
+  <p class="lead">El símbolo es el glifo <i>calli</i> visto en planta: un recinto amurallado con su vano de entrada. Dentro, una escalinata ascendente que funciona en dos lecturas simultáneas — el basamento escalonado mesoamericano y una serie de datos que sube.</p>
+
+  <h3>Construcción</h3>
+  <p>Sobre una retícula de 120 unidades. Muro exterior con trazo de 11 unidades, vano de 20 unidades centrado en el lado inferior. Escalinata interior con trazo de 10 unidades, tres tramos de altura creciente. Uniones redondeadas, remates a hueso. Ninguna proporción es decorativa: el vano es la entrada a la casa y la escalinata es lo que ocurre adentro.</p>
+
+  <div class="logo-grid">
+    <div>
+      <div class="logo-box" id="logo-constr">
+        <div class="lockup">
+          <svg width="112" height="112" viewBox="-24 -10 168 156" role="img" aria-label="Yaocalli">
+            <path class="constr" d="M14 14 H106 V106 H14 Z"/>
+            <path class="constr" d="M50 112 V124 M70 112 V124 M50 118 H70"/>
+            <path class="constr" d="M22 54 H100 M22 70 H100 M22 86 H100"/>
+            <path class="constr" d="M-8 14 V106 M-13 14 H-3 M-13 106 H-3"/>
+            <text class="constr-tick" x="60" y="136" text-anchor="middle">vano 20 u</text>
+            <text class="constr-tick" x="-20" y="8">120 u</text>
+            <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#14110F" stroke-width="11" stroke-linejoin="round"/>
+            <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#8C4A2F" stroke-width="10" stroke-linejoin="round"/>
+          </svg>
+          <div class="wordmark" style="color:#14110F">Yaocalli<small>CONSULTORÍA Y ESTRATEGIA</small></div>
+        </div>
+      </div>
+      <p class="logo-cap">Versión principal sobre fondo claro. Muro en obsidiana, escalinata en barro.</p>
+      <button class="ghost-btn" type="button" data-grid="logo-constr" aria-expanded="false">Mostrar retícula de construcción</button>
+    </div>
+
+    <div>
+      <div class="logo-box dark">
+        <div class="lockup">
+          <svg width="62" height="62" viewBox="0 0 120 120" role="img" aria-label="Yaocalli">
+            <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#EFE9DE" stroke-width="11" stroke-linejoin="round"/>
+            <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#C98F72" stroke-width="10" stroke-linejoin="round"/>
+          </svg>
+          <div class="wordmark" style="color:#EFE9DE">Yaocalli<small>CONSULTORÍA Y ESTRATEGIA</small></div>
+        </div>
+      </div>
+      <p class="logo-cap">Versión sobre fondo oscuro. La escalinata sube a barro pálido para conservar contraste.</p>
+    </div>
+
+    <div>
+      <div class="logo-box">
+        <div class="lockup" style="flex-direction:column; gap:11px; text-align:center">
+          <svg width="58" height="58" viewBox="0 0 120 120" role="img" aria-label="Yaocalli">
+            <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#14110F" stroke-width="11" stroke-linejoin="round"/>
+            <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#8C4A2F" stroke-width="10" stroke-linejoin="round"/>
+          </svg>
+          <div class="wordmark" style="color:#14110F; font-size:26px">Yaocalli<small>CONSULTORÍA Y ESTRATEGIA</small></div>
+        </div>
+      </div>
+      <p class="logo-cap">Versión vertical, para formatos estrechos: avatar de redes, sello en portada, membrete centrado.</p>
+    </div>
+
+    <div>
+      <div class="logo-box" style="gap:26px">
+        <svg width="52" height="52" viewBox="0 0 120 120" role="img" aria-label="Marca reducida">
+          <rect x="14" y="14" width="92" height="92" fill="#14110F"/>
+          <path d="M42 82 V66 H60 V50 H78" fill="none" stroke="#C98F72" stroke-width="11" stroke-linejoin="round"/>
+        </svg>
+        <svg width="30" height="30" viewBox="0 0 120 120" role="img" aria-label="Marca reducida pequeña">
+          <rect x="14" y="14" width="92" height="92" fill="#14110F"/>
+          <path d="M42 82 V66 H60 V50 H78" fill="none" stroke="#C98F72" stroke-width="11" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p class="logo-cap">Versión reducida para favicon, sello y aplicaciones bajo 24 px: el muro se vuelve macizo y solo sobrevive la escalinata.</p>
+    </div>
+  </div>
+
+  <h3>Zona de protección y tamaños mínimos</h3>
+  <p>La zona de protección equivale al ancho del vano de entrada — 20 unidades de la retícula, es decir un sexto del alto del símbolo — libre por los cuatro costados. Ningún texto, filete, borde de imagen ni margen de página puede invadirla.</p>
+
+  <table>
+    <caption>Tamaños mínimos de reproducción por medio.</caption>
+    <thead><tr><th>Medio</th><th>Versión</th><th class="num">Mínimo</th><th>Nota</th></tr></thead>
+    <tbody>
+      <tr><td>Pantalla, lockup horizontal</td><td>Principal</td><td class="num">150 px de ancho</td><td>Por debajo, el descriptor deja de leerse</td></tr>
+      <tr><td>Pantalla, solo símbolo</td><td>Principal</td><td class="num">32 px</td><td>Entre 32 y 24 px, usar versión reducida</td></tr>
+      <tr><td>Pantalla, favicon o avatar</td><td>Reducida</td><td class="num">16 px</td><td>Muro macizo, sin descriptor</td></tr>
+      <tr><td>Impreso, lockup horizontal</td><td>Principal</td><td class="num">38 mm de ancho</td><td>Papelería y portadas de informe</td></tr>
+      <tr><td>Impreso, solo símbolo</td><td>Principal</td><td class="num">10 mm</td><td>Sello, lomo, credencial de campo</td></tr>
+      <tr><td>Bordado o grabado</td><td>Reducida</td><td class="num">18 mm</td><td>Chalecos de encuestador, tablillas</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-info"><p><b>Uso obligado del descriptor.</b> Existen en México un colegio y un equipo deportivo con el nombre Yaocalli, ambos con décadas de presencia. La marca se escribe siempre <b>Yaocalli Consultoría</b> o con el descriptor completo en el lockup. «Yaocalli» a secas queda reservado a contextos donde el emisor ya es evidente: interior de un documento propio, cuerpo de un correo, segunda mención en un texto.</p></div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Paleta</h2></div>
+
+  <p class="lead">Cuatro colores. Obsidiana como voz principal, barro como acento único, jade para lo cuantitativo y cal como superficie de lectura. La paleta se eligió con una restricción explícita: ningún color puede leerse como afiliación partidista.</p>
+
+  <div class="note note-info"><p><b>Por qué no hay azul ni guinda ni naranja ni verde bandera.</b> En el mercado político mexicano el color es filiación antes que estética. Un azul saturado se lee PAN, el guinda se lee Morena, el naranja MC, el verde brillante PVEM, el tricolor PRI. Una consultora que quiere ser contratable por cualquier fuerza no puede vestirse de ninguna. Obsidiana, barro y jade son colores de material y de territorio, no de emblema.</p></div>
+
+  <h3>Colores principales</h3>
+  <div class="swatches">
+    <div class="sw">
+      <button type="button" class="sw-chip" data-hex="#14110F" style="background:#14110F"><b style="color:#EFE9DE">Obsidiana</b><em class="copied">Copiado</em></button>
+      <div class="sw-body">
+        <p class="sw-name">Obsidiana</p>
+        <dl>
+          <dt>HEX</dt><dd>#14110F</dd>
+          <dt>RGB</dt><dd>20 · 17 · 15</dd>
+          <dt>CMYK</dt><dd>0 · 15 · 25 · 92</dd>
+        </dl>
+        <p class="use">Color dominante. Fondos de portada, encabezados de sección, cajas destacadas, texto principal sobre cal. Es el negro de la marca: cálido, con carga de tierra, nunca el #000 puro.</p>
+      </div>
+    </div>
+
+    <div class="sw">
+      <button type="button" class="sw-chip" data-hex="#8C4A2F" style="background:#8C4A2F"><b style="color:#F7EDE7">Barro</b><em class="copied">Copiado</em></button>
+      <div class="sw-body">
+        <p class="sw-name">Barro</p>
+        <dl>
+          <dt>HEX</dt><dd>#8C4A2F</dd>
+          <dt>RGB</dt><dd>140 · 74 · 47</dd>
+          <dt>CMYK</dt><dd>0 · 47 · 66 · 45</dd>
+        </dl>
+        <p class="use">Acento único. Escalinata del símbolo, enlaces, numeración de secciones, filetes que marcan jerarquía. Un solo elemento en barro por pantalla: en cuanto hay dos, deja de acentuar.</p>
+      </div>
+    </div>
+
+    <div class="sw">
+      <button type="button" class="sw-chip" data-hex="#3F6B5A" style="background:#3F6B5A"><b style="color:#E8EFEB">Jade seco</b><em class="copied">Copiado</em></button>
+      <div class="sw-body">
+        <p class="sw-name">Jade seco</p>
+        <dl>
+          <dt>HEX</dt><dd>#3F6B5A</dd>
+          <dt>RGB</dt><dd>63 · 107 · 90</dd>
+          <dt>CMYK</dt><dd>41 · 0 · 16 · 58</dd>
+        </dl>
+        <p class="use">Color de lo cuantitativo. Series de datos, mapas coropléticos, estados de validación, gráficas. Evita que el barro se gaste en información y le deja el papel de acento.</p>
+      </div>
+    </div>
+
+    <div class="sw">
+      <button type="button" class="sw-chip" data-hex="#EFE9DE" style="background:#EFE9DE; border-bottom:1px solid #D2CCBF"><b style="color:#14110F">Cal</b><em class="copied">Copiado</em></button>
+      <div class="sw-body">
+        <p class="sw-name">Cal</p>
+        <dl>
+          <dt>HEX</dt><dd>#EFE9DE</dd>
+          <dt>RGB</dt><dd>239 · 233 · 222</dd>
+          <dt>CMYK</dt><dd>0 · 3 · 7 · 6</dd>
+        </dl>
+        <p class="use">Superficie de lectura. Fondo de documentos, cuerpos de texto largos, tablas. Reduce el deslumbramiento del blanco puro en informes de 60 páginas, que es el formato natural de esta consultoría.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Colores de apoyo</h3>
+  <p>Variantes de los principales, para estados, degradados y fondos suaves.</p>
+  <div class="mini">
+    <div style="background:#2A2521; color:#EFE9DE">Obsidiana 80<span>#2A2521</span></div>
+    <div style="background:#6B3722; color:#F7EDE7">Barro profundo<span>#6B3722</span></div>
+    <div style="background:#C98F72; color:#14110F">Barro pálido<span>#C98F72</span></div>
+    <div style="background:#F7EDE7; color:#6B3722">Barro lavado<span>#F7EDE7</span></div>
+    <div style="background:#2C4C3F; color:#E8EFEB">Jade profundo<span>#2C4C3F</span></div>
+    <div style="background:#7FA593; color:#14110F">Jade pálido<span>#7FA593</span></div>
+    <div style="background:#E8EFEB; color:#2C4C3F">Jade lavado<span>#E8EFEB</span></div>
+  </div>
+
+  <h4>Escala de grises cálidos</h4>
+  <div class="mini">
+    <div style="background:#F5F2EC; color:#33302B">100<span>#F5F2EC</span></div>
+    <div style="background:#E6E1D7; color:#33302B">200<span>#E6E1D7</span></div>
+    <div style="background:#D2CCBF; color:#33302B">300<span>#D2CCBF</span></div>
+    <div style="background:#B0A99B; color:#1D1A17">400<span>#B0A99B</span></div>
+    <div style="background:#8A8377; color:#F5F2EC">500<span>#8A8377</span></div>
+    <div style="background:#6A645A; color:#F5F2EC">600<span>#6A645A</span></div>
+    <div style="background:#4D4841; color:#F5F2EC">700<span>#4D4841</span></div>
+    <div style="background:#33302B; color:#F5F2EC">800<span>#33302B</span></div>
+    <div style="background:#1D1A17; color:#F5F2EC">900<span>#1D1A17</span></div>
+  </div>
+
+  <h4>Colores semánticos</h4>
+  <div class="mini">
+    <div style="background:#3E7A55; color:#fff">Correcto<span>#3E7A55</span></div>
+    <div style="background:#B8862B; color:#14110F">Advertencia<span>#B8862B</span></div>
+    <div style="background:#A33131; color:#fff">Error<span>#A33131</span></div>
+    <div style="background:#35617A; color:#fff">Información<span>#35617A</span></div>
+  </div>
+
+  <h3>Proporción de uso</h3>
+  <p>Regla de reparto para cualquier pieza: la obsidiana y la cal cargan la superficie, el barro y el jade aparecen en dosis pequeñas. Si al entrecerrar los ojos una pieza se ve rojiza, hay demasiado barro.</p>
+  <div class="ratio">
+    <i style="background:#EFE9DE; color:#14110F; flex:50">Cal 50 %</i>
+    <i style="background:#14110F; color:#EFE9DE; flex:33">Obsidiana 33 %</i>
+    <i style="background:#8C4A2F; color:#F7EDE7; flex:10">Barro 10 %</i>
+    <i style="background:#3F6B5A; color:#E8EFEB; flex:7">Jade 7 %</i>
+  </div>
+
+  <h3>Contraste WCAG</h3>
+  <p>Verificado por cálculo, no a ojo. El umbral AA para texto normal es 4.5:1; AAA es 7:1; para texto grande, a partir de 18.66 px en negrita o 24 px normal, basta 3:1.</p>
+
+  <table>
+    <caption>Combinaciones autorizadas y prohibidas. Ratio calculado según WCAG 2.1.</caption>
+    <thead><tr><th>Texto</th><th>Fondo</th><th class="num">Ratio</th><th>Veredicto</th><th>Uso</th></tr></thead>
+    <tbody>
+      <tr><td>Obsidiana #14110F</td><td>Cal #EFE9DE</td><td class="num">15.56</td><td class="verdict pass">AAA</td><td>Texto principal de todo documento</td></tr>
+      <tr><td>Obsidiana #14110F</td><td>Blanco #FFFFFF</td><td class="num">18.80</td><td class="verdict pass">AAA</td><td>Texto en tablero y app</td></tr>
+      <tr><td>Cal #EFE9DE</td><td>Obsidiana #14110F</td><td class="num">15.56</td><td class="verdict pass">AAA</td><td>Texto sobre portada y cajas oscuras</td></tr>
+      <tr><td>Barro #8C4A2F</td><td>Cal #EFE9DE</td><td class="num">5.54</td><td class="verdict pass">AA</td><td>Enlaces y titulares de acento</td></tr>
+      <tr><td>Barro #8C4A2F</td><td>Blanco #FFFFFF</td><td class="num">6.70</td><td class="verdict pass">AA</td><td>Enlaces sobre superficie blanca</td></tr>
+      <tr><td>Barro profundo #6B3722</td><td>Cal #EFE9DE</td><td class="num">7.92</td><td class="verdict pass">AAA</td><td>Texto de acento en cuerpos largos</td></tr>
+      <tr><td>Jade #3F6B5A</td><td>Cal #EFE9DE</td><td class="num">5.02</td><td class="verdict pass">AA</td><td>Etiquetas de datos y leyendas</td></tr>
+      <tr><td>Jade profundo #2C4C3F</td><td>Cal #EFE9DE</td><td class="num">7.86</td><td class="verdict pass">AAA</td><td>Texto cuantitativo en cuerpo pequeño</td></tr>
+      <tr><td>Blanco #FFFFFF</td><td>Barro #8C4A2F</td><td class="num">6.70</td><td class="verdict pass">AA</td><td>Texto sobre botón de acción</td></tr>
+      <tr><td>Gris 700 #4D4841</td><td>Cal #EFE9DE</td><td class="num">7.50</td><td class="verdict pass">AAA</td><td>Texto secundario</td></tr>
+      <tr><td>Gris 600 #6A645A</td><td>Cal #EFE9DE</td><td class="num">4.85</td><td class="verdict pass">AA</td><td>Pies de figura y metadatos</td></tr>
+      <tr><td>Barro pálido #C98F72</td><td>Obsidiana #14110F</td><td class="num">6.85</td><td class="verdict pass">AA</td><td>Acento sobre fondo oscuro</td></tr>
+      <tr><td>Jade pálido #7FA593</td><td>Obsidiana #14110F</td><td class="num">6.90</td><td class="verdict pass">AA</td><td>Series de datos en tablero oscuro</td></tr>
+      <tr><td>Gris 500 #8A8377</td><td>Cal #EFE9DE</td><td class="num">3.11</td><td class="verdict partial">Solo texto grande</td><td>Metadatos a 24 px o más, nunca cuerpo</td></tr>
+      <tr><td>Jade #3F6B5A</td><td>Obsidiana #14110F</td><td class="num">3.10</td><td class="verdict fail">Reprobado</td><td>Prohibido. Usar jade pálido</td></tr>
+      <tr><td>Barro pálido #C98F72</td><td>Cal #EFE9DE</td><td class="num">2.27</td><td class="verdict fail">Reprobado</td><td>Prohibido. Solo relleno o filete</td></tr>
+      <tr><td>Advertencia #B8862B</td><td>Cal #EFE9DE</td><td class="num">2.68</td><td class="verdict fail">Reprobado</td><td>Prohibido como texto. Usar #8A6218, que alcanza 4.53</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-err"><p><b>Tres reglas que se rompen solas si no se escriben.</b> El barro pálido nunca es color de texto sobre fondo claro: es relleno, filete o icono. El jade no funciona sobre obsidiana: sobre oscuro sube a jade pálido. El amarillo de advertencia jamás lleva texto encima ni es texto: solo borde y fondo, con la palabra en #8A6218.</p></div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Tipografía</h2></div>
+
+  <p class="lead">Una sola superfamilia, Alegreya, en sus cortes con serifas y de palo seco. Diseñada por Huerta Tipográfica en Argentina para textos largos en español, con acentos y ñ resueltos por diseño y no por parche.</p>
+
+  <h3>Por qué esta familia</h3>
+  <p>Tres razones concretas, no de gusto. Primera: el producto natural de Yaocalli es el documento largo — diagnósticos, notas metodológicas, informes de 60 páginas — y Alegreya fue dibujada precisamente para lectura extendida. Segunda: es una tipografía latinoamericana, lo que sostiene el origen del nombre sin recurrir a la caricatura prehispánica. Tercera: su versión de palo seco comparte esqueleto con la serifa, de modo que una tabla y su texto explicativo se ven de la misma casa.</p>
+
+  <div class="type-spec">
+    <p class="type-alpha" style="font-family:var(--serif)">Aa Bb Cc Dd Ee — Ññ Áé íóú ¿? ¡! 0123456789</p>
+    <p style="font-family:var(--serif); font-size:18px; max-width:60ch; margin:0">Alegreya. Titulares, cuerpos de texto largo, citas, portadas y todo material que se lee de corrido. Es la voz de la marca escrita.</p>
+    <p class="type-weights">Pesos autorizados: Regular 400, Medium 500, Bold 700, Italic 400 e Italic 500. La cursiva se reserva a términos técnicos en otro idioma, nombres de instrumentos y citas textuales; nunca para enfatizar.</p>
+  </div>
+
+  <div class="type-spec">
+    <p class="type-alpha" style="font-family:var(--sans)">Aa Bb Cc Dd Ee — Ññ Áé íóú ¿? ¡! 0123456789</p>
+    <p style="font-family:var(--sans); font-size:18px; max-width:60ch; margin:0">Alegreya Sans. Tablas, etiquetas, leyendas de gráfica, interfaces, tableros, formularios de campo y el descriptor del logotipo.</p>
+    <p class="type-weights">Pesos autorizados: Regular 400, Medium 500 y Bold 700. En tablas y gráficas, activar siempre cifras tabulares con <code>font-variant-numeric: tabular-nums</code> para que las columnas de números alineen.</p>
+  </div>
+
+  <h3>Escala tipográfica</h3>
+  <p>Base de 17.5 px con razón aproximada de 1.25. La medida de línea no pasa de 68 caracteres en texto serifado ni de 62 en palo seco.</p>
+
+  <table>
+    <caption>Escala aplicada. Interlínea expresada como múltiplo del tamaño.</caption>
+    <thead><tr><th>Elemento</th><th>Familia</th><th>Peso</th><th class="num">Escritorio</th><th class="num">Móvil</th><th class="num">Interlínea</th></tr></thead>
+    <tbody>
+      <tr><td>Título de portada</td><td>Alegreya</td><td>400</td><td class="num">76 px</td><td class="num">38 px</td><td class="num">1.06</td></tr>
+      <tr><td>Título de sección</td><td>Alegreya</td><td>700</td><td class="num">40 px</td><td class="num">30 px</td><td class="num">1.18</td></tr>
+      <tr><td>Subtítulo</td><td>Alegreya</td><td>700</td><td class="num">28 px</td><td class="num">23 px</td><td class="num">1.20</td></tr>
+      <tr><td>Apartado</td><td>Alegreya</td><td>700</td><td class="num">21 px</td><td class="num">19 px</td><td class="num">1.28</td></tr>
+      <tr><td>Entrada destacada</td><td>Alegreya</td><td>400</td><td class="num">21 px</td><td class="num">19 px</td><td class="num">1.55</td></tr>
+      <tr><td>Cuerpo de texto</td><td>Alegreya</td><td>400</td><td class="num">17.5 px</td><td class="num">17 px</td><td class="num">1.62</td></tr>
+      <tr><td>Tabla y etiqueta</td><td>Alegreya Sans</td><td>400</td><td class="num">15 px</td><td class="num">14.5 px</td><td class="num">1.45</td></tr>
+      <tr><td>Encabezado de tabla</td><td>Alegreya Sans</td><td>700</td><td class="num">14 px</td><td class="num">13.5 px</td><td class="num">1.35</td></tr>
+      <tr><td>Pie de figura y nota</td><td>Alegreya Sans</td><td>400</td><td class="num">13.5 px</td><td class="num">13 px</td><td class="num">1.5</td></tr>
+      <tr><td>Descriptor del logotipo</td><td>Alegreya Sans</td><td>400</td><td class="num">11.4 px</td><td class="num">10.5 px</td><td class="num">1.0</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-info"><p><b>Única excepción de versalitas.</b> El descriptor «CONSULTORÍA Y ESTRATEGIA» del logotipo va en mayúsculas con interletrado de 0.19 em. Es la única mayúscula espaciada del sistema. No se replica como etiqueta sobre los títulos: ese recurso desgasta la excepción y hace que el logotipo deje de distinguirse.</p></div>
+
+  <div class="note note-supuesto"><p><span class="tag tag-supuesto">Supuesto por validar</span> Alegreya y Alegreya Sans son de licencia libre (SIL Open Font License), lo que permite usarlas en web, impresos y software sin costo. Si en el futuro se quiere una tipografía exclusiva de marca, esta pareja funciona como base para un encargo de personalización.</p></div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Tono de voz</h2></div>
+
+  <p class="lead">El activo verbal de Yaocalli ya existe y está en sus documentos metodológicos. La web, las propuestas y las redes deben sonar a eso, no a agencia de marketing político.</p>
+
+  <h3>Así suena, así no suena</h3>
+  <div class="voice">
+    <div class="voice-col voice-yes">
+      <h5>Sí suena así</h5>
+      <blockquote>«Los números aleatorios se generan con semilla documentada y se archivan antes del levantamiento. Este requisito convierte la aleatoriedad en un hecho auditable y no en una declaración.»</blockquote>
+      <blockquote>«El valor del diagnóstico participativo no radica en obtener más presupuesto, sino en asignar mejor el presupuesto disponible.»</blockquote>
+      <blockquote>«Sin bitácora de campo, la afirmación de representatividad no es verificable.»</blockquote>
+    </div>
+    <div class="voice-col voice-no">
+      <h5>No suena así</h5>
+      <blockquote>«Somos líderes en soluciones integrales de inteligencia política 360°.»</blockquote>
+      <blockquote>«Nuestro poderoso algoritmo de IA predice el resultado electoral con total certeza.»</blockquote>
+      <blockquote>«Transformamos datos en insights accionables que empoderan tu campaña.»</blockquote>
+    </div>
+  </div>
+  <p style="font-family:var(--sans); font-size:15px; color:var(--g600); max-width:var(--measure)">Las tres frases de la izquierda están tomadas de documentos reales de la consultoría. Las de la derecha son ejemplos construidos para contraste.</p>
+
+  <h3>Cinco principios de escritura</h3>
+  <div class="numcards">
+    <div class="numcard"><b>Principio 1</b><h5>Toda cifra viaja con su incertidumbre</h5><p>Nunca un porcentaje suelto. Se acompaña de margen de error, tamaño de muestra o periodo de levantamiento. Una cifra sin contexto es publicidad.</p></div>
+    <div class="numcard"><b>Principio 2</b><h5>Se afirma lo que se puede sostener</h5><p>«Estimamos», «los datos sugieren», «en el rango de». Se prohíbe «garantizamos», «predecimos con certeza» y «asegura el triunfo».</p></div>
+    <div class="numcard"><b>Principio 3</b><h5>El verbo antes que el adjetivo</h5><p>Describir lo que se hace: levantamos, georreferenciamos, ponderamos, auditamos. No lo que se siente: revolucionario, innovador, disruptivo.</p></div>
+    <div class="numcard"><b>Principio 4</b><h5>Explicar el método, no esconderlo</h5><p>El método es el producto. Decir cómo se calculó un índice no regala nada: demuestra que existe. La opacidad se lee como inseguridad.</p></div>
+    <div class="numcard"><b>Principio 5</b><h5>Sin color partidista en el lenguaje</h5><p>Se habla de «actores», «fuerzas políticas», «gobierno municipal». Nunca de «nuestro candidato» ni de adjetivos que sitúen a la firma en un bando.</p></div>
+  </div>
+
+  <h3>Vocabulario</h3>
+  <table>
+    <caption>Preferencias léxicas para todo material público.</caption>
+    <thead><tr><th>Se dice</th><th>No se dice</th><th>Por qué</th></tr></thead>
+    <tbody>
+      <tr><td>Levantamiento en campo</td><td>Encuestita, sondeo rápido</td><td>El diminutivo abarata el trabajo que sostiene la cifra</td></tr>
+      <tr><td>Hallazgo</td><td>Insight</td><td>Anglicismo evitable; el cliente institucional lee en español</td></tr>
+      <tr><td>Tablero</td><td>Dashboard</td><td>Igual claridad, registro propio</td></tr>
+      <tr><td>Estimación con margen de error</td><td>Resultado contundente</td><td>Lo segundo es indefendible ante una auditoría</td></tr>
+      <tr><td>Índice ponderado, memoria de cálculo</td><td>Fórmula secreta, algoritmo propietario</td><td>El secreto contradice el pilar de método auditable</td></tr>
+      <tr><td>Modelo de clasificación</td><td>Inteligencia artificial avanzada</td><td>Nombrar la técnica es más creíble que invocar la categoría</td></tr>
+      <tr><td>Personas encuestadas</td><td>Muestreo de gente</td><td>Precisión y trato adecuado a la unidad de análisis</td></tr>
+      <tr><td>Trazabilidad, expediente, bitácora</td><td>Transparencia total</td><td>Lo primero se comprueba, lo segundo se promete</td></tr>
+      <tr><td>Priorización de la atención</td><td>Focalización del voto</td><td>Distingue el trabajo de política pública del electoral</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Fotografía e imagen</h2></div>
+
+  <p class="lead">El repertorio visual de esta consultoría no es la gente sonriendo en una sala de juntas. Es el territorio, el trabajo de campo y el instrumento.</p>
+
+  <h3>Estilo</h3>
+  <ul class="plain">
+    <li><b>Luz natural, hora del día.</b> Sin flash directo, sin filtros cálidos añadidos. La escena ya es cálida por el material.</li>
+    <li><b>Documental antes que publicitaria.</b> Nadie mira a cámara ni posa. Se fotografía lo que ocurre: la tableta en la banqueta, la ruta trazada, la sesión de captura.</li>
+    <li><b>Distancia media y detalle.</b> El plano abierto de paisaje se reserva para portadas; el trabajo se cuenta mejor en el detalle de manos, pantallas y papel.</li>
+    <li><b>Sin rostros identificables de personas encuestadas.</b> Regla ética, no estética. Se fotografía de espaldas, de perfil parcial o desde el instrumento hacia afuera.</li>
+  </ul>
+
+  <h3>Tratamiento</h3>
+  <p>Ligera desaturación de los verdes y azules del entorno para que la paleta de marca no compita con la fotografía. Contraste medio, sin sombras aplastadas. Cuando una imagen sirve de fondo para texto, se aplica una capa de obsidiana al 70 % de opacidad y encima el texto en cal, jamás texto directo sobre la foto.</p>
+
+  <h3>Tomas necesarias para producir el sitio</h3>
+  <table>
+    <caption>Banco mínimo para la primera versión de la web.</caption>
+    <thead><tr><th>Toma</th><th>Uso</th><th>Cantidad</th></tr></thead>
+    <tbody>
+      <tr><td>Retrato del equipo, luz natural, fondo neutro</td><td>Página de quiénes somos, propuestas, LinkedIn</td><td class="num">1 por persona</td></tr>
+      <tr><td>Encuestador en campo con tableta, sin rostro de terceros</td><td>Portada, servicio de levantamiento</td><td class="num">4 a 6</td></tr>
+      <tr><td>Pantalla de tablero en uso, sobre escritorio real</td><td>Servicio de visualización y tableros</td><td class="num">3 a 4</td></tr>
+      <tr><td>Detalle de mapa impreso, plano o cartografía sobre mesa</td><td>Servicio de inteligencia territorial</td><td class="num">3</td></tr>
+      <tr><td>Sesión de trabajo con contraparte gubernamental</td><td>Metodología, casos</td><td class="num">2 a 3</td></tr>
+      <tr><td>Paisaje urbano y rural del estado, horizontal amplio</td><td>Fondos de sección y encabezados</td><td class="num">5 a 8</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note-supuesto"><p><span class="tag tag-supuesto">Supuesto por validar</span> Este banco asume que existe material fotográfico de proyectos anteriores o que puede producirse una sesión. Si no lo hay, la primera versión del sitio se resuelve con cartografía y visualizaciones propias en lugar de fotografía, lo cual es incluso más coherente con la marca. Hay que decidirlo antes de los wireframes.</p></div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Elementos gráficos de apoyo</h2></div>
+
+  <p class="lead">Tres recursos, todos derivados del trabajo real de la consultoría. Ninguno es ornamento: cada uno codifica algo.</p>
+
+  <h4>La retícula cartográfica</h4>
+  <p>Una malla de líneas a 34 px, al 9 % de opacidad sobre obsidiana o al 5.5 % sobre cal. Es la graticula de un mapa. Aparece en portadas, encabezados de sección y fondos de caja oscura. Nunca sobre texto de cuerpo.</p>
+  <div style="height:120px; background:#14110F; border-radius:3px; margin:1rem 0" class="graticule"></div>
+
+  <h4>La escalinata</h4>
+  <p>El trazo interior del símbolo, extraído y usado como filete, viñeta o separador. Marca inicio de sección y jerarquía en listados. Se usa en barro sobre claro y en barro pálido sobre oscuro.</p>
+  <p>En medios digitales la escalinata es además el separador base de este manual y del sitio, y da origen a un sistema de tres separadores que se documenta al final de esta sección.</p>
+  <div style="margin:1rem 0">
+    <svg width="220" height="46" viewBox="0 0 220 46" role="img" aria-label="Filete de escalinata">
+      <path d="M4 40 V28 H60 V18 H116 V8 H216" fill="none" stroke="#8C4A2F" stroke-width="6" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <h4>La barra de índice</h4>
+  <p>Recurso para representar un valor dentro de un rango, que es lo que hace un índice de priorización. Barra de cuatro tramos en jade, del lavado al profundo, con el valor marcado. Se usa en fichas de municipio, tarjetas de resultado y tableros.</p>
+  <div style="display:flex; height:26px; border-radius:2px; overflow:hidden; max-width:420px; margin:1rem 0; font-family:var(--sans); font-size:12px">
+    <i style="flex:1; background:#E8EFEB; color:#2C4C3F; display:flex; align-items:center; justify-content:center; font-style:normal">Bajo</i>
+    <i style="flex:1; background:#7FA593; color:#14110F; display:flex; align-items:center; justify-content:center; font-style:normal">Medio</i>
+    <i style="flex:1; background:#3F6B5A; color:#E8EFEB; display:flex; align-items:center; justify-content:center; font-style:normal">Alto</i>
+    <i style="flex:1; background:#2C4C3F; color:#E8EFEB; display:flex; align-items:center; justify-content:center; font-style:normal">Muy alto</i>
+  </div>
+
+  <h3>Sistema de separadores</h3>
+  <p>Los tres elementos anteriores no viven sueltos: forman un sistema de separadores con una regla de reparto. Cada uno tiene un destino distinto, y esa es la razón de que sean tres y no uno decorado de tres maneras. El lector aprende en las primeras dos pantallas que la escalinata regresa, la regla avanza y el pórtico sale del documento.</p>
+
+  <table>
+    <caption>Cuándo se usa cada separador y a dónde lleva.</caption>
+    <thead><tr><th>Separador</th><th>Dónde va</th><th>Destino</th><th>Comportamiento</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>Escalinata</b></td>
+        <td>Entre secciones, en posición impar</td>
+        <td>Regresa al índice del documento</td>
+        <td>Se dibuja de izquierda a derecha al entrar en pantalla. Al apuntarlo, un punto en jade sube los escalones.</td>
+      </tr>
+      <tr>
+        <td><b>Regla cartográfica</b></td>
+        <td>Entre secciones, en posición par</td>
+        <td>Avanza a la siguiente sección, cuyo número y nombre aparecen escritos</td>
+        <td>Las marcas de graduación crecen desde la línea base con retraso escalonado. Al apuntarla, el testigo en barro recorre la regla de un extremo al otro.</td>
+      </tr>
+      <tr>
+        <td><b>Pórtico</b></td>
+        <td>Una sola vez, al cierre del documento</td>
+        <td>Sale hacia el siguiente documento de la serie</td>
+        <td>Los cuatro tramos de la barra de índice se llenan en secuencia. Al apuntarlo, cada tramo avanza un grado en la rampa y el último pasa a barro.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Reglas de movimiento</h4>
+  <ul class="plain">
+    <li><b>Una sola vez.</b> Ninguna animación se repite en bucle ni se vuelve a disparar si el lector regresa. El movimiento marca un cambio de estado, no llena el tiempo.</li>
+    <li><b>Alternancia obligatoria.</b> Nunca dos separadores iguales seguidos. La alternancia es lo que enseña al lector que la dirección del gesto significa algo.</li>
+    <li><b>Un pórtico por documento.</b> Es la única llamada a la acción del archivo. Repetirlo lo convierte en botón y deja de funcionar como cierre.</li>
+    <li><b>El movimiento siempre responde o informa.</b> Al entrar en pantalla informa de un cambio de apartado; al apuntar responde al lector y anticipa el destino. No hay movimiento que no haga ninguna de las dos cosas.</li>
+    <li><b>Accesibilidad no negociable.</b> Todo separador es alcanzable con teclado y muestra foco visible. Con <code>prefers-reduced-motion</code> activo, los tres aparecen en su estado final sin animación. En papel se imprimen dibujados y sin elementos de interfaz.</li>
+  </ul>
+
+  <div class="note note-info"><p><b>Cómo se ve en el sitio.</b> Los separadores de este manual son el mismo componente que llevará la web: la escalinata entre bloques de una página larga, la regla cartográfica al pie de cada servicio para pasar al siguiente, y el pórtico como cierre de página apuntando a la conversión — solicitar una propuesta o abrir el caso siguiente.</p></div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section id="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Aplicaciones</h2></div>
+
+  <h3>Redes sociales</h3>
+  <table>
+    <caption>Medidas y versión del logotipo por canal.</caption>
+    <thead><tr><th>Canal</th><th>Pieza</th><th class="num">Medida</th><th>Versión de marca</th></tr></thead>
+    <tbody>
+      <tr><td>LinkedIn</td><td>Foto de página</td><td class="num">400 × 400 px</td><td>Vertical sobre obsidiana</td></tr>
+      <tr><td>LinkedIn</td><td>Portada</td><td class="num">1128 × 191 px</td><td>Retícula sobre obsidiana, lockup horizontal a la izquierda</td></tr>
+      <tr><td>LinkedIn</td><td>Publicación</td><td class="num">1200 × 1200 px</td><td>Marca reducida en esquina inferior derecha</td></tr>
+      <tr><td>X</td><td>Avatar y encabezado</td><td class="num">400 × 400 · 1500 × 500 px</td><td>Vertical y horizontal</td></tr>
+      <tr><td>Instagram</td><td>Publicación y carrusel</td><td class="num">1080 × 1350 px</td><td>Reducida arriba a la izquierda</td></tr>
+      <tr><td>Todos</td><td>Miniatura para compartir</td><td class="num">1200 × 630 px</td><td>Lockup horizontal sobre obsidiana con retícula</td></tr>
+    </tbody>
+  </table>
+  <p style="font-family:var(--sans); font-size:15px; color:var(--g600)">LinkedIn es el canal prioritario: es donde están los tomadores de decisión de gobierno y los responsables de contratación. Instagram y X son secundarios, para difusión de hallazgos y visualizaciones.</p>
+
+  <h3>Papelería</h3>
+  <ul class="plain">
+    <li><b>Hoja membretada.</b> Carta, márgenes de 25 mm. Lockup horizontal arriba a la izquierda a 38 mm de ancho. Pie con filete de escalinata en barro y datos de contacto en Alegreya Sans 9 pt, gris 600.</li>
+    <li><b>Tarjeta de presentación.</b> 90 × 50 mm. Anverso en obsidiana con retícula y marca vertical centrada. Reverso en cal con nombre en Alegreya 11 pt y cargo en Alegreya Sans 8.5 pt.</li>
+    <li><b>Portada de informe.</b> Obsidiana a sangre con retícula, título en Alegreya regular a 44 pt sobre cal, franja de proporción de cuatro colores al pie y bloque de metadatos: cliente, tipo de documento, fecha, versión.</li>
+    <li><b>Firma de correo.</b> Marca reducida a 40 px, nombre en Alegreya Sans 14 px, cargo y contacto en 13 px gris 600, filete de escalinata como separador. Sin imágenes pesadas ni frases motivacionales.</li>
+    <li><b>Credencial de campo.</b> 86 × 54 mm vertical. Necesaria para el trabajo de levantamiento: foto, nombre, folio, vigencia, marca reducida y contacto de verificación. Es un elemento de confianza frente a la persona encuestada.</li>
+  </ul>
+
+  <h3>Tableros y visualización</h3>
+  <p>Reglas para Power BI, Looker Studio y desarrollos propios, donde la marca se juega su credibilidad técnica.</p>
+  <ul class="plain">
+    <li>Fondo blanco o cal, nunca obsidiana en tableros de trabajo diario: el uso prolongado en oficina lo hace incómodo. La obsidiana se reserva a tableros de sala y proyección.</li>
+    <li>Series cuantitativas en la rampa jade, del lavado al profundo. El barro se usa exclusivamente para marcar el dato seleccionado o el valor de referencia.</li>
+    <li>Escalas coropléticas secuenciales en jade; escalas divergentes con jade en un extremo y barro en el otro, con el punto neutro en cal.</li>
+    <li>Nunca codificar solo por color: acompañar siempre con etiqueta, tramado o forma, por daltonismo y por impresión en blanco y negro.</li>
+    <li>Toda gráfica lleva pie de fuente y fecha de corte. Es aplicación de marca y de método al mismo tiempo.</li>
+  </ul>
+</section>
+
+<!-- ============ 9 ============ -->
+<section id="s9">
+  <div class="sec-head"><span class="sec-num">09</span><h2>Errores a evitar</h2></div>
+
+  <div class="dont">
+    <div><b>No usar «Yaocalli» solo en materiales públicos</b>Existen un colegio y un equipo deportivo con ese nombre. Sin el descriptor, la marca se confunde y el posicionamiento en buscadores se pierde.</div>
+    <div><b>No teñir la marca de color partidista</b>Ni en paleta, ni en fotografía, ni en ejemplos. Un solo material con azul o guinda dominante cierra la puerta a la mitad del mercado.</div>
+    <div><b>No usar barro pálido como texto sobre claro</b>Contraste de 2.27:1. Reprueba WCAG y se vuelve ilegible en pantalla exterior o impresión económica.</div>
+    <div><b>No poner jade sobre obsidiana</b>Contraste de 3.10:1. Sobre fondo oscuro siempre jade pálido.</div>
+    <div><b>No deformar ni recolorear el símbolo</b>Sin estirar, rotar, aplicar sombra, degradado ni contorno. El muro es obsidiana o cal; la escalinata es barro o barro pálido. No hay más combinaciones.</div>
+    <div><b>No invadir la zona de protección</b>Ni con texto, ni con el borde de una imagen, ni con el filo de la hoja. El vano de entrada es la unidad de medida.</div>
+    <div><b>No sustituir las tipografías</b>Nada de Arial, Times ni la fuente por defecto de la plantilla de turno. Si Alegreya no carga en un entorno, el respaldo es Georgia para serifa y la fuente de sistema para palo seco.</div>
+    <div><b>No usar mayúsculas espaciadas como etiqueta</b>Están reservadas al descriptor del logotipo. Repetirlas encima de cada título convierte el recurso en decoración de plantilla.</div>
+    <div><b>No llenar la pieza de barro</b>Un solo elemento de acento por pantalla. El barro pierde su función en cuanto se reparte.</div>
+    <div><b>No publicar una cifra sin ficha técnica</b>Es error de marca, no solo metodológico. Contradice el pilar que sostiene todo el posicionamiento.</div>
+  </div>
+</section>
+
+<!-- ============ 10 ============ -->
+<section id="s10">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Resumen técnico</h2></div>
+
+  <p class="lead">Tokens listos para pegar en el sitio, en el tablero o en cualquier desarrollo de la consultoría.</p>
+
+<pre><i>/* Importación de fuentes */</i>
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+:root{
+  <i>/* Marca */</i>
+  <b>--brand</b>:        #8C4A2F;  <i>/* barro, acento único */</i>
+  <b>--brand-deep</b>:   #6B3722;  <i>/* hover, sombra, texto de acento AAA */</i>
+  <b>--brand-pale</b>:   #C98F72;  <i>/* solo sobre oscuro o como relleno */</i>
+  <b>--brand-wash</b>:   #F7EDE7;  <i>/* fondo suave */</i>
+  <b>--ink</b>:          #14110F;  <i>/* obsidiana, oscuro dominante */</i>
+  <b>--ink-soft</b>:     #2A2521;
+  <b>--bone</b>:         #EFE9DE;  <i>/* cal, fondo claro alterno */</i>
+
+  <i>/* Cuantitativo */</i>
+  <b>--data</b>:         #3F6B5A;  <i>/* jade */</i>
+  <b>--data-deep</b>:    #2C4C3F;
+  <b>--data-pale</b>:    #7FA593;  <i>/* jade sobre fondo oscuro */</i>
+  <b>--data-wash</b>:    #E8EFEB;
+
+  <i>/* Grises cálidos */</i>
+  <b>--g-100</b>:#F5F2EC; <b>--g-200</b>:#E6E1D7; <b>--g-300</b>:#D2CCBF;
+  <b>--g-400</b>:#B0A99B; <b>--g-500</b>:#8A8377; <b>--g-600</b>:#6A645A;
+  <b>--g-700</b>:#4D4841; <b>--g-800</b>:#33302B; <b>--g-900</b>:#1D1A17;
+
+  <i>/* Semánticos */</i>
+  <b>--ok</b>:#3E7A55;   <b>--ok-text</b>:#2F5E41;
+  <b>--warn</b>:#B8862B; <b>--warn-text</b>:#8A6218;  <i>/* --warn nunca como texto */</i>
+  <b>--err</b>:#A33131;  <b>--info</b>:#35617A;
+
+  <i>/* Tipografía */</i>
+  <b>--font-serif</b>: 'Alegreya', Georgia, serif;
+  <b>--font-sans</b>:  'Alegreya Sans', system-ui, sans-serif;
+  <b>--size-body</b>: 17.5px;
+  <b>--leading-body</b>: 1.62;
+  <b>--measure</b>: 68ch;
+
+  <i>/* Retícula cartográfica */</i>
+  <b>--graticule-dark</b>:  rgba(239,233,222,.09);
+  <b>--graticule-light</b>: rgba(20,17,15,.055);
+  <b>--graticule-size</b>:  34px;
+}</pre>
+
+  <h4>Reglas de contraste programadas</h4>
+<pre><i>/* Prohibiciones verificadas por cálculo WCAG */</i>
+.on-dark  { color: var(--bone); }        <i>/* 15.56:1 sobre obsidiana */</i>
+.on-dark .accent { color: var(--brand-pale); }  <i>/* 6.85:1  */</i>
+.on-dark .data   { color: var(--data-pale); }   <i>/* 6.90:1  */</i>
+
+.on-light { color: var(--ink); }         <i>/* 15.56:1 sobre cal */</i>
+.on-light .accent { color: var(--brand-deep); } <i>/* 7.92:1  */</i>
+.on-light .data   { color: var(--data-deep); }  <i>/* 7.86:1  */</i>
+
+<i>/* Nunca: var(--brand-pale) sobre --bone  → 2.27:1 */</i>
+<i>/* Nunca: var(--data) sobre --ink         → 3.10:1 */</i>
+<i>/* Nunca: var(--warn) como color de texto → 2.68:1 */</i></pre>
+
+  <div class="note note-ok"><p><b>Todos los ratios de este documento están calculados</b> con la fórmula de luminancia relativa de WCAG 2.1, no estimados a ojo. Los valores CMYK son conversión aritmética desde RGB y sirven de referencia; antes de cualquier tiraje hay que calibrar con el perfil de la imprenta y aprobar prueba de color.</p></div>
+</section>
+
+</main>
+
+<div class="closer" id="closer">
+  <div class="sheet">
+    <a class="closer-link" href="./2_Arquitectura_y_Wireframes_Yaocalli.html">
+      <span class="closer-bar" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="closer-text">
+        <small>Siguiente documento de la serie</small>
+        <b>02 — Arquitectura y wireframes</b>
+        <em>Perfiles de usuario, mapa del sitio, estructura de URLs con prioridad de posicionamiento y wireframes dibujados de cada pantalla, escritorio y móvil.</em>
+      </span>
+    </a>
+    <p class="closer-note"><span class="tag tag-supuesto">Pendiente</span> El documento 02 se produce después de validar el benchmark de competencia. El enlace ya está escrito y resolverá en cuanto el archivo esté en la misma carpeta que este.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="lockup">
+    <svg width="42" height="42" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#EFE9DE" stroke-width="11" stroke-linejoin="round"/>
+      <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#C98F72" stroke-width="10" stroke-linejoin="round"/>
+    </svg>
+    <div class="wordmark">Yaocalli<small>CONSULTORÍA Y ESTRATEGIA</small></div>
+  </div>
+  <p style="max-width:62ch; margin:0">Documento 01 de la serie de identidad y estrategia digital. Versión 1.0, borrador para aprobación, 1 de septiembre de 2026. Los apartados marcados como supuesto requieren validación antes de producir los documentos de arquitectura, contenidos y medición.</p>
+</footer>
+
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* 1. Separadores de sección. Dos variantes que se alternan:
+        escalinata = regreso al índice; regla cartográfica = avance a la siguiente sección. */
+  var STAIR = '<span class="sep-line"></span>'
+    + '<span class="sep-hint">Volver al contenido</span>'
+    + '<button class="sep-btn" type="button">'
+    + '<svg width="126" height="36" viewBox="0 0 118 34" aria-hidden="true">'
+    + '<path class="sep-track" d="M4 28 V20 H40 V13 H76 V6 H114" fill="none" stroke-width="4" stroke-linejoin="round"/>'
+    + '<path class="sep-fill" d="M4 28 V20 H40 V13 H76 V6 H114" fill="none" stroke-width="4" stroke-linejoin="round"/>'
+    + '<circle class="sep-dot" r="4.5"/></svg>'
+    + '<span class="sr-only">Volver al contenido</span></button>'
+    + '<span class="sep-line"></span>';
+
+  function ruleSvg(){
+    var t = '';
+    for (var k = 0; k < 9; k++){
+      var x = 2 + k * 10, tall = (k % 2 === 0);
+      t += '<rect class="tick" x="' + x + '" y="' + (tall ? 7 : 13) + '" width="1.6" height="' + (tall ? 13 : 7) + '"/>';
+    }
+    return '<svg width="96" height="26" viewBox="0 0 92 24" aria-hidden="true">'
+      + '<line class="rule-base" x1="2" y1="20.7" x2="84" y2="20.7"/>'
+      + t + '<path class="marker" d="M0 0 H9 L4.5 7 Z"/></svg>';
+  }
+
+  function nextSep(target){
+    var num = target.querySelector('.sec-num');
+    var ttl = target.querySelector('h2');
+    return '<span class="sep-line"></span>'
+      + '<a class="next-btn" href="#' + target.id + '">'
+      + ruleSvg()
+      + '<span class="next-text"><small>Siguiente</small>'
+      + '<b>' + (num ? num.textContent + ' ' : '') + (ttl ? ttl.textContent : '') + '</b></span></a>';
+  }
+
+  var secs = document.querySelectorAll('main.sheet > section');
+  var seps = [];
+  for (var i = 1; i < secs.length; i++){
+    var d = document.createElement('div');
+    var isNext = (i % 2 === 0);
+    d.className = isNext ? 'sep sep-next' : 'sep';
+    d.setAttribute('role','separator');
+    d.innerHTML = isNext ? nextSep(secs[i]) : STAIR;
+    if (!reduce) d.classList.add('pending');
+    secs[i].parentNode.insertBefore(d, secs[i]);
+    seps.push(d);
+  }
+  var closer = document.getElementById('closer');
+  if (closer){
+    if (!reduce) closer.classList.add('pending');
+    seps.push(closer);
+  }
+
+  document.addEventListener('click', function(e){
+    var b = e.target.closest && e.target.closest('.sep-btn');
+    if (b){ document.querySelector('.toc').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'}); }
+  });
+
+  if (!reduce && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          en.target.classList.remove('pending');
+          en.target.classList.add('is-visible');
+          io.unobserve(en.target);
+        }
+      });
+    }, {rootMargin: '0px 0px -18% 0px'});
+    seps.forEach(function(s){ io.observe(s); });
+  }
+
+  /* 2. Retícula de construcción del logotipo */
+  document.querySelectorAll('[data-grid]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var box = document.getElementById(btn.dataset.grid);
+      var on = box.classList.toggle('showgrid');
+      btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+      btn.textContent = on ? 'Ocultar retícula de construcción' : 'Mostrar retícula de construcción';
+    });
+  });
+
+  /* 3. Muestras de color: clic para copiar el hexadecimal */
+  document.querySelectorAll('.mini div').forEach(function(el){
+    var sp = el.querySelector('span');
+    if (!sp) return;
+    el.dataset.hex = sp.textContent.trim();
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.insertAdjacentHTML('beforeend','<em class="copied">Copiado</em>');
+  });
+
+  function copyHex(el){
+    var hex = el.dataset.hex;
+    if (!hex) return;
+    var done = function(){
+      el.classList.add('done');
+      setTimeout(function(){ el.classList.remove('done'); }, 1200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(hex).then(done, function(){ fallback(hex, done); });
+    } else { fallback(hex, done); }
+  }
+  function fallback(hex, cb){
+    var t = document.createElement('textarea');
+    t.value = hex; t.setAttribute('readonly','');
+    t.style.position='fixed'; t.style.opacity='0';
+    document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); cb(); } catch(err){}
+    document.body.removeChild(t);
+  }
+
+  document.addEventListener('click', function(e){
+    var el = e.target.closest && e.target.closest('[data-hex]');
+    if (el) copyHex(el);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var el = e.target.closest && e.target.closest('.mini [data-hex]');
+    if (el){ e.preventDefault(); copyHex(el); }
+  });
+})();
+</script>
+
+</body>
+</html>

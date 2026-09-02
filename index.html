@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serie de identidad y estrategia digital — Yaocalli Consultoría y Estrategia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --obsidiana:#14110F; --barro:#8C4A2F; --barro-deep:#6B3722; --barro-pale:#C98F72; --barro-wash:#F7EDE7;
+  --jade:#3F6B5A; --jade-deep:#2C4C3F; --jade-pale:#7FA593; --jade-wash:#E8EFEB; --cal:#EFE9DE;
+  --g100:#F5F2EC; --g200:#E6E1D7; --g300:#D2CCBF; --g400:#B0A99B;
+  --g500:#8A8377; --g600:#6A645A; --g700:#4D4841; --g800:#33302B;
+  --warn-text:#8A6218;
+  --serif:'Alegreya', Georgia, serif; --sans:'Alegreya Sans', system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--cal); color:var(--obsidiana); font-family:var(--serif); font-size:17.5px; line-height:1.62; -webkit-font-smoothing:antialiased}
+p{max-width:68ch; margin:0 0 1em}
+h1,h2,h3{font-family:var(--serif); font-weight:700; line-height:1.18; margin:0}
+.graticule{background-image:linear-gradient(to right, rgba(239,233,222,.09) 1px, transparent 1px),linear-gradient(to bottom, rgba(239,233,222,.09) 1px, transparent 1px); background-size:34px 34px}
+
+.cover{min-height:88vh; background:var(--obsidiana); color:var(--cal); padding:7vh 7vw 5vh; display:flex; flex-direction:column; justify-content:space-between}
+.cover-mark{width:96px}
+.cover h1{font-size:clamp(38px,7vw,74px); font-weight:400; line-height:1.06; letter-spacing:-.02em; max-width:15ch; margin:0 0 .6rem}
+.cover h1 em{font-style:italic}
+.cover-sub{font-family:var(--sans); font-size:clamp(16px,2.2vw,21px); color:var(--g400); max-width:52ch; line-height:1.5}
+.cover-meta{font-family:var(--sans); font-size:14px; color:var(--g500); border-top:1px solid rgba(239,233,222,.18); padding-top:1.1rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem 2rem}
+.cover-meta b{display:block; color:var(--cal); font-weight:500; font-size:15px}
+.cover-band{height:9px; display:flex; margin-top:1.5rem}
+.cover-band i{display:block; height:100%}
+
+.sheet{max-width:1040px; margin:0 auto; padding:0 7vw}
+section{padding:3.6rem 0}
+.intro h2{font-size:34px; margin-bottom:1.1rem}
+@media(max-width:640px){.intro h2{font-size:26px}}
+
+.chain{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:1.6rem 0; font-family:var(--sans); font-size:13.5px}
+.chain span{background:var(--jade-wash); color:var(--jade-deep); padding:6px 13px; border-radius:13px; white-space:nowrap}
+.chain span.last{background:var(--barro-wash); color:var(--barro-deep)}
+.chain i{width:16px; height:1px; background:var(--g400); flex:none}
+
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin:2rem 0}
+.card{
+  display:flex; flex-direction:column; background:#fff; border:1px solid var(--g300);
+  border-radius:3px; padding:1.4rem 1.5rem 1.5rem; text-decoration:none; color:inherit;
+  transition:border-color .2s, transform .2s;
+}
+.card:hover{border-color:var(--barro); transform:translateY(-2px)}
+.card:focus-visible{outline:2px solid var(--barro); outline-offset:3px}
+.card-top{display:flex; align-items:baseline; gap:11px; margin-bottom:.55rem}
+.card-num{font-family:var(--sans); font-size:14px; font-weight:500; color:var(--barro); border:1px solid var(--barro); border-radius:2px; padding:2px 8px}
+.card-cat{font-family:var(--sans); font-size:12.5px; color:var(--g600)}
+.card h3{font-size:24px; margin:0 0 .45rem; line-height:1.2}
+.card-desc{font-family:var(--sans); font-size:15px; color:var(--g700); margin:0 0 .9rem; line-height:1.5}
+.card ul{list-style:none; margin:0 0 1rem; padding:0; font-family:var(--sans); font-size:14px; color:var(--g700)}
+.card li{padding:.3rem 0 .3rem 1rem; border-top:1px solid var(--g200); position:relative}
+.card li::before{content:''; position:absolute; left:0; top:.95em; width:4px; height:1px; background:var(--barro)}
+.card-foot{margin-top:auto; display:flex; align-items:center; gap:10px; font-family:var(--sans); font-size:13.5px; color:var(--g600); border-top:1px solid var(--g200); padding-top:.8rem}
+.card-foot b{color:var(--barro-deep); font-weight:500; margin-left:auto}
+.card svg{flex:none}
+
+.path{background:var(--obsidiana); color:var(--cal); border-radius:3px; padding:2rem 2.2rem; margin:2rem 0}
+.path h3{color:var(--cal); font-size:26px; margin-bottom:1.2rem}
+.path ol{list-style:none; margin:0; padding:0; counter-reset:p}
+.path li{counter-increment:p; padding:.7rem 0 .7rem 2.6rem; position:relative; border-top:1px solid rgba(239,233,222,.14); font-family:var(--sans); font-size:15.5px; color:var(--g300); max-width:70ch}
+.path li:first-child{border-top:0}
+.path li::before{content:counter(p,decimal-leading-zero); position:absolute; left:0; top:.85rem; font-size:13px; color:var(--barro-pale)}
+.path li b{color:var(--cal); font-weight:500}
+
+.note{border-left:3px solid #B8862B; background:#FBF4E6; padding:.95rem 1.15rem; margin:1.8rem 0; font-family:var(--sans); font-size:15.5px; line-height:1.55; max-width:68ch}
+.note p{font-family:var(--sans); font-size:15.5px; margin:0}
+.note p + p{margin-top:.6rem}
+.note code{font-family:ui-monospace, Menlo, monospace; font-size:.88em; background:var(--g200); padding:1px 5px; border-radius:2px}
+
+footer{background:var(--obsidiana); color:var(--g500); padding:2.8rem 7vw; font-family:var(--sans); font-size:14px}
+footer .lockup{display:flex; align-items:center; gap:15px; margin-bottom:1rem}
+footer .wordmark{font-family:var(--serif); font-weight:700; font-size:22px; color:var(--cal); line-height:1}
+footer .wordmark small{display:block; font-family:var(--sans); font-weight:400; font-size:10px; letter-spacing:.19em; color:var(--g500); margin-top:5px}
+
+@media (prefers-reduced-motion: reduce){ .card{transition:none} .card:hover{transform:none} html{scroll-behavior:auto} }
+@media print{
+  body{font-size:11pt; background:#fff}
+  .cover{min-height:auto; page-break-after:always}
+  .card,.path,.note{page-break-inside:avoid}
+  a{color:#000; text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="cover graticule">
+  <div>
+    <svg class="cover-mark" viewBox="0 0 120 120" role="img" aria-label="Marca Yaocalli">
+      <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#EFE9DE" stroke-width="11" stroke-linejoin="round"/>
+      <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#C98F72" stroke-width="10" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div>
+    <h1>Identidad y <em>estrategia digital</em></h1>
+    <p class="cover-sub">Cinco documentos que van del diagnóstico de competencia a la medición de resultados, pasando por la marca, la arquitectura del sitio y el plan de contenidos.</p>
+    <div class="cover-band">
+      <i style="background:#14110F; flex:5"></i><i style="background:#8C4A2F; flex:2"></i>
+      <i style="background:#3F6B5A; flex:1"></i><i style="background:#EFE9DE; flex:2"></i>
+    </div>
+  </div>
+  <div class="cover-meta">
+    <div><b>Cliente</b>Yaocalli Consultoría y Estrategia</div>
+    <div><b>Documentos</b>Cinco, más este portal</div>
+    <div><b>Lectura completa</b>Alrededor de 2 horas</div>
+    <div><b>Versión</b>1.0 — borrador para aprobación</div>
+    <div><b>Fecha</b>1 de septiembre de 2026</div>
+  </div>
+</header>
+
+<main class="sheet">
+
+<section class="intro">
+  <h2>Cómo se relacionan entre sí</h2>
+  <p>No son cinco documentos sueltos: son una cadena de decisiones donde cada uno depende del anterior. El benchmark encuentra el hueco del mercado. La identidad convierte ese hueco en una marca reconocible. La arquitectura traduce la marca en pantallas y recorridos. El plan de contenidos llena esas pantallas con material que atrae al cliente correcto. La guía de posicionamiento asegura que alguien lo encuentre y permite saber si funcionó.</p>
+  <p>Leerlos fuera de orden es posible, pero cada uno da por sentado lo que decidió el anterior. Si algo del benchmark cambia, cambia todo lo demás.</p>
+
+  <div class="chain">
+    <span>Diagnóstico</span><i></i>
+    <span>Marca</span><i></i>
+    <span>Estructura</span><i></i>
+    <span>Contenido</span><i></i>
+    <span class="last">Medición</span>
+  </div>
+</section>
+
+<section>
+  <div class="cards">
+
+    <a class="card" href="./0_Benchmark_Yaocalli.html" target="_blank" rel="noopener">
+      <div class="card-top"><span class="card-num">00</span><span class="card-cat">Diagnóstico</span></div>
+      <h3>Benchmark de competencia</h3>
+      <p class="card-desc">Quién compite por el mismo cliente en el mundo, en México y en Hidalgo, con verificación de dominios uno por uno. Termina en el hueco que ninguno está ocupando.</p>
+      <ul>
+        <li>Siete hallazgos y las cifras de la ventana electoral</li>
+        <li>Doce fichas de competidor con lectura estratégica</li>
+        <li>Verificación de diecinueve dominios</li>
+        <li>El estado real del mercado local en Hidalgo</li>
+        <li>Análisis FODA orientado al producto web</li>
+        <li>Prioridades con esfuerzo estimado en jornadas</li>
+      </ul>
+      <div class="card-foot">
+        <svg width="18" height="18" viewBox="0 0 120 120" aria-hidden="true"><path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#8C4A2F" stroke-width="11" stroke-linejoin="round"/></svg>
+        25 min de lectura <b>Abrir</b>
+      </div>
+    </a>
+
+    <a class="card" href="./1_Manual_de_Identidad_Yaocalli.html" target="_blank" rel="noopener">
+      <div class="card-top"><span class="card-num">01</span><span class="card-cat">Marca</span></div>
+      <h3>Manual de identidad</h3>
+      <p class="card-desc">El sistema visual y verbal completo en la ruta obsidiana y tierra, con contrastes calculados y no estimados a ojo, y tokens listos para pegar en código.</p>
+      <ul>
+        <li>Posicionamiento, tres pilares y personalidad</li>
+        <li>Logotipo con retícula de construcción interactiva</li>
+        <li>Paleta con hex, RGB, CMYK y tabla de contraste</li>
+        <li>Tipografía con escala de escritorio y móvil</li>
+        <li>Tono de voz con frases reales de la firma</li>
+        <li>Sistema de separadores y tokens de código</li>
+      </ul>
+      <div class="card-foot">
+        <svg width="18" height="18" viewBox="0 0 120 120" aria-hidden="true"><path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#8C4A2F" stroke-width="11" stroke-linejoin="round"/></svg>
+        30 min de lectura <b>Abrir</b>
+      </div>
+    </a>
+
+    <a class="card" href="./2_Arquitectura_y_Wireframes_Yaocalli.html" target="_blank" rel="noopener">
+      <div class="card-top"><span class="card-num">02</span><span class="card-cat">Estructura</span></div>
+      <h3>Arquitectura y wireframes</h3>
+      <p class="card-desc">Cómo se organiza el sitio y qué va en cada pantalla, dibujado y no descrito, con las dos vistas de teléfono y el código del mecanismo de conversión.</p>
+      <ul>
+        <li>Objetivo del sitio y su métrica única</li>
+        <li>Cuatro perfiles de usuario con su recorrido</li>
+        <li>Mapa del sitio y estructura de URLs</li>
+        <li>Seis wireframes de escritorio dibujados</li>
+        <li>Vistas móviles y reglas de comportamiento</li>
+        <li>Alcance de la versión 1 contra fase 2</li>
+      </ul>
+      <div class="card-foot">
+        <svg width="18" height="18" viewBox="0 0 120 120" aria-hidden="true"><path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#8C4A2F" stroke-width="11" stroke-linejoin="round"/></svg>
+        28 min de lectura <b>Abrir</b>
+      </div>
+    </a>
+
+    <a class="card" href="./3_Plan_de_Contenidos_Yaocalli.html" target="_blank" rel="noopener">
+      <div class="card-top"><span class="card-num">03</span><span class="card-cat">Contenido</span></div>
+      <h3>Plan de contenidos</h3>
+      <p class="card-desc">Qué publicar durante seis meses, con títulos finales listos para usar y el sistema que convierte cada nota en cinco piezas para redes sin escribir nada nuevo.</p>
+      <ul>
+        <li>Cuatro pilares editoriales con su peso</li>
+        <li>Calendario de octubre a marzo con doce títulos</li>
+        <li>Anatomía de una nota en siete pasos</li>
+        <li>Cascada de despiece a redes con días</li>
+        <li>Banco de veinte ideas de reserva</li>
+        <li>Carga de producción real por mes</li>
+      </ul>
+      <div class="card-foot">
+        <svg width="18" height="18" viewBox="0 0 120 120" aria-hidden="true"><path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#8C4A2F" stroke-width="11" stroke-linejoin="round"/></svg>
+        22 min de lectura <b>Abrir</b>
+      </div>
+    </a>
+
+    <a class="card" href="./4_Guia_SEO_y_Medicion_Yaocalli.html" target="_blank" rel="noopener">
+      <div class="card-top"><span class="card-num">04</span><span class="card-cat">Medición</span></div>
+      <h3>Posicionamiento y medición</h3>
+      <p class="card-desc">Cómo hacer que el sitio se encuentre y cómo saber si está funcionando, incluida la cronología honesta de por qué los primeros meses van a parecer un fracaso.</p>
+      <ul>
+        <li>Requisitos técnicos obligatorios</li>
+        <li>Datos estructurados listos para copiar</li>
+        <li>Palabras clave en tres niveles de prioridad</li>
+        <li>Ficha de empresa local paso a paso</li>
+        <li>Cronología de resultados mes por mes</li>
+        <li>Metas a tres, seis y doce meses</li>
+      </ul>
+      <div class="card-foot">
+        <svg width="18" height="18" viewBox="0 0 120 120" aria-hidden="true"><path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#8C4A2F" stroke-width="11" stroke-linejoin="round"/></svg>
+        26 min de lectura <b>Abrir</b>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<section>
+  <div class="path">
+    <h3>Recorrido sugerido</h3>
+    <ol>
+      <li><b>Empieza por el 00, aunque tengas prisa.</b> Es el que dice contra quién se compite y por qué el calendario aprieta. Todo lo demás son consecuencias de ese diagnóstico.</li>
+      <li><b>Sigue con el 01 y detente en la paleta.</b> La decisión de no usar ningún color partidista es la que sostiene el modelo de negocio completo. Si no te convence, hay que revisarla antes que nada.</li>
+      <li><b>Lee el 02 con los wireframes abiertos al lado.</b> Están dibujados justamente para aprobarse o corregirse en minutos. Marca lo que sobra y lo que falta directamente sobre ellos.</li>
+      <li><b>Revisa los doce títulos del 03 uno por uno.</b> Son finales y publicables tal como están. Si alguno no lo escribirías con tu firma, cámbialo ahora y no en el mes cuatro.</li>
+      <li><b>Deja el 04 para el final y guárdalo.</b> Es el documento de consulta permanente, no de lectura única. Su sección de cronología es la que hay que releer en el mes dos, cuando parezca que nada funciona.</li>
+      <li><b>Resuelve los pendientes marcados en amarillo.</b> Están repartidos en los cinco documentos. Ninguna línea de código debería escribirse antes de cerrarlos.</li>
+    </ol>
+  </div>
+
+  <div class="note">
+    <p><b>Nota técnica.</b> Los seis archivos deben estar en la misma carpeta para que los enlaces entre ellos funcionen. Los nombres no se cambian: <code>index.html</code>, <code>0_Benchmark_Yaocalli.html</code>, <code>1_Manual_de_Identidad_Yaocalli.html</code>, <code>2_Arquitectura_y_Wireframes_Yaocalli.html</code>, <code>3_Plan_de_Contenidos_Yaocalli.html</code> y <code>4_Guia_SEO_y_Medicion_Yaocalli.html</code>.</p>
+    <p>Cada documento funciona también por separado si se envía suelto por correo: el logotipo va incrustado y no hay más dependencia externa que las tipografías. Todos se imprimen o exportan a PDF sin cortes, con los elementos de interfaz ocultos.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="lockup">
+    <svg width="42" height="42" viewBox="0 0 120 120" aria-hidden="true">
+      <path d="M70 106 H106 V14 H14 V106 H50" fill="none" stroke="#EFE9DE" stroke-width="11" stroke-linejoin="round"/>
+      <path d="M36 86 V70 H60 V54 H84" fill="none" stroke="#C98F72" stroke-width="10" stroke-linejoin="round"/>
+    </svg>
+    <div class="wordmark">Yaocalli<small>CONSULTORÍA Y ESTRATEGIA</small></div>
+  </div>
+  <p style="max-width:64ch; margin:0">Serie de identidad y estrategia digital. Versión 1.0, borrador para aprobación, 1 de septiembre de 2026. Los apartados marcados como supuesto requieren validación antes de pasar a producción.</p>
+</footer>
+
+</body>
+</html>
