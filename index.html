@@ -33,6 +33,16 @@ h1,h2,h3{font-family:var(--serif); font-weight:700; line-height:1.18; margin:0}
 .cover-band{height:9px; display:flex; margin-top:1.5rem}
 .cover-band i{display:block; height:100%}
 
+.cta-site{
+  display:inline-flex; align-items:center; gap:10px; align-self:flex-start;
+  background:var(--barro); color:var(--cal); font-family:var(--sans); font-size:15px; font-weight:500;
+  text-decoration:none; padding:.85rem 1.4rem; border-radius:3px; margin-top:1.6rem;
+  transition:background .2s, transform .2s;
+}
+.cta-site:hover{background:var(--barro-deep); transform:translateY(-1px)}
+.cta-site:focus-visible{outline:2px solid var(--cal); outline-offset:3px}
+.cta-site svg{flex:none}
+
 .sheet{max-width:1040px; margin:0 auto; padding:0 7vw}
 section{padding:3.6rem 0}
 .intro h2{font-size:34px; margin-bottom:1.1rem}
@@ -102,6 +112,10 @@ footer .wordmark small{display:block; font-family:var(--sans); font-weight:400; 
   <div>
     <h1>Identidad y <em>estrategia digital</em></h1>
     <p class="cover-sub">Cinco documentos que van del diagnóstico de competencia a la medición de resultados, pasando por la marca, la arquitectura del sitio y el plan de contenidos.</p>
+    <a class="cta-site" href="https://yaocalli-web.et-mohedano.workers.dev/" target="_blank" rel="noopener">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Visitar el sitio
+    </a>
     <div class="cover-band">
       <i style="background:#14110F; flex:5"></i><i style="background:#8C4A2F; flex:2"></i>
       <i style="background:#3F6B5A; flex:1"></i><i style="background:#EFE9DE; flex:2"></i>
